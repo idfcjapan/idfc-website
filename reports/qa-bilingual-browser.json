@@ -1,0 +1,18 @@
+{
+  "result": "pass",
+  "environment": "isolated localhost preview; production content was not edited",
+  "checks": {
+    "memberLogin": true,
+    "webmcpReadsBothLanguages": true,
+    "webmcpStagesBothLanguages": true,
+    "unsavedDraftsSurviveLanguageSwitch": true,
+    "sharedPhotoReplacement": true,
+    "saveDisabledBeforeBothLanguageReview": true,
+    "singleSavePublishesBothLanguages": true,
+    "gitHubStylePageLoadsJapanese": true,
+    "gitHubStylePageLoadsEnglish": true,
+    "photosLoad": true,
+    "linksKeepLanguageAndBasePath": true
+  },
+  "translationAPIUsed": false
+}

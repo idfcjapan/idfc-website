@@ -1,0 +1,12 @@
+{
+  "result": "pass",
+  "runtime": "Cloudflare workerd / Miniflare",
+  "assertions": 59,
+  "bilingualAtomicPublication": true,
+  "singleLanguageRejected": true,
+  "draftsPrivate": true,
+  "concurrentWrites": true,
+  "publicGitHubCORS": true,
+  "uploads": true,
+  "persistenceAcrossRestart": true
+}

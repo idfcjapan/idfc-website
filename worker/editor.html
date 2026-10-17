@@ -6,9 +6,9 @@
   <meta name="robots" content="noindex,nofollow">
   <title>IDFC ページ編集</title>
   <link rel="icon" href="/assets/images/idfc-logo.svg">
-  <link rel="stylesheet" href="/assets/editor/editor.css?v=20261013-direct1">
-  <script src="/assets/editor/editor.js?v=20261013-ai1" defer></script>
-  <script src="/assets/editor/direct.js?v=20261013-direct1" defer></script>
+  <link rel="stylesheet" href="/assets/editor/editor.css?v=20261017-pair1">
+  <script src="/assets/editor/editor.js?v=20261017-pair1" defer></script>
+  <script src="/assets/editor/direct.js?v=20261017-pair1" defer></script>
 </head>
 <body>
   <main id="login-view" class="login-view" hidden>
@@ -31,7 +31,7 @@
     <div class="editor-layout">
       <aside class="editor-sidebar">
         <div class="page-controls">
-          <label for="language">言語</label><select id="language"><option value="ja">日本語</option><option value="en">English</option></select>
+          <label for="language">プレビュー・編集する言語</label><select id="language"><option value="ja">日本語</option><option value="en">English</option></select>
           <label for="page-select">編集するページ</label><select id="page-select"></select>
           <label for="scope">編集する場所</label><select id="scope"><option value="main">本文</option><option value="header">ヘッダー（全ページ共通）</option><option value="footer">フッター（全ページ共通）</option></select>
           <p id="scope-hint" class="hint"></p>
@@ -61,11 +61,13 @@
           <div class="ai-step">
             <h2><span class="step-number">3</span> 受け取ったファイルを確認する</h2>
             <label class="file-label" for="ai-import">ChatGPTが作った編集ファイル</label><input id="ai-import" type="file" accept=".html,.htm,text/html" disabled>
-            <p class="hint">HTML形式（.html / .htm）、2 MBまで。読み込むと右側に提案が表示されます。内容を確認して「保存して公開」を押すまで、公開ページは変わりません。</p>
+            <p class="hint">日英セットのHTML形式（.html / .htm）、約4 MBまで。両言語のプレビューを確認して保存するまで、公開ページは変わりません。</p>
           </div>
           </details>
           <p id="ai-status" class="ai-status" role="status" aria-live="polite"></p>
-          <p class="language-note">日本語と英語は別々に編集・保存します。ヘッダーとフッターは、選んだ言語の全ページ共通です。</p>
+          <p class="language-note">日本語と英語をセットで編集し、一度に保存・公開します。言語を切り替えても編集中の内容は残ります。文章の翻訳はChatGPTに依頼するか、両言語を手動で編集してください。外部の翻訳APIは使用しません。写真の差し替えは両言語共通です。</p>
+          <p id="pair-status" class="hint" role="status">日本語と英語の両方を確認してください。</p>
+          <label class="pair-review"><input id="pair-reviewed" type="checkbox" disabled>日本語と英語の両方を確認しました</label>
         </section>
         <details class="manual-panel"><summary>自分で文章・写真を調整する</summary>
           <p class="hint">右側の文章を押して入力できます。写真やリンクを選ぶと、以下で変更できます。文字の書式はプレビュー上の「手動の書式設定」を開いてください。</p>

@@ -119,3 +119,5 @@ details>summary{cursor:pointer;font-size:12px;font-weight:600;line-height:1.7;mi
 .direct-request-help #direct-prompt-area{margin-top:14px}
 .direct-note{padding-top:10px;border-top:1px solid var(--editor-line)}
 .file-workflow{margin-top:18px;padding-top:8px;border-top:1px solid var(--editor-line)}
+.pair-review{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid #c4d2c8;border-radius:6px;background:#f0f5ef;font-size:13px;line-height:1.8}
+.pair-review input{width:18px;height:18px;flex:0 0 18px;margin-top:3px}

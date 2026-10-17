@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "python scripts/build.py && vite build && node scripts/package-worker.mjs",
+    "build": "node scripts/version-assets.mjs && vite build && node scripts/package-worker.mjs",
     "db:generate": "drizzle-kit generate",
-    "test:editor": "node scripts/test-editor.mjs"
+    "test:editor": "node scripts/test-bilingual-editor.mjs"
   },
   "dependencies": { "drizzle-orm": "0.45.2" },
   "devDependencies": {

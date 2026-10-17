@@ -1,6 +1,14 @@
-(() => {
+(async () => {
   'use strict';
   document.documentElement.classList.add('js');
+  const scriptURL = document.currentScript?.src;
+  if (location.origin === 'https://idfcjapan.github.io' && scriptURL) {
+    try {
+      const moduleURL = new URL('./content-sync.js', scriptURL);
+      moduleURL.search = new URL(scriptURL).search;
+      await (await import(moduleURL.href)).syncPublishedContent();
+    } catch { /* The static publication stays usable without the editor. */ }
+  }
   const english = document.documentElement.getAttribute('lang') === 'en';
   const text = english ? {
     menuOpen: 'Open menu', menuClose: 'Close menu', imageFailed: 'The image could not be loaded.',

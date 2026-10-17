@@ -13,11 +13,10 @@ const token = () => [...crypto.getRandomValues(new Uint8Array(32))].map(x=>x.toS
 const same = (a,b) => {let n=a.length^b.length; for(let i=0;i<Math.max(a.length,b.length);i++)n|=(a.charCodeAt(i)||0)^(b.charCodeAt(i)||0);return n===0;};
 
 function keyFor(path, scope='main') {
-  const locale=path.startsWith('/en/')?'en':'ja';
-  if(scope==='footer'||scope==='header')return '@'+scope+'-'+locale;
-  const base=locale==='en'?path.slice(3):path;
-  if(['/idfc2027/','/idfc2027/活動/','/idfc2027/実行委員/','/idfc2027/資料/'].includes(base))return (locale==='en'?'/en':'')+'/idfc2027/';
-  return path;
+  if(scope==='footer'||scope==='header')return '@bilingual:'+scope;
+  let base=path.startsWith('/en/')?path.slice(3):path;
+  if(['/idfc2027/','/idfc2027/活動/','/idfc2027/実行委員/','/idfc2027/資料/'].includes(base))base='/idfc2027/';
+  return '@bilingual:main:'+base;
 }
 function pagePath(value) {
   try {value=decodeURIComponent(value||'/');}catch{return null;}
@@ -46,7 +45,7 @@ async function authorize(request,env,write=false) {
 }
 async function bodyJSON(request) {
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw new Error('JSONが必要です。');
-  const raw=await boundedBody(request,MAX_HTML+20000);
+  const raw=await boundedBody(request,MAX_HTML*2+20000);
   return JSON.parse(new TextDecoder().decode(raw));
 }
 async function boundedBody(request,max) {
@@ -104,12 +103,41 @@ export async function sanitize(source) {
   }}).transform(new Response(source)).text();
 }
 async function currentPage(request,env,path,scope) {
-  const asset=await env.ASSETS.fetch(new Request(new URL(encodeURI(path),request.url),{method:'GET'}));
-  if(asset.status!==200||!asset.headers.get('content-type')?.includes('text/html'))throw new Error('ページを読み込めませんでした。');
-  const source=await asset.text();
   const key=keyFor(path,scope);
   const row=await database(env).prepare('SELECT html, revision, updated_at FROM page_edits WHERE path = ?').bind(key).first();
-  return {html:row?.html??await fragment(source,scope==='main'?'main#main':scope==='header'?'header.site-header':'footer.site-footer'),revision:row?.revision??0,updatedAt:row?.updated_at??null,key};
+  if(row)return {html:JSON.parse(row.html),revision:row.revision,updatedAt:row.updated_at,key};
+  const base=path.startsWith('/en/')?path.slice(3):path;
+  const html={};
+  for(const language of ['ja','en']){
+    const localePath=(language==='en'?'/en':'')+base;
+    const asset=await env.ASSETS.fetch(new Request(new URL(encodeURI(localePath),request.url),{method:'GET'}));
+    if(asset.status!==200||!asset.headers.get('content-type')?.includes('text/html'))throw new Error('日英のページを読み込めませんでした。');
+    html[language]=await fragment(await asset.text(),scope==='main'?'main#main':scope==='header'?'header.site-header':'footer.site-footer');
+  }
+  return {html,revision:0,updatedAt:null,key};
+}
+async function sanitizePair(html){
+  if(!html||typeof html!=='object'||Array.isArray(html)||typeof html.ja!=='string'||typeof html.en!=='string')throw new Error('日本語と英語の両方をセットで指定してください。');
+  const clean={ja:await sanitize(html.ja),en:await sanitize(html.en)};
+  if(!clean.ja.trim()||!clean.en.trim())throw new Error('日本語と英語の両方に内容が必要です。');
+  return clean;
+}
+// Only saved, publicly published fragments are exposed here, never editor drafts
+// or authentication data. GitHub Pages reads this endpoint without credentials.
+async function publicContent(request,env,url){
+  const headers={'access-control-allow-origin':'https://idfcjapan.github.io','vary':'Origin'};
+  if(request.method!=='GET')return json({error:'GET only'},405,headers);
+  const path=pagePath(url.searchParams.get('path'));
+  if(!path)return json({error:'ページが見つかりません。'},404,headers);
+  const language=path.startsWith('/en/')?'en':'ja';
+  const scopesList=['main','header','footer'],keys=scopesList.map(scope=>keyFor(path,scope));
+  const rows=await database(env).prepare('SELECT path, html, revision FROM page_edits WHERE path IN (?, ?, ?)').bind(...keys).all();
+  const content={};
+  for(const [i,key] of keys.entries()){
+    const row=rows.results.find(r=>r.path===key);
+    if(row)content[scopesList[i]]={html:JSON.parse(row.html)[language],revision:row.revision};
+  }
+  return json({path,language,content},200,headers);
 }
 async function login(request,env) {
   if(!originOK(request))return json({error:'同じサイトからログインしてください。'},403);
@@ -141,8 +169,7 @@ async function api(request,env,url) {
   if(url.pathname==='/api/editor/draft'&&request.method==='POST'){
     if(!path||!scopes.has(scope))return json({error:'ページが見つかりません。'},404);
     const body=await bodyJSON(request);
-    const clean=await sanitize(body.html);
-    if(!clean.trim())return json({error:'編集案が空です。ChatGPTが作成したHTMLファイルを選んでください。'},400);
+    const clean=await sanitizePair(body.html);
     // An AI draft only updates the editor preview. The existing revision-checked
     // save endpoint remains the single publication path for all editors.
     return json({html:clean});
@@ -155,11 +182,11 @@ async function api(request,env,url) {
     if(!path||!scopes.has(scope))return json({error:'ページが見つかりません。'},404);
     const body=await bodyJSON(request);
     if(!Number.isSafeInteger(body.revision)||body.revision<0)return json({error:'保存前にページを読み直してください。'},400);
-    const clean=await sanitize(body.html),key=keyFor(path,scope),now=Date.now();
-    if(!clean.trim())return json({error:'空の内容は保存できません。'},400);
+    if(body.reviewed?.ja!==true||body.reviewed?.en!==true)return json({error:'日本語と英語の両方を確認してから保存してください。'},400);
+    const clean=await sanitizePair(body.html),key=keyFor(path,scope),now=Date.now(),serialized=JSON.stringify(clean);
     const result=body.revision===0
-      ?await database(env).prepare('INSERT INTO page_edits (path, html, revision, updated_at) VALUES (?, ?, 1, ?) ON CONFLICT(path) DO NOTHING RETURNING revision').bind(key,clean,now).first()
-      :await database(env).prepare('UPDATE page_edits SET html = ?, revision = revision + 1, updated_at = ? WHERE path = ? AND revision = ? RETURNING revision').bind(clean,now,key,body.revision).first();
+      ?await database(env).prepare('INSERT INTO page_edits (path, html, revision, updated_at) VALUES (?, ?, 1, ?) ON CONFLICT(path) DO NOTHING RETURNING revision').bind(key,serialized,now).first()
+      :await database(env).prepare('UPDATE page_edits SET html = ?, revision = revision + 1, updated_at = ? WHERE path = ? AND revision = ? RETURNING revision').bind(serialized,now,key,body.revision).first();
     if(!result)return json({error:'ほかの人が先に保存しました。変更内容をコピーしてから最新のページを読み直してください。'},409);
     return json({ok:true,revision:result.revision,updatedAt:now,html:clean});
   }
@@ -177,7 +204,7 @@ async function api(request,env,url) {
   if(url.pathname==='/api/editor/preview'&&request.method==='GET'){
     if(!path||!scopes.has(scope))return json({error:'ページが見つかりません。'},404);
     const response=await publicPage(request,env,path);
-    return new HTMLRewriter().on('head',{element(el){el.append('<link rel="stylesheet" href="/assets/editor/preview.css">',{html:true});}}).on('body',{element(el){el.setAttribute('data-editor-scope',scope);el.append('<script src="/assets/editor/preview.js?v=20261013-ai1" defer></script>',{html:true});}}).transform(response);
+    return new HTMLRewriter().on('head',{element(el){el.append('<link rel="stylesheet" href="/assets/editor/preview.css">',{html:true});}}).on('body',{element(el){el.setAttribute('data-editor-scope',scope);el.append('<script src="/assets/editor/preview.js?v=20261017-pair1" defer></script>',{html:true});}}).transform(response);
   }
   return json({error:'操作が見つかりません。'},404);
 }
@@ -190,7 +217,7 @@ async function publicPage(request,env,path) {
   let rewriter=new HTMLRewriter();
   for(const [i,selector] of ['main#main','header.site-header','footer.site-footer'].entries()){
     const row=rows.results.find(row=>row.path===keys[i]);
-    if(row)rewriter=rewriter.on(selector,{element(el){el.setInnerContent(row.html,{html:true});}});
+    if(row)rewriter=rewriter.on(selector,{element(el){el.setInnerContent(JSON.parse(row.html)[path.startsWith('/en/')?'en':'ja'],{html:true});}});
   }
   const rewritten=rewriter.transform(response),headers=new Headers(rewritten.headers);
   headers.set('cache-control','no-store');
@@ -202,6 +229,7 @@ async function publicPage(request,env,path) {
 export default {async fetch(request,env) {
   const url=new URL(request.url);
   try {
+    if(url.pathname==='/api/public/content')return await publicContent(request,env,url);
     if(url.pathname.startsWith('/api/editor/'))return await api(request,env,url);
     if(url.pathname==='/edit'||url.pathname==='/en/edit/')return Response.redirect(url.origin+'/edit/',302);
     if(url.pathname==='/edit/')return new Response(editor,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-frame-options':'SAMEORIGIN','x-content-type-options':'nosniff','content-security-policy':"default-src 'self'; img-src 'self' https: data:; style-src 'self'; script-src 'self'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"}});
