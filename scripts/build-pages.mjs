@@ -37,6 +37,15 @@ for (const file of all) {
   let text = await readFile(file, 'utf8');
   if (file.endsWith('.html')) {
     pages++;
+    // The third advisor has an existing profile but was missing from the shared menu.
+    const advisorMenu = /(<ul\b[^>]*id="nav-4"[^>]*>)([\s\S]*?)(<\/ul>)/;
+    if (!advisorMenu.test(text)) throw new Error(`Missing advisor menu: ${file}`);
+    const english = /<html\b[^>]*lang="en"/.test(text);
+    const advisorHref = (english ? '/en' : '') + '/' + encodeURIComponent('アドバイザー') + '/#advisor-khaing';
+    const advisorLabel = english ? 'Nan Mya Khaing, Research Fellow' : 'ナンミャケーカイン 特別研究員';
+    text = text.replace(advisorMenu, (whole, opening, items, closing) =>
+      items.includes('#advisor-khaing') ? whole
+        : opening + items + `<li class=""><a href="${advisorHref}">${advisorLabel}</a></li>` + closing);
     text = text.replace(/\b(href|src|poster|action|data-src|data-original|data-url|content)=(['"])(.*?)\2/gs,
       (_, attribute, quote, value) => `${attribute}=${quote}${rewriteURL(value)}${quote}`);
     text = text.replace(/\bsrcset=(['"])(.*?)\1/gs, (_, quote, value) => {
