@@ -38,6 +38,9 @@ for (const file of all) {
   let text = await readFile(file, 'utf8');
   if (file.endsWith('.html')) {
     pages++;
+    // Select the scripted layout before the first stylesheet can paint. The
+    // deferred bundle may wait for saved bilingual content before wiring menus.
+    text = text.replace(/<head>/i, '<head><script>document.documentElement.classList.add("js")</script>');
     // Include the third advisor's individual message page in the shared menu.
     const advisorMenu = /(<ul\b[^>]*id="nav-4"[^>]*>)([\s\S]*?)(<\/ul>)/;
     if (!advisorMenu.test(text)) throw new Error(`Missing advisor menu: ${file}`);

@@ -289,18 +289,20 @@ html[lang=en] .hero h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(20
 @media(max-width:600px){.advisor-card{padding:18px}.advisor-card .j-textWithImage{grid-template-columns:76px minmax(0,1fr);gap:16px}.advisor-card .cc-imagewrapper img{width:76px;height:96px}.advisor-card .j-callToAction{margin-left:92px}}
 @media(max-width:380px){.supporter-entry{padding:12px}.supporter-grants .supporter-entry p{font-size:16px!important}}
 
-/* Compact navigation keeps the page visible and every support link reachable. */
+/* Compact header geometry applies from first paint, before scripts or saved content load. */
 html{scrollbar-gutter:stable}
 body.photo-open{overflow:hidden}
 .hero a:focus-visible,.home-sponsor a:focus-visible{outline-color:var(--gold)}
 .hero-actions .text-link,.story-link,.photo-album-link,.footer-current>a,.back-top{display:inline-flex;align-items:center;min-height:44px}
 .photo-close{width:44px;height:44px;top:0;right:4px}
 @media(max-width:1199px){
- .js .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;gap:12px;min-height:80px;padding-block:12px}
- .js .brand{grid-column:1;grid-row:1;min-width:0;flex-shrink:1}
- .js .brand>span{min-width:0}
- .js .header-tools{grid-column:2;grid-row:1;justify-self:end;align-self:start;width:auto;gap:0;margin-left:0;z-index:1}
- .js .mobile-toggle{grid-column:3;grid-row:1;align-self:start;margin-left:0;z-index:1}
+ /* These links move into the menu after startup; keep the brand's width stable. */
+ .header-tools .header-links{display:none}
+ .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;gap:12px;min-height:80px;padding-block:12px}
+ .brand{grid-column:1;grid-row:1;min-width:0;flex-shrink:1}
+ .brand>span{min-width:0}
+ .header-tools{grid-column:2;grid-row:1;justify-self:end;align-self:start;width:auto;gap:0;margin-left:0;z-index:1}
+ .mobile-toggle{grid-column:3;grid-row:1;align-self:start;margin-left:0;z-index:1}
  .language-switch a{min-width:76px}
  .primary-nav .header-links{justify-content:flex-start;gap:12px;flex-wrap:wrap;padding:20px 48px 0}
  .primary-nav .header-links>a{padding:10px 16px;min-height:44px;white-space:normal;border:1px solid var(--line);border-radius:6px;background:var(--cream)}
@@ -308,14 +310,14 @@ body.photo-open{overflow:hidden}
  .primary-nav .header-links>a:focus-visible{outline-offset:3px}
 }
 @media(max-width:600px){
- .js .brand-row{gap:8px;min-height:74px;padding-block:10px}
+ .brand-row{gap:8px;min-height:74px;padding-block:10px}
  .language-switch a{width:64px;min-width:64px}
- .js .brand span span{font-size:10px;line-height:1.35}
- html[lang=en].js .brand{display:grid;grid-column:1/-1;grid-row:1;grid-template-columns:44px minmax(0,1fr);grid-template-rows:44px auto;column-gap:7px;row-gap:3px}
- html[lang=en].js .brand>span{display:contents}
- html[lang=en].js .brand img{grid-column:1;grid-row:1}
- html[lang=en].js .brand strong{grid-column:2;grid-row:1;justify-self:start}
- html[lang=en].js .brand span span{grid-column:2;grid-row:2;max-width:100%;margin-top:0;font-size:11px;line-height:1.45}
+ .brand span span{font-size:10px;line-height:1.35}
+ html[lang=en] .brand{display:grid;grid-column:1/-1;grid-row:1;grid-template-columns:44px minmax(0,1fr);grid-template-rows:44px auto;column-gap:7px;row-gap:3px}
+ html[lang=en] .brand>span{display:contents}
+ html[lang=en] .brand img{grid-column:1;grid-row:1}
+ html[lang=en] .brand strong{grid-column:2;grid-row:1;justify-self:start}
+ html[lang=en] .brand span span{grid-column:2;grid-row:2;max-width:100%;margin-top:0;font-size:11px;line-height:1.45}
  .primary-nav .header-links{gap:10px;padding:16px 24px 0}
  .primary-nav .header-links>a{flex:1 1 auto;font-size:13px;text-align:center;justify-content:center}
  .hero-description{font-size:15px;line-height:1.9}
