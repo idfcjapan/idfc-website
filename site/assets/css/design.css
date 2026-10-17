@@ -327,3 +327,22 @@ body.photo-open{overflow:hidden}
  .primary-nav .header-links>.contact-button{border-color:ButtonText}
 }
 @media print{body.photo-open{overflow:visible}.primary-nav .header-links{display:none}}
+
+/* Advisor messages are readable on both mobile and desktop. */
+.advisor-detail .article-layout{display:block;max-width:820px;margin-inline:auto}
+.advisor-message{min-width:0}
+.advisor-identity{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.advisor-identity.has-photo{display:flex;align-items:center;gap:24px}
+.advisor-identity figure{flex:0 0 104px;margin:0}
+.advisor-identity img{display:block;width:104px;height:128px;object-fit:contain;object-position:left center}
+.advisor-message .advisor-affiliation{font-size:15px;color:var(--muted);line-height:1.8;margin:0}
+.advisor-message section>h2{font-size:24px;margin:0 0 24px}
+.advisor-message section>p{font-size:16px;line-height:2;margin:0 0 24px;overflow-wrap:break-word}
+html[lang=en] .advisor-message section>p{line-height:1.85}
+.advisor-earlier{border-top:1px solid var(--line);margin-top:40px;padding-top:20px}
+.advisor-earlier>summary{cursor:pointer;font-size:16px;font-weight:600;padding:10px 0}
+.advisor-earlier-content{padding-top:20px}
+.advisor-khaing>.text-link{margin-top:18px;align-self:flex-start}
+.brochure-open{display:inline-flex;align-items:center;min-height:44px;margin-right:20px}
+.reader-intro .brochure-open{margin-bottom:12px}
+@media(max-width:600px){.advisor-message section>h2{font-size:21px}.advisor-identity.has-photo{gap:18px}.advisor-identity figure{flex-basis:76px}.advisor-identity img{width:76px;height:96px}}
