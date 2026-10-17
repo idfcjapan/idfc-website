@@ -1,0 +1,76 @@
+{
+  "result": "pass",
+  "pages_checked": 88,
+  "header_fonts": "system fonts only, identical wordmark in base and design styles",
+  "english_title": "unchanged wording, balanced two-line styling",
+  "estimated_hero_line_fit": [
+    {
+      "width": 320,
+      "available_width": 280,
+      "font_size": 14.4,
+      "two_lines_fit": true
+    },
+    {
+      "width": 375,
+      "available_width": 335,
+      "font_size": 16.88,
+      "two_lines_fit": true
+    },
+    {
+      "width": 390,
+      "available_width": 350,
+      "font_size": 17.55,
+      "two_lines_fit": true
+    },
+    {
+      "width": 601,
+      "available_width": 537,
+      "font_size": 24,
+      "two_lines_fit": true
+    },
+    {
+      "width": 768,
+      "available_width": 580,
+      "font_size": 25.34,
+      "two_lines_fit": true
+    },
+    {
+      "width": 900,
+      "available_width": 580,
+      "font_size": 29.7,
+      "two_lines_fit": true
+    },
+    {
+      "width": 901,
+      "available_width": 415.43,
+      "font_size": 20,
+      "two_lines_fit": true
+    },
+    {
+      "width": 1024,
+      "available_width": 484.96,
+      "font_size": 22.02,
+      "two_lines_fit": true
+    },
+    {
+      "width": 1199,
+      "available_width": 580,
+      "font_size": 25.78,
+      "two_lines_fit": true
+    },
+    {
+      "width": 1200,
+      "available_width": 580,
+      "font_size": 25.8,
+      "two_lines_fit": true
+    },
+    {
+      "width": 1440,
+      "available_width": 580,
+      "font_size": 30,
+      "two_lines_fit": true
+    }
+  ],
+  "rendering_browser_qa": false,
+  "limitation": "Line-fit estimates use font metrics; actual browser typography is not verified."
+}

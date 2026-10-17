@@ -1,0 +1,66 @@
+{
+  "locales": {
+    "ja": {
+      "early_year_order": [
+        "IDFC2016",
+        "IDFC2017",
+        "IDFC2018"
+      ],
+      "founding_year_separate": true,
+      "2026_own_page": true,
+      "closed_guidelines": [
+        {
+          "year": 2023,
+          "first_heading": "IDFC2023本会議実施",
+          "retained_modules": 25,
+          "collapsed": true
+        },
+        {
+          "year": 2024,
+          "first_heading": "IDFC2024本会議",
+          "retained_modules": 30,
+          "collapsed": true
+        },
+        {
+          "year": 2025,
+          "first_heading": "IDFC2025本会議実施",
+          "retained_modules": 32,
+          "collapsed": true
+        }
+      ]
+    },
+    "en": {
+      "early_year_order": [
+        "IDFC2016",
+        "IDFC2017",
+        "IDFC2018"
+      ],
+      "founding_year_separate": true,
+      "2026_own_page": true,
+      "closed_guidelines": [
+        {
+          "year": 2023,
+          "first_heading": "IDFC2023 Main Conference Held",
+          "retained_modules": 25,
+          "collapsed": true
+        },
+        {
+          "year": 2024,
+          "first_heading": "IDFC2024 Main Conference",
+          "retained_modules": 30,
+          "collapsed": true
+        },
+        {
+          "year": 2025,
+          "first_heading": "IDFC2025 main conference held",
+          "retained_modules": 32,
+          "collapsed": true
+        }
+      ]
+    }
+  },
+  "source_modules_preserved": true,
+  "heading_bookmarks_preserved": true,
+  "visual_browser_qa": false,
+  "matching_header_and_hero_fonts": true
+}

@@ -1,0 +1,39 @@
+{
+  "review_date": "2026-10-06",
+  "scope": "Public Japanese and English sponsorship page, including the expandable historical section.",
+  "original_page": "https://idfc-jpn-mmr.jimdofree.com/新規スポンサー様募集/",
+  "source_preserved": "source/all-pages.json",
+  "supplied_materials_reviewed": [
+    "2027 overview, p.9",
+    "2027 brochure, p.3 and p.7",
+    "Brand Sponsorship Proposal 2027, pp.2–3 and pp.15–18"
+  ],
+  "findings": [
+    {
+      "claim": "200 conference participants; 1,000 event participants; 43 media appearances; 13 outlets at the 2020 symposium; 16,000+ Facebook followers",
+      "status": "Historical organizer self-report, explicitly dated 2020-08-26. No underlying attendance ledgers, full coverage list or dated account analytics were available for this review.",
+      "public_action": "Withdraw the quoted totals from the sponsorship page. Do not treat them as false or replace them with newer, differently defined figures."
+    },
+    {
+      "claim": "15 places annually; 300–400 Myanmar applicants; about 40 Japanese applicants; selection measuring English, teamwork and critical thinking",
+      "status": "Original organizer copy located. Annual applicant records and selection rubric were not available; 2027 documents do not substantiate these annual totals.",
+      "public_action": "Withdraw the quoted applicant totals and selection claims."
+    },
+    {
+      "claim": "Myanmar participants are in the top few percent and come from wealthy families",
+      "status": "Unsupported inference. An acceptance ratio does not establish academic rank or household finances. No records support the assertion.",
+      "public_action": "Withdraw the heading and paragraph; remove the related top-student wording from the current page introduction."
+    },
+    {
+      "claim": "Guaranteed prominent logos, Facebook posts, state-TV exposure, booths, free sponsor dinners and recruiting/hiring cases",
+      "status": "Found in the legacy recruitment copy. Current supplied sponsorship documents do not establish these guarantees, access conditions or historical hiring cases.",
+      "public_action": "Withdraw the guarantees; direct readers to discuss logo placement, event participation, costs and conditions individually."
+    }
+  ],
+  "retained": [
+    "Existing supporter logos and assistance/sponsorship/endorsement hierarchy",
+    "Historical photographs",
+    "Supplied original documents as documents; legacy recruitment materials are explicitly identified as past terms"
+  ],
+  "research_limit": "This is a review of available organizer materials and public sources, not an audit of internal registers or sponsor agreements. Failure to corroborate a claim does not demonstrate it is false."
+}

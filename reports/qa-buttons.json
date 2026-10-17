@@ -1,0 +1,27 @@
+{
+  "result": "pass",
+  "assertions": 23169,
+  "pages": 88,
+  "buttons": {
+    "menu": 88,
+    "submenu": 704,
+    "photo close": 88,
+    "document previous": 6,
+    "document next": 6,
+    "contact": 2
+  },
+  "anchors": 8752,
+  "hover_rules": 35,
+  "selected_text_contrast": {
+    ".update-nav a[aria-current=page]": 9.31,
+    ".year-nav a[aria-current=page]": 9.31,
+    ".header-links>a[aria-current=page]": 10.76,
+    ".language-switch a[aria-current=page]": 11.91
+  },
+  "intentional_disabled_controls": {
+    "document previous": 6,
+    "contact": 2
+  },
+  "rendering_browser_qa": false,
+  "scope": "All generated controls, destinations, current-page states and shared CSS state rules"
+}

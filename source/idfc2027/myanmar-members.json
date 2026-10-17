@@ -1,0 +1,262 @@
+[
+  {
+    "id": "myanmar-executive-2027",
+    "title": "運営幹部",
+    "source_title": "Executive Department",
+    "source_page": 1,
+    "source": "/assets/idfc2027/myanmar-departments/1.png",
+    "source_sha256": "e3f046ac7a27724b14964c810442029e08f443b0cbceb74dc8aeb1fcf6829c5a",
+    "members": [
+      {
+        "id": "aleo",
+        "name": "Aleo",
+        "role": "President",
+        "photo": "myanmar-aleo",
+        "image": "/assets/idfc2027/myanmar-aleo.webp",
+        "bbox": [
+          349,
+          288,
+          684,
+          637
+        ],
+        "width": 335,
+        "height": 349
+      },
+      {
+        "id": "win-war",
+        "name": "Win War",
+        "role": "Vice President",
+        "photo": "myanmar-win-war",
+        "image": "/assets/idfc2027/myanmar-win-war.webp",
+        "bbox": [
+          90,
+          803,
+          416,
+          1135
+        ],
+        "width": 326,
+        "height": 332
+      },
+      {
+        "id": "pyae-phyo-kyaw",
+        "name": "Pyae Phyo Kyaw",
+        "role": "Vice President",
+        "photo": "myanmar-pyae-phyo-kyaw",
+        "image": "/assets/idfc2027/myanmar-pyae-phyo-kyaw.webp",
+        "bbox": [
+          665,
+          812,
+          984,
+          1136
+        ],
+        "width": 319,
+        "height": 324
+      }
+    ]
+  },
+  {
+    "id": "myanmar-academic-2027",
+    "title": "学術・プログラム部門",
+    "source_title": "Academic & Program Department",
+    "source_page": 2,
+    "source": "/assets/idfc2027/myanmar-departments/2.png",
+    "source_sha256": "fbcab97a51aee6d290c7598c8f5e002e48ca8d7a90d64aae480594cc610722b4",
+    "members": [
+      {
+        "id": "myat-su-wai",
+        "name": "Myat Su Wai",
+        "role": "Academic Head",
+        "photo": "myanmar-myat-su-wai",
+        "image": "/assets/idfc2027/myanmar-myat-su-wai.webp",
+        "bbox": [
+          360,
+          298,
+          691,
+          635
+        ],
+        "width": 331,
+        "height": 337
+      },
+      {
+        "id": "may",
+        "name": "May",
+        "role": "Academic Member",
+        "photo": "myanmar-may",
+        "image": "/assets/idfc2027/myanmar-may.webp",
+        "bbox": [
+          90,
+          805,
+          416,
+          1133
+        ],
+        "width": 326,
+        "height": 328
+      },
+      {
+        "id": "lu-htoi",
+        "name": "Lu Htoi",
+        "role": "Academic Member",
+        "photo": "myanmar-lu-htoi",
+        "image": "/assets/idfc2027/myanmar-lu-htoi.webp",
+        "bbox": [
+          665,
+          811,
+          984,
+          1136
+        ],
+        "width": 319,
+        "height": 325
+      }
+    ]
+  },
+  {
+    "id": "myanmar-operation-2027",
+    "title": "運営部門",
+    "source_title": "Operation Department",
+    "source_page": 3,
+    "source": "/assets/idfc2027/myanmar-departments/3.png",
+    "source_sha256": "4d6f7760e9f144252255b8dd4114f279752b8f4324f2e2965a0e26b07f3b65ed",
+    "members": [
+      {
+        "id": "phone-min-khant",
+        "name": "Phone Min Khant",
+        "role": "Operation Head",
+        "photo": "myanmar-phone-min-khant",
+        "image": "/assets/idfc2027/myanmar-phone-min-khant.webp",
+        "bbox": [
+          107,
+          627,
+          467,
+          994
+        ],
+        "width": 360,
+        "height": 367
+      },
+      {
+        "id": "yu-ko",
+        "name": "Yu Ko",
+        "role": "Operation Member",
+        "photo": "myanmar-yu-ko",
+        "image": "/assets/idfc2027/myanmar-yu-ko.webp",
+        "bbox": [
+          619,
+          630,
+          966,
+          986
+        ],
+        "width": 347,
+        "height": 356
+      }
+    ]
+  },
+  {
+    "id": "myanmar-external-affairs-2027",
+    "title": "渉外部門",
+    "source_title": "External Affairs Department",
+    "source_page": 4,
+    "source": "/assets/idfc2027/myanmar-departments/4.png",
+    "source_sha256": "67f61e6770b1258b9b6830e599804bb2f155f406d382b1db4f49b4e31efac743",
+    "members": [
+      {
+        "id": "nay-thu-ta",
+        "name": "Nay Thu Ta",
+        "role": "External Affairs Head",
+        "photo": "myanmar-nay-thu-ta",
+        "image": "/assets/idfc2027/myanmar-nay-thu-ta.webp",
+        "bbox": [
+          108,
+          627,
+          466,
+          994
+        ],
+        "width": 358,
+        "height": 367
+      },
+      {
+        "id": "zung-bawm",
+        "name": "Zung Bawm",
+        "role": "External Affairs Member",
+        "photo": "myanmar-zung-bawm",
+        "image": "/assets/idfc2027/myanmar-zung-bawm.webp",
+        "bbox": [
+          619,
+          630,
+          966,
+          987
+        ],
+        "width": 347,
+        "height": 357
+      }
+    ]
+  },
+  {
+    "id": "myanmar-pr-2027",
+    "title": "広報部門",
+    "source_title": "Public Relations Department",
+    "source_page": 5,
+    "source": "/assets/idfc2027/myanmar-departments/5.png",
+    "source_sha256": "3129f6325306ec5c6aa5c35ceab8d737f9e448babdcbaf7500d2402678fa2726",
+    "members": [
+      {
+        "id": "saw-chit-tun",
+        "name": "Saw Chit Tun",
+        "role": "PR Head",
+        "photo": "myanmar-saw-chit-tun",
+        "image": "/assets/idfc2027/myanmar-saw-chit-tun.webp",
+        "bbox": [
+          112,
+          284,
+          413,
+          590
+        ],
+        "width": 301,
+        "height": 306
+      },
+      {
+        "id": "catherine",
+        "name": "Catherine",
+        "role": "PR Member",
+        "photo": "myanmar-catherine",
+        "image": "/assets/idfc2027/myanmar-catherine.webp",
+        "bbox": [
+          640,
+          282,
+          940,
+          590
+        ],
+        "width": 300,
+        "height": 308
+      },
+      {
+        "id": "kaung-khant-zaw",
+        "name": "Kaung Khant Zaw",
+        "role": "PR Member",
+        "photo": "myanmar-kaung-khant-zaw",
+        "image": "/assets/idfc2027/myanmar-kaung-khant-zaw.webp",
+        "bbox": [
+          112,
+          892,
+          397,
+          1186
+        ],
+        "width": 285,
+        "height": 294
+      },
+      {
+        "id": "hsaw-reh",
+        "name": "Hsaw Reh",
+        "role": "PR Member",
+        "photo": "myanmar-hsaw-reh",
+        "image": "/assets/idfc2027/myanmar-hsaw-reh.webp",
+        "bbox": [
+          675,
+          895,
+          950,
+          1186
+        ],
+        "width": 275,
+        "height": 291
+      }
+    ]
+  }
+]

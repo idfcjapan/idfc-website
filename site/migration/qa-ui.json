@@ -1,0 +1,19 @@
+{
+  "result": "pass",
+  "assertions": 65660,
+  "fixtures": 88,
+  "widths": [
+    375,
+    390,
+    768,
+    1024,
+    1199,
+    1200,
+    1280,
+    1440
+  ],
+  "scope": "Generated HTML + real site.js, simulated DOM events and layout geometry",
+  "static_ui_checks": "pass",
+  "rendering_browser_qa": false,
+  "limitation": "DOM adapter tests interaction logic with simulated geometry; real rendering, CSS layout and touch gestures are not verified."
+}

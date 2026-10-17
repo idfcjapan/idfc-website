@@ -1,0 +1,6 @@
+{
+  "result": "pass",
+  "assertions": 31,
+  "scope": "Real motion.js lifecycle callbacks with animation API doubles",
+  "rendering_browser_qa": false
+}

@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "page_pairs": 44,
+  "translation_records": 2386,
+  "fluent_paragraph_records": 157,
+  "fluent_paragraph_instances_checked": 161,
+  "translated_node_values_checked": 11198,
+  "pdf_page_views_checked": 96,
+  "document_default_view": "original page images",
+  "assertions": 40909,
+  "errors": [],
+  "rendering_browser_qa": false
+}

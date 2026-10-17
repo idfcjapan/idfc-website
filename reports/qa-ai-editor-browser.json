@@ -1,0 +1,19 @@
+{
+  "result": "pass",
+  "browser": "Codex in-app browser",
+  "environment": "local Cloudflare Worker with isolated local database",
+  "publicLayoutWidths": [390, 1440],
+  "editorLayoutWidths": [390, 1440],
+  "compactHeaderAndMenuVerified": true,
+  "noHorizontalOverflowAtTestedWidths": true,
+  "memberPasswordLoginVerified": true,
+  "aiFileExportVerified": true,
+  "aiFileImportAndPreviewVerified": true,
+  "previewDoesNotPublishVerified": true,
+  "explicitSavePublishesVerified": true,
+  "webMcpReadVerified": true,
+  "webMcpPreviewVerified": true,
+  "webMcpInvalidTargetRejected": true,
+  "productionDataUsedForTests": false,
+  "existingBilingualContentPreserved": true
+}

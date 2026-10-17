@@ -1,0 +1,17 @@
+{
+  "name": "idfc-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python scripts/build.py && vite build && node scripts/package-worker.mjs",
+    "db:generate": "drizzle-kit generate",
+    "test:editor": "node scripts/test-editor.mjs"
+  },
+  "dependencies": { "drizzle-orm": "0.45.2" },
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "vite": "8.0.13",
+    "@cloudflare/vite-plugin": "1.37.1",
+    "wrangler": "4.92.0"
+  }
+}

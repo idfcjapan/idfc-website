@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "notices": 25,
+  "initially_visible_per_language": 9,
+  "year_groups": [
+    2027,
+    2026,
+    2025
+  ],
+  "date_format": "YYYY.MM.DD",
+  "presentation": "one short sentence per notice",
+  "earlier_notices": "native collapsed details",
+  "locale_views_checked": 50,
+  "rendering_browser_qa": false
+}

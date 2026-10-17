@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "charts_checked": 14,
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "counts_match_captured_documents": true,
+  "svg_proportions_verified": true,
+  "accessible_text_breakdowns": true,
+  "year_navigation_matches": true,
+  "rendering_browser_qa": false
+}

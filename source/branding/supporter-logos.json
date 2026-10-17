@@ -1,0 +1,13 @@
+{
+  "mufg-foundation": {
+    "name": "公益財団法人 三菱UFJ国際財団",
+    "image": "/assets/idfc2027/mufg-foundation.png",
+    "width": 960,
+    "height": 70,
+    "source_document": "/assets/idfc2027/overview.pdf",
+    "source_page": 9,
+    "source_pdf_image_object": 517,
+    "sha256": "3bfb3882695fc2222030b3219d3efbf10345f45eb6ce913abb8ed353d30c4571",
+    "modified": false
+  }
+}

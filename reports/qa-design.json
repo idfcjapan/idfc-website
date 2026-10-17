@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "css_syntax_nodes_checked": 4143,
+  "native_scrolling": true,
+  "animated_hero_background": true,
+  "content_and_chart_entrances": true,
+  "mobile_photos_not_zoomed": true,
+  "unique_ids_pages_checked": 88,
+  "rendering_browser_qa": false
+}

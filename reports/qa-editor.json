@@ -1,0 +1,12 @@
+{
+  "result": "pass",
+  "runtime": "Cloudflare workerd / Miniflare",
+  "assertions": 82,
+  "persistenceAcrossRestart": true,
+  "authentication": true,
+  "csrf": true,
+  "concurrentWrites": true,
+  "uploads": true,
+  "htmlSanitization": true,
+  "renderingBrowserQA": false
+}

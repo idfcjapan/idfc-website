@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "new_uploads_preserved": 10,
+  "added_unique_photos": 9,
+  "duplicate_uploads_displayed_once": 1,
+  "original_photos_preserved": 19,
+  "gallery_photos": 28,
+  "language_galleries_checked": 2,
+  "webp_assets_verified": 56,
+  "natural_proportions": true,
+  "shared_snapshot_orientation": "90 degrees counterclockwise",
+  "online_meeting_image_lossless": true,
+  "checks": "Image dimensions, decoding, exact original hashes, bilingual captions and enlargement links. Existing site interaction suite checks dialog behavior. No browser rendering was performed."
+}

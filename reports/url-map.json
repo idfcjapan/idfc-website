@@ -1,0 +1,187 @@
+[
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/",
+    "new_path": "/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/about-idfc/",
+    "new_path": "/about-idfc/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/",
+    "new_path": "/これまでの活動/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc-2019/",
+    "new_path": "/これまでの活動/idfc-2019/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc-2020/",
+    "new_path": "/これまでの活動/idfc-2020/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc-2021/",
+    "new_path": "/これまでの活動/idfc-2021/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc-2022/",
+    "new_path": "/これまでの活動/idfc-2022/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc2023/",
+    "new_path": "/これまでの活動/idfc2023/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc2024/",
+    "new_path": "/これまでの活動/idfc2024/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/これまでの活動/idfc2025/",
+    "new_path": "/これまでの活動/idfc2025/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/アドバイザー/",
+    "new_path": "/アドバイザー/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/アドバイザー/根本-敬-教授/",
+    "new_path": "/アドバイザー/根本-敬-教授/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/アドバイザー/松田-正彦-教授/",
+    "new_path": "/アドバイザー/松田-正彦-教授/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/",
+    "new_path": "/idfc-next-参加者の声/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/idfc創設者/",
+    "new_path": "/idfc-next-参加者の声/idfc創設者/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/idfc創設者/hashimoto-yu-前半/",
+    "new_path": "/idfc-next-参加者の声/idfc創設者/hashimoto-yu-前半/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/idfc創設者/hashimoto-yu-後半/",
+    "new_path": "/idfc-next-参加者の声/idfc創設者/hashimoto-yu-後半/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/参加学生の声/",
+    "new_path": "/idfc-next-参加者の声/参加学生の声/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/参加学生の声/sawada-mei/",
+    "new_path": "/idfc-next-参加者の声/参加学生の声/sawada-mei/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/参加学生の声/nakada-naoyuki/",
+    "new_path": "/idfc-next-参加者の声/参加学生の声/nakada-naoyuki/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/活動を未来に繋げる/",
+    "new_path": "/idfc-next-参加者の声/活動を未来に繋げる/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/活動を未来に繋げる/sugiura-aki/",
+    "new_path": "/idfc-next-参加者の声/活動を未来に繋げる/sugiura-aki/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/活動を未来に繋げる/ishihara-mihoshi/",
+    "new_path": "/idfc-next-参加者の声/活動を未来に繋げる/ishihara-mihoshi/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/idfc-next-参加者の声/参加後のネットワーク/",
+    "new_path": "/idfc-next-参加者の声/参加後のネットワーク/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/ミャンマーからの声/",
+    "new_path": "/ミャンマーからの声/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/ミャンマーからの声/mr-nishigaki-mitsuru/",
+    "new_path": "/ミャンマーからの声/mr-nishigaki-mitsuru/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/ミャンマーからの声/mr-kuroyanagi-hidenori/",
+    "new_path": "/ミャンマーからの声/mr-kuroyanagi-hidenori/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/web-media/",
+    "new_path": "/web-media/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/blog/",
+    "new_path": "/blog/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/新規スポンサー様募集/",
+    "new_path": "/新規スポンサー様募集/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/お問合せ/",
+    "new_path": "/お問合せ/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/about/",
+    "new_path": "/about/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/j/privacy",
+    "new_path": "/j/privacy/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/sitemap/",
+    "new_path": "/sitemap/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/2016/07/19/新しいブログを書く-テスト投稿-塚本/",
+    "new_path": "/2016/07/19/新しいブログを書く-テスト投稿-塚本/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/blog-1/?tag=tagPlaceholder",
+    "new_path": "/blog-1/",
+    "redirect_on_old_host": "301（旧ホストの管理設定が必要）"
+  },
+  {
+    "source_url": "https://idfc-jpn-mmr.jimdofree.com/j/privacy",
+    "new_path": "/j/privacy/",
+    "redirect_on_old_host": "301"
+  }
+]

@@ -1,0 +1,551 @@
+{
+  "year": 2026,
+  "photos": [
+    {
+      "id": "group-outdoors",
+      "original_filename": "IMG_8026.jpeg",
+      "original_sha256": "841d5fbe7d35cdcf12238a47805f8538df099dbd4e8893960a0d545363f6add6",
+      "src": "/assets/idfc2026/group-outdoors.webp",
+      "preview": "/assets/idfc2026/group-outdoors-720.webp",
+      "width": 1536,
+      "height": 1024,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "IDFC2026 集合写真",
+        "en": "IDFC2026 group photo"
+      },
+      "alt": {
+        "ja": "IDFC2026の横断幕を囲む参加者の集合写真",
+        "en": "IDFC2026 participants gathered around the conference banner"
+      }
+    },
+    {
+      "id": "session-wide",
+      "original_filename": "IMG_8015.jpeg",
+      "original_sha256": "8ba683b02b9ce96cfc3a4d27190f05d950cee144b26d24f1ebba71d4b666e9ca",
+      "src": "/assets/idfc2026/session-wide.webp",
+      "preview": "/assets/idfc2026/session-wide-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "会場での学び",
+        "en": "Learning at the conference"
+      },
+      "alt": {
+        "ja": "スクリーンを見ながら説明を聞くIDFC2026の参加者",
+        "en": "IDFC2026 participants watching a presentation on a screen"
+      }
+    },
+    {
+      "id": "discussion-speaker",
+      "original_filename": "IMG_8033.jpeg",
+      "original_sha256": "d4b5f348e82f6444d4c4fa0dca6773125d75388aa1f13ececb746b9ef72a778d",
+      "src": "/assets/idfc2026/discussion-speaker.webp",
+      "preview": "/assets/idfc2026/discussion-speaker-720.webp",
+      "width": 1115,
+      "height": 1672,
+      "preview_width": 480,
+      "preview_height": 720,
+      "caption": {
+        "ja": "意見を交わす学びの時間",
+        "en": "A moment of discussion"
+      },
+      "alt": {
+        "ja": "IDFC2026の会場でマイクを使って発言する人",
+        "en": "A speaker using a microphone at IDFC2026"
+      }
+    },
+    {
+      "id": "discussion-audience",
+      "original_filename": "IMG_8032.jpeg",
+      "original_sha256": "5ce2a98e043c3a1aff9f95e6e479e41cef4ca20252f171d5d8c62a093a4a03a3",
+      "src": "/assets/idfc2026/discussion-audience.webp",
+      "preview": "/assets/idfc2026/discussion-audience-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "学びの時間",
+        "en": "Learning together"
+      },
+      "alt": {
+        "ja": "会場で説明を聞くIDFC2026の参加者",
+        "en": "IDFC2026 participants listening during a session"
+      }
+    },
+    {
+      "id": "circle-exchange",
+      "original_filename": "IMG_8022.jpeg",
+      "original_sha256": "773ff35cf77ef886f5060f027873572172a6a417b49ea12d1bca6ece52a4a5cc",
+      "src": "/assets/idfc2026/circle-exchange.webp",
+      "preview": "/assets/idfc2026/circle-exchange-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "輪になって交流",
+        "en": "Getting to know each other"
+      },
+      "alt": {
+        "ja": "円形に座って交流するIDFC2026の参加者",
+        "en": "IDFC2026 participants sitting in a circle together"
+      }
+    },
+    {
+      "id": "circle-speaker",
+      "original_filename": "IMG_8021.jpeg",
+      "original_sha256": "39b9c8f28e6094f5bd14aa8c3daec05d223ce8d24558b8773211786d70a394bd",
+      "src": "/assets/idfc2026/circle-speaker.webp",
+      "preview": "/assets/idfc2026/circle-speaker-720.webp",
+      "width": 1115,
+      "height": 1672,
+      "preview_width": 480,
+      "preview_height": 720,
+      "caption": {
+        "ja": "交流中のひとこま",
+        "en": "A moment of exchange"
+      },
+      "alt": {
+        "ja": "交流の場でマイクを手に話すIDFC2026の参加者",
+        "en": "An IDFC2026 participant speaking into a microphone during an exchange"
+      }
+    },
+    {
+      "id": "cultural-sharing",
+      "original_filename": "IMG_8031.jpeg",
+      "original_sha256": "40508f02c0d62b508dcf3738cb20f1289a5a884813d5408ee166b9f2eacc9783",
+      "src": "/assets/idfc2026/cultural-sharing.webp",
+      "preview": "/assets/idfc2026/cultural-sharing-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "文化交流のひとこま",
+        "en": "Sharing cultures"
+      },
+      "alt": {
+        "ja": "文化交流の会場で発表するIDFC2026の参加者",
+        "en": "IDFC2026 participants presenting during a cultural exchange"
+      }
+    },
+    {
+      "id": "cultural-presentation",
+      "original_filename": "IMG_8029.jpeg",
+      "original_sha256": "6ad041b0700b0cb26e7d82a662c2678b79fcf5d81f1f83996086f219a101ccca",
+      "src": "/assets/idfc2026/cultural-presentation.webp",
+      "preview": "/assets/idfc2026/cultural-presentation-720.webp",
+      "width": 1536,
+      "height": 1152,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "文化紹介",
+        "en": "Cultural presentations"
+      },
+      "alt": {
+        "ja": "赤い法被を着て文化交流の発表を行うIDFC2026の参加者",
+        "en": "IDFC2026 participants in red happi coats presenting during a cultural exchange"
+      }
+    },
+    {
+      "id": "traditional-dance",
+      "original_filename": "IMG_8027.jpeg",
+      "original_sha256": "8a3c1a4b2dd767e911ac4dd71abea746082e14d15ede3fd80a790eda2d901150",
+      "src": "/assets/idfc2026/traditional-dance.webp",
+      "preview": "/assets/idfc2026/traditional-dance-720.webp",
+      "width": 1108,
+      "height": 1477,
+      "preview_width": 540,
+      "preview_height": 720,
+      "caption": {
+        "ja": "伝統衣装での交流",
+        "en": "Connecting through traditional dress"
+      },
+      "alt": {
+        "ja": "伝統衣装を着て踊るIDFC2026の参加者",
+        "en": "IDFC2026 participants dancing in traditional clothing"
+      }
+    },
+    {
+      "id": "dance-together",
+      "original_filename": "IMG_8028.jpeg",
+      "original_sha256": "ded7299edf875414eaf9fc79411bfa85744fcb9966ff5688b70a370bc5a96e08",
+      "src": "/assets/idfc2026/dance-together.webp",
+      "preview": "/assets/idfc2026/dance-together-720.webp",
+      "width": 960,
+      "height": 1706,
+      "preview_width": 405,
+      "preview_height": 720,
+      "caption": {
+        "ja": "一緒に踊るひととき",
+        "en": "Dancing together"
+      },
+      "alt": {
+        "ja": "会場で一緒に踊るIDFC2026の参加者",
+        "en": "IDFC2026 participants dancing together"
+      }
+    },
+    {
+      "id": "completion-group",
+      "original_filename": "IMG_8023.jpeg",
+      "original_sha256": "5cbd6586e7c36f8ba6cb32101d8ae9643dba7754a991b568218d467da94dd858",
+      "src": "/assets/idfc2026/completion-group.webp",
+      "preview": "/assets/idfc2026/completion-group-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "活動を終えて",
+        "en": "At the end of the programme"
+      },
+      "alt": {
+        "ja": "証書を持って並ぶIDFC2026の参加者の集合写真",
+        "en": "A group photo of IDFC2026 participants holding certificates"
+      }
+    },
+    {
+      "id": "certificate-group",
+      "original_filename": "IMG_8019.jpeg",
+      "original_sha256": "2f5c90948e105edce34644c6623255f74ae256d8a15ec36ff188b549303db634",
+      "src": "/assets/idfc2026/certificate-group.webp",
+      "preview": "/assets/idfc2026/certificate-group-720.webp",
+      "width": 1108,
+      "height": 1477,
+      "preview_width": 540,
+      "preview_height": 720,
+      "caption": {
+        "ja": "証書を手に記念撮影",
+        "en": "A photo with certificates"
+      },
+      "alt": {
+        "ja": "会場で証書を持って記念撮影するIDFC2026の参加者",
+        "en": "IDFC2026 participants posing with certificates at the venue"
+      }
+    },
+    {
+      "id": "certificates-close",
+      "original_filename": "IMG_8018.jpeg",
+      "original_sha256": "47a5718bb3a45a0fba1cf2dc5d0bcaf10529a43bf1ff4e3baf814330fc0935e8",
+      "src": "/assets/idfc2026/certificates-close.webp",
+      "preview": "/assets/idfc2026/certificates-close-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "学びの思い出",
+        "en": "Memories of learning together"
+      },
+      "alt": {
+        "ja": "証書を手に笑顔で写るIDFC2026の参加者",
+        "en": "IDFC2026 participants smiling with their certificates"
+      }
+    },
+    {
+      "id": "meal-exchange",
+      "original_filename": "IMG_8024.jpeg",
+      "original_sha256": "56213b3a81ab275efe2e1420d8d353524a4be152115094fb0979d79c8bf6c547",
+      "src": "/assets/idfc2026/meal-exchange.webp",
+      "preview": "/assets/idfc2026/meal-exchange-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "食事のひととき",
+        "en": "Sharing a meal"
+      },
+      "alt": {
+        "ja": "食卓を囲んで交流するIDFC2026の参加者",
+        "en": "IDFC2026 participants getting to know each other over a meal"
+      }
+    },
+    {
+      "id": "meal-small",
+      "original_filename": "IMG_8014.jpeg",
+      "original_sha256": "06c07a474d46410842d39e8600d19b9b326c6b4344e3a2cea742ee5ccf963b32",
+      "src": "/assets/idfc2026/meal-small.webp",
+      "preview": "/assets/idfc2026/meal-small-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "食事を囲んで",
+        "en": "Together over a meal"
+      },
+      "alt": {
+        "ja": "食事の席で記念撮影するIDFC2026の参加者",
+        "en": "IDFC2026 participants posing for a photograph over a meal"
+      }
+    },
+    {
+      "id": "group-evening",
+      "original_filename": "IMG_8030.jpeg",
+      "original_sha256": "8586c7e459dd73ee311b82ea56b121be5893e8f41c515bc83a3fb306a42692d0",
+      "src": "/assets/idfc2026/group-evening.webp",
+      "preview": "/assets/idfc2026/group-evening-720.webp",
+      "width": 1536,
+      "height": 1152,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "交流の思い出",
+        "en": "Memories together"
+      },
+      "alt": {
+        "ja": "IDFC2026の横断幕を広げた参加者の夜の集合写真",
+        "en": "An evening group photo of IDFC2026 participants with the conference banner"
+      }
+    },
+    {
+      "id": "friendship",
+      "original_filename": "IMG_8025.jpeg",
+      "original_sha256": "df21087a9982164555480dd3c96b574af7e2fd752b4b97ad1dc4ef24386f47c8",
+      "src": "/assets/idfc2026/friendship.webp",
+      "preview": "/assets/idfc2026/friendship-720.webp",
+      "width": 2048,
+      "height": 1365,
+      "preview_width": 720,
+      "preview_height": 480,
+      "caption": {
+        "ja": "参加者同士の交流",
+        "en": "Building friendships"
+      },
+      "alt": {
+        "ja": "屋外で交流するIDFC2026の参加者",
+        "en": "IDFC2026 participants spending time together outdoors"
+      }
+    },
+    {
+      "id": "friendship-selfie",
+      "original_filename": "IMG_8020.jpeg",
+      "original_sha256": "868bed4e15a006871986fa6b85d4c1a5a7f7bf1ba00f8bd5fc56eacd0bd9328f",
+      "src": "/assets/idfc2026/friendship-selfie.webp",
+      "preview": "/assets/idfc2026/friendship-selfie-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "仲間との一枚",
+        "en": "A photo with friends"
+      },
+      "alt": {
+        "ja": "屋内で集まって自撮りするIDFC2026の参加者",
+        "en": "IDFC2026 participants taking a group selfie indoors"
+      }
+    },
+    {
+      "id": "outdoor-selfie",
+      "original_filename": "IMG_8017.jpeg",
+      "original_sha256": "b4c71d2e3505723abf681f389483e569948ff750a2b9a381a212c72eba213eff",
+      "src": "/assets/idfc2026/outdoor-selfie.webp",
+      "preview": "/assets/idfc2026/outdoor-selfie-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "屋外での記念撮影",
+        "en": "A group selfie outdoors"
+      },
+      "alt": {
+        "ja": "屋外で集まって自撮りするIDFC2026の参加者",
+        "en": "IDFC2026 participants taking a group selfie outdoors"
+      }
+    },
+    {
+      "id": "table-conversation",
+      "original_filename": "IMG_8012.jpeg",
+      "original_sha256": "77f17ebb4332e8656baae86dad9835ad2e01de56ba824f337e2d3e84f6515a11",
+      "src": "/assets/idfc2026/table-conversation.webp",
+      "preview": "/assets/idfc2026/table-conversation-720.webp",
+      "width": 1108,
+      "height": 1477,
+      "preview_width": 540,
+      "preview_height": 720,
+      "caption": {
+        "ja": "会話のひとこま",
+        "en": "A moment of conversation"
+      },
+      "alt": {
+        "ja": "パソコンを広げて話すIDFC2026の参加者",
+        "en": "IDFC2026 participants talking with a laptop open"
+      }
+    },
+    {
+      "id": "evening-table",
+      "original_filename": "IMG_8011.jpeg",
+      "original_sha256": "53387552137ae35e618832dc75fcf25ec57e05d42878a69b59f6148ec42b8717",
+      "src": "/assets/idfc2026/evening-table.webp",
+      "preview": "/assets/idfc2026/evening-table-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "仲間と過ごす時間",
+        "en": "Time with friends"
+      },
+      "alt": {
+        "ja": "テーブルを囲んで記念撮影するIDFC2026の参加者",
+        "en": "IDFC2026 participants posing for a photograph around a table"
+      }
+    },
+    {
+      "id": "friends-small-group",
+      "original_filename": "IMG_8009.jpeg",
+      "original_sha256": "06246ff45f5dacf427f7e8847e36c3e73c0e37141d86e20b3d3c3164b490301b",
+      "src": "/assets/idfc2026/friends-small-group.webp",
+      "preview": "/assets/idfc2026/friends-small-group-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "笑顔で記念撮影",
+        "en": "Smiling for a photo"
+      },
+      "alt": {
+        "ja": "屋内で自撮りする4人のIDFC2026参加者",
+        "en": "Four IDFC2026 participants taking a selfie indoors"
+      }
+    },
+    {
+      "id": "longyi-exchange",
+      "original_filename": "IMG_8008.jpeg",
+      "original_sha256": "8223244f899561a6417ceb03dfd6320f9c083d755d4e42837079a3f5ee9c6f0e",
+      "src": "/assets/idfc2026/longyi-exchange.webp",
+      "preview": "/assets/idfc2026/longyi-exchange-720.webp",
+      "width": 1108,
+      "height": 1477,
+      "preview_width": 540,
+      "preview_height": 720,
+      "caption": {
+        "ja": "ロンジーを通じた文化交流",
+        "en": "Sharing culture through a longyi"
+      },
+      "alt": {
+        "ja": "ロンジーを着て室内で話すIDFC2026の参加者",
+        "en": "An IDFC2026 participant wearing a longyi and speaking indoors"
+      }
+    },
+    {
+      "id": "shared-meal-selfie",
+      "original_filename": "IMG_8007.jpeg",
+      "original_sha256": "14e32036dac21e14d274022271774d761ec526159577207678bd18005299191b",
+      "src": "/assets/idfc2026/shared-meal-selfie.webp",
+      "preview": "/assets/idfc2026/shared-meal-selfie-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "食卓で広がる交流",
+        "en": "Connecting over a meal"
+      },
+      "alt": {
+        "ja": "食卓を囲み、笑顔で自撮りするIDFC2026の参加者",
+        "en": "IDFC2026 participants smiling for a selfie around a meal table"
+      }
+    },
+    {
+      "id": "friends-portrait",
+      "original_filename": "5E111058-2583-4EAB-BA91-BCD617528F19.jpeg",
+      "original_sha256": "d3d1379157bae11b279d430b517ca21c6432e8cf2b8751f0f937cc94857f3fe5",
+      "src": "/assets/idfc2026/friends-portrait.webp",
+      "preview": "/assets/idfc2026/friends-portrait-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "仲間と並んで",
+        "en": "Side by side with friends"
+      },
+      "alt": {
+        "ja": "屋内で並んで記念撮影する2人のIDFC2026参加者",
+        "en": "Two IDFC2026 participants posing together indoors"
+      }
+    },
+    {
+      "id": "shared-snapshot",
+      "original_filename": "187543F1-20E2-468E-9886-CF5609DF548A.jpeg",
+      "original_sha256": "162d5716fbbed8f96bb29a778f65f93e2a0d5003222dc538fbefdeeff4648960",
+      "src": "/assets/idfc2026/shared-snapshot.webp",
+      "preview": "/assets/idfc2026/shared-snapshot-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "日常の交流のひとこま",
+        "en": "A moment together"
+      },
+      "alt": {
+        "ja": "2つの場面を組み合わせたIDFC2026参加者の記念写真",
+        "en": "A composite photograph showing IDFC2026 participants in two moments together"
+      },
+      "rotation_degrees_ccw": 90
+    },
+    {
+      "id": "shared-meal-group",
+      "original_filename": "9140F8D7-5142-4775-9F05-01FBF331B0B9.jpeg",
+      "original_sha256": "8aaf08951035b7f32f133462528df70bf23794052afd97afa412cd1e96c0ed59",
+      "src": "/assets/idfc2026/shared-meal-group.webp",
+      "preview": "/assets/idfc2026/shared-meal-group-720.webp",
+      "width": 1477,
+      "height": 1108,
+      "preview_width": 720,
+      "preview_height": 540,
+      "caption": {
+        "ja": "食事の時間も一緒に",
+        "en": "Together at mealtime"
+      },
+      "alt": {
+        "ja": "食事の席でピースサインをして自撮りするIDFC2026の参加者",
+        "en": "IDFC2026 participants making peace signs for a selfie over a meal"
+      }
+    },
+    {
+      "id": "online-gathering",
+      "original_filename": "IMG_8001.jpeg",
+      "original_sha256": "6bcc02f9aa3c4be161516f43c30ef97a91df7f6c9c3c10654b3b72c0548c89e3",
+      "src": "/assets/idfc2026/online-gathering.webp",
+      "preview": "/assets/idfc2026/online-gathering-720.webp",
+      "width": 1638,
+      "height": 953,
+      "preview_width": 720,
+      "preview_height": 419,
+      "caption": {
+        "ja": "オンラインでの交流",
+        "en": "Online exchange"
+      },
+      "alt": {
+        "ja": "画面越しに集まるIDFC2026参加者のオンライン会議",
+        "en": "IDFC2026 participants gathering in an online meeting"
+      }
+    }
+  ],
+  "home_preview": [
+    "session-wide",
+    "cultural-sharing",
+    "completion-group"
+  ],
+  "duplicate_uploads": [
+    {
+      "original_filename": "B418AB24-0129-464C-A00D-31D0C685C598.jpeg",
+      "original_sha256": "d14708fda44424120a1d198b323e918ed367643d603def64cbdaa388ecc99476",
+      "duplicate_of": "longyi-exchange",
+      "reason": "Identical decoded pixels to IMG_8008.jpeg"
+    }
+  ]
+}
