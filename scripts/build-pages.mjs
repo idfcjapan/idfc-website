@@ -1,5 +1,6 @@
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
 const source = path.join(root, 'site');
@@ -9,6 +10,7 @@ if (!publicURL.pathname.endsWith('/')) throw new Error('PAGES_URL must end in a 
 const previousOrigin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const editorURL = `${previousOrigin}/edit/`;
 const base = publicURL.pathname;
+const designVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/css/design.css'))).digest('hex').slice(0, 12);
 
 export function rewriteURL(value) {
   if (value === '/edit/' || value === '/edit' || value === '/en/edit/' || value === editorURL) return editorURL;
@@ -41,6 +43,8 @@ for (const file of all) {
       if (value.includes('data:')) return `srcset=${quote}${value}${quote}`;
       return `srcset=${quote}${value.split(',').map(item => item.replace(/^(\s*)(\S+)/, (_, space, url) => space + rewriteURL(url))).join(',')}${quote}`;
     });
+    text = text.replace(/href=(['"])([^'"]*\/assets\/css\/design\.css)(?:\?[^'"]*)?\1/g,
+      (_, quote, url) => `href=${quote}${url}?v=${designVersion}${quote}`);
   }
   // Translation metadata also contains the old canonical URLs.
   text = text.replaceAll(editorURL, '__IDFC_EDITOR_URL__')
