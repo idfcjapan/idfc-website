@@ -10,6 +10,12 @@ const origin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const esc = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const route = (p, en) => `${en ? '/en' : ''}/${encodeURIComponent('アドバイザー')}/${encodeURIComponent(p.slug)}/`;
 const directory = en => `${en ? '/en' : ''}/${encodeURIComponent('アドバイザー')}/`;
+const portrait = (p, en, lazy = false) => `<img src="${p.portrait.src}" alt="${esc(en ? `Portrait of ${p.en.name}` : `${p.ja.name}の写真`)}" width="${p.portrait.width}" height="${p.portrait.height}"${lazy ? ' loading="lazy"' : ''} decoding="async">`;
+const headingName = (p, en) => {
+  const label = p[en ? 'en' : 'ja'].name;
+  const split = en ? label.indexOf(',') : label.lastIndexOf(' ');
+  return `${esc(label.slice(0, split))}<span class="advisor-role">${esc(label.slice(split + 1).trim())}</span>`;
+};
 async function files(dir) {
   return (await Promise.all((await readdir(dir, { withFileTypes: true })).map(e => e.isDirectory() ? files(path.join(dir, e.name)) : path.join(dir, e.name)))).flat();
 }
@@ -45,9 +51,16 @@ for (const en of [false, true]) {
         old = old.replace(/(<div class="cc-m-textwithimage-inline-rte"[^>]*>)[\s\S]*?(<\/div>)/, (_, start, end) => start + earlier.map(p => `<p>${esc(p)}</p>`).join('') + end);
       }
     }
-    const image = person.id === 'khaing' ? '' : html.match(/<img\b[^>]*data-image-id[^>]*>/)?.[0] ?? '';
+    // The current portrait belongs with the name. Earlier messages retain their
+    // text, without repeating the old floating portrait beneath the new one.
+    old = old.replace(/<figure\b[\s\S]*?<\/figure>/g, '');
     const next = people[(people.indexOf(person) + 1) % people.length];
-    const main = `<main id="main" class="advisor-detail"><div class="wrap"><nav class="breadcrumbs" aria-label="${en ? 'Breadcrumbs' : 'パンくず'}"><ol><li><a href="${en ? '/en/' : '/'}">${en ? 'Home' : 'ホーム'}</a></li><li><a href="${directory(en)}">${en ? 'Advisors' : 'アドバイザー'}</a></li><li aria-current="page">${esc(data.name)}</li></ol></nav><header class="page-masthead"><p class="eyebrow">${en ? 'Advisors' : 'アドバイザー'}</p><h1>${esc(data.name)}</h1></header><div class="article-layout"><article class="advisor-message"><div class="advisor-identity${image ? ' has-photo' : ''}">${image ? `<figure>${image}</figure>` : ''}<p class="advisor-affiliation">${esc(data.affiliation)}</p></div><section aria-labelledby="advisor-message-title"><h2 id="advisor-message-title">${en ? 'Message to IDFC' : 'IDFCへのメッセージ'}</h2>${data.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</section>${old ? `<details class="advisor-earlier"><summary>${en ? 'Earlier message' : 'これまでのメッセージ'}</summary><div class="advisor-earlier-content">${old}</div></details>` : ''}<nav class="page-neighbors" aria-label="${en ? 'More advisors' : '他のアドバイザー'}"><a href="${directory(en)}">${en ? '← All advisors' : '← アドバイザー一覧'}</a><a href="${route(next, en)}">${esc(next[lang].name)} →</a></nav></article></div></div></main>`;
+    const main = `<main id="main" class="advisor-detail"><div class="wrap">
+      <nav class="breadcrumbs" aria-label="${en ? 'Breadcrumbs' : 'パンくず'}"><ol><li><a href="${en ? '/en/' : '/'}">${en ? 'Home' : 'ホーム'}</a></li><li><a href="${directory(en)}">${en ? 'Advisors' : 'アドバイザー'}</a></li><li aria-current="page">${esc(data.name)}</li></ol></nav>
+      <header class="page-masthead advisor-profile-header"><figure class="advisor-portrait advisor-portrait--${person.id}">${portrait(person, en)}</figure><div class="advisor-profile-copy"><p class="eyebrow">${en ? 'Advisors' : 'アドバイザー'}</p><h1>${headingName(person, en)}</h1><p class="advisor-affiliation">${esc(data.affiliation)}</p></div></header>
+      <div class="article-layout"><article class="advisor-message"><section aria-labelledby="advisor-message-title"><h2 id="advisor-message-title">${en ? 'Message to IDFC' : 'IDFCへのメッセージ'}</h2>${data.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</section>
+      ${old ? `<details class="advisor-earlier"><summary>${en ? 'Earlier message' : 'これまでのメッセージ'}</summary><div class="advisor-earlier-content">${old}</div></details>` : ''}
+      <nav class="page-neighbors" aria-label="${en ? 'More advisors' : '他のアドバイザー'}"><a href="${directory(en)}">${en ? '← All advisors' : '← アドバイザー一覧'}</a><a href="${route(next, en)}">${esc(next[lang].name)} →</a></nav></article></div></div></main>`;
     if (person.id === 'khaing') {
       const identity = part => part.replaceAll(encodeURIComponent('松田-正彦-教授'), encodeURIComponent(person.slug)).replaceAll('松田-正彦-教授', person.slug)
         .replaceAll('Masahiko Matsuda, Professor', data.name).replaceAll('松田 正彦 教授', person.ja.name).replaceAll('松田正彦教授', person.ja.name);
@@ -60,15 +73,16 @@ for (const en of [false, true]) {
       html = html.replace('</title>', `</title><meta name="description" content="${esc(data.affiliation)} — ${en ? 'Message to IDFC' : 'IDFCへのメッセージ'}">`);
     }
     html = html.replace(/<title\b[^>]*>[\s\S]*?<\/title>/, `<title>${esc(data.name)} - IDFC</title>`);
-    html = html.replace(/<main\b[\s\S]*?<\/main>/, main);
+    html = html.replace(/<main\b[\s\S]*?<\/main>/, main.replace(/\n[ \t]+\n/g, '\n\n'));
     await mkdir(path.dirname(file), { recursive: true });
     await writeFile(file, html);
   }
   const index = path.join(site, en ? 'en' : '', 'アドバイザー/index.html');
   let html = await readFile(index, 'utf8');
-  const khaing = people[2];
-  html = html.replace(/href="#advisor-khaing"/g, `href="${route(khaing, en)}"`);
-  html = html.replace(/(<article class="advisor-card advisor-khaing"[^>]*>)[\s\S]*?<\/article>/, `$1<h2 class="advisor-name">${esc(khaing[lang].name)}</h2><p class="advisor-affiliation">${esc(khaing[lang].affiliation)}</p><a class="text-link" href="${route(khaing, en)}">${en ? 'Read the message →' : 'メッセージを読む →'}</a></article>`);
+  const breadcrumbs = html.match(/<nav class="breadcrumbs"[\s\S]*?<\/nav>/)?.[0] ?? '';
+  const masthead = html.match(/<header class="page-masthead"[\s\S]*?<\/header>/)?.[0] ?? '';
+  const cards = people.map(p => `<article class="advisor-card" id="advisor-${p.id}"><a class="advisor-portrait advisor-portrait--${p.id}" href="${route(p, en)}">${portrait(p, en, true)}</a><div class="advisor-card-copy"><h2 class="advisor-name"><a href="${route(p, en)}">${headingName(p, en)}</a></h2><p class="advisor-affiliation">${esc(p[lang].affiliation)}</p><a class="text-link" href="${route(p, en)}">${en ? 'Read the message →' : 'メッセージを読む →'}</a></div></article>`).join('');
+  html = html.replace(/<main\b[\s\S]*?<\/main>/, `<main id="main" class="advisor-index"><div class="wrap">${breadcrumbs}${masthead}<div class="advisor-cards advisor-gallery">${cards}</div></div></main>`);
   await writeFile(index, html);
 }
 

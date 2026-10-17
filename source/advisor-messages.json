@@ -1,6 +1,7 @@
 [
   {
     "id": "nemoto",
+    "portrait": { "src": "/assets/advisors/takashi-nemoto.jpg", "width": 280, "height": 280 },
     "slug": "根本-敬-教授",
     "ja": {
       "name": "根本 敬 名誉教授",
@@ -23,6 +24,7 @@
   },
   {
     "id": "matsuda",
+    "portrait": { "src": "/assets/advisors/masahiko-matsuda.jpg", "width": 235, "height": 309 },
     "slug": "松田-正彦-教授",
     "ja": {
       "name": "松田 正彦 教授",
@@ -45,6 +47,7 @@
   },
   {
     "id": "khaing",
+    "portrait": { "src": "/assets/advisors/nan-mya-khaing.jpg", "width": 937, "height": 1417 },
     "slug": "ナンミャケーカイン-特別研究員",
     "ja": {
       "name": "ナンミャケーカイン 特別研究員",
