@@ -1,5 +1,9 @@
 # IDFC日本ミャンマー学生会議 — 公開サイトと共同編集
 
+公開サイト: **https://idfcjapan.github.io/idfc-website/**
+
+GitHub Pagesでは `site/` の閲覧ページ・画像・PDFを公開します。`main` への変更を保存すると、GitHub Actionsが `node scripts/build-pages.mjs` でリンクと公開URLを整え、全ページの内部参照を検証してから公開します。GitHub Pagesにサーバーのログイン・D1・R2はありません。フッターの「編集」は従来の管理画面へ移動します。管理画面で保存した内容をこちらへ反映する際は、`node scripts/capture-public-pages.mjs` で現在の88ページとアップロード画像を取り込み、変更を確認してコミットしてください。既存の閲覧用URLはGitHub Pagesの公開処理には使いません。
+
 元サイト: https://idfc-jpn-mmr.jimdofree.com
 
 トップURLの共有プレビューは「お知らせ」ではなく団体名とトップの紹介文を表示します。使用終了の2016年メールアドレスは、全ページ共通のフッターとお問い合わせ欄から削除しています。
