@@ -51,10 +51,12 @@
   });
   const updateMenuHeight = () => {
     if (!nav || !header) return;
-    const top = Math.max(0, header.getBoundingClientRect().bottom);
+    // Absolute positioning starts at the header's padding edge, inside its border.
+    const border = parseFloat(window.getComputedStyle(header).borderBottomWidth) || 0;
+    const top = Math.max(0, header.getBoundingClientRect().bottom - border);
     const viewportHeight = window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight;
     nav.style.setProperty('--menu-top', `${top}px`);
-    nav.style.setProperty('--menu-height', `${Math.max(1, Math.floor(viewportHeight - top - 12))}px`);
+    nav.style.setProperty('--menu-height', `${Math.max(1, viewportHeight - top)}px`);
   };
   const updateHeaderHeight = () => {
     if (!header) return;
