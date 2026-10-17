@@ -299,8 +299,9 @@ body.photo-open{overflow:hidden}
  .js .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;gap:12px;min-height:80px;padding-block:12px}
  .js .brand{grid-column:1;grid-row:1;min-width:0;flex-shrink:1}
  .js .brand>span{min-width:0}
- .js .header-tools{grid-column:2;grid-row:1;justify-self:end;width:auto;gap:0;margin-left:0}
- .js .mobile-toggle{grid-column:3;grid-row:1;margin-left:0}
+ .js .header-tools{grid-column:2;grid-row:1;justify-self:end;align-self:start;width:auto;gap:0;margin-left:0;z-index:1}
+ .js .mobile-toggle{grid-column:3;grid-row:1;align-self:start;margin-left:0;z-index:1}
+ .language-switch a{min-width:76px}
  .primary-nav .header-links{justify-content:flex-start;gap:12px;flex-wrap:wrap;padding:20px 48px 0}
  .primary-nav .header-links>a{padding:10px 16px;min-height:44px;white-space:normal;border:1px solid var(--line);border-radius:6px;background:var(--cream)}
  .primary-nav .header-links>.contact-button{border-color:var(--ink);background:var(--ink);color:var(--paper)}
@@ -308,12 +309,13 @@ body.photo-open{overflow:hidden}
 }
 @media(max-width:600px){
  .js .brand-row{gap:8px;min-height:74px;padding-block:10px}
+ .language-switch a{width:64px;min-width:64px}
  .js .brand span span{font-size:10px;line-height:1.35}
- html[lang=en].js .brand-row{grid-template-columns:minmax(0,1fr) 44px}
- html[lang=en].js .brand{grid-column:1/-1;grid-row:1}
- html[lang=en].js .header-tools{grid-column:1;grid-row:2;justify-self:start}
- html[lang=en].js .mobile-toggle{grid-column:2;grid-row:2;justify-self:end}
- html[lang=en].js .brand span span{max-width:100%;font-size:11px;line-height:1.45}
+ html[lang=en].js .brand{display:grid;grid-column:1/-1;grid-row:1;grid-template-columns:44px minmax(0,1fr);grid-template-rows:44px auto;column-gap:7px;row-gap:3px}
+ html[lang=en].js .brand>span{display:contents}
+ html[lang=en].js .brand img{grid-column:1;grid-row:1}
+ html[lang=en].js .brand strong{grid-column:2;grid-row:1;justify-self:start}
+ html[lang=en].js .brand span span{grid-column:2;grid-row:2;max-width:100%;margin-top:0;font-size:11px;line-height:1.45}
  .primary-nav .header-links{gap:10px;padding:16px 24px 0}
  .primary-nav .header-links>a{flex:1 1 auto;font-size:13px;text-align:center;justify-content:center}
  .hero-description{font-size:15px;line-height:1.9}
