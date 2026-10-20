@@ -83,55 +83,46 @@
   const yearMenu = document.querySelector('.year-section-nav');
 
   // Enhance the saved publication only after CMS synchronization. Keeping the
-  // original section/card elements preserves editor scopes and existing links.
+  // original chapter elements preserves editor scopes and existing links.
   const profileDisclosures = [];
-  const addProfileDisclosure = (container, member = false) => {
-    const heading = container.querySelector(member ? ':scope > h4, :scope > h3' : ':scope > h3');
+  const addProfileDisclosure = container => {
+    const heading = container.querySelector(':scope > h2');
     if (!heading || container.querySelector(':scope > .profile-disclosure')) return;
     const disclosure = document.createElement('details');
     disclosure.className = 'profile-disclosure';
     const summary = document.createElement('summary');
     const body = document.createElement('div');
     body.className = 'profile-disclosure-body';
-    const role = member ? container.querySelector(':scope > .member-role') : null;
     summary.append(heading);
-    if (role) {
-      const label = document.createElement('span');
-      for (const attribute of role.attributes) label.setAttribute(attribute.name, attribute.value);
-      label.replaceChildren(...role.childNodes);
-      summary.append(label);
-      role.remove();
-    }
     body.append(...container.childNodes);
     disclosure.append(summary, body);
     container.append(disclosure);
     container.classList.add('has-profile-disclosure');
     profileDisclosures.push(disclosure);
   };
-  document.querySelectorAll('#committee-2027 > .update-section').forEach(section => addProfileDisclosure(section));
-  document.querySelectorAll('#japan-members-2027 .member-card, #myanmar-members-2027 .member-card')
-    .forEach(card => addProfileDisclosure(card, true));
+  document.querySelectorAll('#committee-2027, #japan-members-2027, #myanmar-members-2027')
+    .forEach(addProfileDisclosure);
 
+  const revealProfileTarget = hash => {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return null; }
+    if (!target) return null;
+    const own = target.querySelector(':scope > .profile-disclosure');
+    if (own) own.open = true;
+    let ancestor = target.closest('.profile-disclosure');
+    while (ancestor) {
+      ancestor.open = true;
+      ancestor = ancestor.parentElement?.closest('.profile-disclosure');
+    }
+    return target;
+  };
   if (profileDisclosures.length) {
-    const revealProfileTarget = hash => {
-      let target;
-      try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return null; }
-      if (!target) return null;
-      const own = target.querySelector(':scope > .profile-disclosure');
-      if (own) own.open = true;
-      let ancestor = target.closest('.profile-disclosure');
-      while (ancestor) {
-        ancestor.open = true;
-        ancestor = ancestor.parentElement?.closest('.profile-disclosure');
-      }
-      return target;
-    };
     const followProfileHash = () => {
       const target = revealProfileTarget(window.location.hash);
       if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'auto' }));
     };
     // Open before the browser performs its normal anchor navigation. This also
-    // handles clicking the current hash again after manually closing its card.
+    // handles clicking the current hash again after manually closing its chapter.
     document.addEventListener('click', event => {
       if (event.defaultPrevented || event.button > 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       const link = event.target.closest('a[href]');
@@ -143,6 +134,8 @@
     }, true);
     window.addEventListener('hashchange', followProfileHash);
     followProfileHash();
+    const initial = document.querySelector('[data-year-hub]')?.getAttribute('data-initial-section');
+    if (!window.location.hash && initial) revealProfileTarget('#' + initial);
 
     // Native details must be open for reliable printing across browsers. Restore
     // the reader's choices once the print dialog closes.
@@ -237,14 +230,15 @@
     window.addEventListener('hashchange', queueContents);
     window.addEventListener('pageshow', queueContents);
     document.addEventListener('toggle', queueContents, true);
-    window.addEventListener('load', () => {
-      let target;
-      try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch { /* Keep the browser's normal URL handling. */ }
+    const alignInitialSection = () => {
+      let target = revealProfileTarget(window.location.hash);
       const initial = hub?.getAttribute('data-initial-section');
-      if (!window.location.hash && initial && initial !== 'overview-2027') target = document.getElementById(initial);
+      if (!window.location.hash && initial && initial !== 'overview-2027') target = revealProfileTarget('#' + initial);
       target?.scrollIntoView({ block: 'start', behavior: 'auto' });
       queueContents();
-    }, { once: true });
+    };
+    if (document.readyState === 'complete') alignInitialSection();
+    else window.addEventListener('load', alignInitialSection, { once: true });
     syncContents();
   }
 

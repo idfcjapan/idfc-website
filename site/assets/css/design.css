@@ -406,37 +406,27 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 .blog-current{margin:28px 0 0;font-size:14px;line-height:1.9}
 @media(max-width:600px){.blog-archive-grid{grid-template-columns:1fr;gap:18px}.blog-archive-card{padding:24px}.blog-archive-intro{font-size:15px}.blog-archive-card h2{font-size:22px}}
 
-/* Names and roles stay visible while long introductions open on demand. */
-.year-chapter>.update-section.has-profile-disclosure{padding:0;margin:0 0 16px;border:0}
-.profile-disclosure{min-width:0;border:1px solid #bdcabc;border-radius:10px;background:#fff;overflow:clip}
-.profile-disclosure>summary{display:grid;grid-template-columns:minmax(0,1fr) 20px;column-gap:20px;align-items:center;min-height:64px;padding:18px 22px;cursor:pointer;list-style:none;color:var(--ink)}
+/* Each chapter opens all of its introductions together. */
+.profile-disclosure{min-width:0}
+.profile-disclosure>summary{display:grid;grid-template-columns:minmax(0,1fr) 20px;column-gap:20px;align-items:center;min-height:64px;padding:18px 22px;cursor:pointer;list-style:none;color:var(--ink);border:1px solid #bdcabc;border-radius:10px;background:var(--cream)}
 .profile-disclosure>summary::-webkit-details-marker{display:none}
-.profile-disclosure>summary::after{content:"";grid-column:2;grid-row:1/3;justify-self:center;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px)}
+.profile-disclosure>summary::after{content:"";grid-column:2;grid-row:1;justify-self:center;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px)}
 .profile-disclosure[open]>summary::after{transform:rotate(225deg) translate(-2px,-2px)}
 .profile-disclosure>summary:focus-visible{outline:3px solid var(--ink);outline-offset:-5px;border-radius:10px}
 .profile-disclosure>summary:hover{background:#edf2ea}
-.profile-disclosure[open]>summary{border-bottom:1px solid var(--line);background:#edf2ea}
-.year-chapter .profile-disclosure>summary>h3,.year-hub .profile-disclosure>summary>h4{grid-column:1;font-family:var(--sans);font-size:18px;line-height:1.65;margin:0;letter-spacing:0}
-.profile-disclosure>summary>.member-role{grid-column:1;display:block;font-size:12px!important;line-height:1.7!important;margin:5px 0 0!important}
-.profile-disclosure-body{padding:26px 22px;min-width:0}
-.profile-disclosure-body>:last-child{margin-bottom:0}
-#japan-members-2027 .member-grid,#myanmar-members-2027 .member-grid{align-items:start;gap:16px}
-.member-card.has-profile-disclosure{padding:0;margin:0;border:0;box-shadow:none;animation:none!important}
-.member-card.has-profile-disclosure .profile-disclosure>summary{min-height:90px}
-.member-card.has-profile-disclosure .document-photo{margin-bottom:22px}
-.member-card.has-profile-disclosure .member-source{display:inline-flex;align-items:center;min-height:44px}
+.profile-disclosure[open]>summary{background:#edf2ea}
+.update-content .profile-disclosure>summary>.year-chapter-title{grid-column:1;margin:0}
+.profile-disclosure-body{padding-top:36px;min-width:0}
+.profile-disclosure-body>.update-section>h3{font-family:var(--serif);font-size:29px;line-height:1.55;letter-spacing:.01em;margin:0 0 27px;font-weight:600}
+@media(max-width:900px){.profile-disclosure-body>.update-section>h3{font-size:25px}}
 @media(max-width:600px){
  .profile-disclosure>summary{padding:16px;column-gap:14px}
- .year-chapter .profile-disclosure>summary>h3,.year-hub .profile-disclosure>summary>h4{font-size:17px}
- .profile-disclosure-body{padding:22px 16px}
- .member-card.has-profile-disclosure{margin-bottom:14px}
 }
-@media(forced-colors:active){.profile-disclosure{border-color:CanvasText}.profile-disclosure>summary:focus-visible{outline-color:Highlight}}
+@media(forced-colors:active){.profile-disclosure>summary{border-color:CanvasText}.profile-disclosure>summary:focus-visible{outline-color:Highlight}}
 @media print{
- .profile-disclosure{overflow:visible;border-color:#777}
+ .profile-disclosure{overflow:visible}
  .profile-disclosure>summary{background:none!important;break-after:avoid}
  .profile-disclosure>summary::after{display:none}
  .profile-disclosure-body{display:block!important}
  .profile-disclosure::details-content{content-visibility:visible}
- .member-card.has-profile-disclosure{break-inside:avoid}
 }
