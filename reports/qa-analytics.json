@@ -1,0 +1,22 @@
+{
+  "result": "pass",
+  "runtime": "Cloudflare workerd / Miniflare + deterministic Node handlers + browser tracker VM",
+  "assertions": 233,
+  "productionWrites": false,
+  "privateAnalyticsAuthentication": true,
+  "aggregateOnly": true,
+  "atomicConcurrentViews": 32,
+  "bilingualAndAliasAggregation": true,
+  "japanMidnightBoundary": true,
+  "periods": [
+    30,
+    "all"
+  ],
+  "zeroFilledDates": true,
+  "allHistoryCalendarYearsAndLeapDay": true,
+  "collectionStartAndPartialDates": true,
+  "publicOriginAndBodyValidation": true,
+  "botAndPreviewExclusions": true,
+  "publicTrackerPrivacyAndFailureSafety": true,
+  "persistenceAcrossRestart": true
+}

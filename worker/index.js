@@ -1,5 +1,6 @@
 import editor from './editor.html?raw';
 import pages from './pages.json';
+import { recordPublicView, editorAnalytics } from './analytics.js';
 
 const enc = new TextEncoder();
 const COOKIE = '__Host-idfc-editor';
@@ -160,6 +161,7 @@ async function api(request,env,url) {
   if(url.pathname==='/api/editor/login'&&request.method==='POST')return login(request,env);
   const write=!['GET','HEAD'].includes(request.method);
   const auth=await authorize(request,env,write);if(auth.error)return auth.error;
+  if(url.pathname==='/api/editor/analytics'&&request.method==='GET')return editorAnalytics(request,env,pages);
   if(url.pathname==='/api/editor/session'&&request.method==='GET')return json({csrf:auth.session.csrf,pages});
   if(url.pathname==='/api/editor/logout'&&request.method==='POST'){
     await database(env).prepare('DELETE FROM edit_sessions WHERE token_hash = ?').bind(auth.session.token_hash).run();
@@ -230,6 +232,7 @@ export default {async fetch(request,env) {
   const url=new URL(request.url);
   try {
     if(url.pathname==='/api/public/content')return await publicContent(request,env,url);
+    if(url.pathname==='/api/public/views')return await recordPublicView(request,env,pages);
     if(url.pathname.startsWith('/api/editor/'))return await api(request,env,url);
     if(url.pathname==='/edit'||url.pathname==='/en/edit/')return Response.redirect(url.origin+'/edit/',302);
     if(url.pathname==='/edit/')return new Response(editor,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-frame-options':'SAMEORIGIN','x-content-type-options':'nosniff','content-security-policy':"default-src 'self'; img-src 'self' https: data:; style-src 'self'; script-src 'self'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"}});

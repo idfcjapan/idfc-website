@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "environment": "Local Miniflare with isolated synthetic daily counts, no production content saves",
+  "periods": ["過去30日", "今まで全部"],
+  "verified": ["automatic graph after editor login", "line chart rendering", "period selection", "page selection", "Japanese page titles", "keyboard day selection", "editor return", "reopen analytics", "mobile layout without horizontal overflow"],
+  "viewports": ["default", "1280x900", "390x844"],
+  "productionVisualAuthentication": "existing password remains user controlled"
+}

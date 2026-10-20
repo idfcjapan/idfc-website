@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/version-assets.mjs && vite build && node scripts/package-worker.mjs",
     "db:generate": "drizzle-kit generate",
-    "test:editor": "node scripts/test-bilingual-editor.mjs"
+    "test:editor": "node scripts/test-bilingual-editor.mjs",
+    "test:analytics": "node scripts/test-analytics.mjs"
   },
   "dependencies": { "drizzle-orm": "0.45.2" },
   "devDependencies": {

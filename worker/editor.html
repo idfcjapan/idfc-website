@@ -6,8 +6,9 @@
   <meta name="robots" content="noindex,nofollow">
   <title>IDFC ページ編集</title>
   <link rel="icon" href="/assets/images/idfc-logo.svg">
-  <link rel="stylesheet" href="/assets/editor/editor.css?v=20261017-pair1">
-  <script src="/assets/editor/editor.js?v=20261017-pair1" defer></script>
+  <link rel="stylesheet" href="/assets/editor/editor.css?v=20261020-analytics1">
+  <script src="/assets/editor/analytics.js?v=20261020-analytics1" defer></script>
+  <script src="/assets/editor/editor.js?v=20261020-analytics1" defer></script>
   <script src="/assets/editor/direct.js?v=20261017-pair1" defer></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
   <div id="editor-view" hidden>
     <header class="editor-header">
       <a class="brand" href="/">IDFC <span>メンバー編集</span></a>
-      <div class="header-actions"><span id="save-status" role="status">ページを選んでください</span><a id="public-link" href="/" target="_blank" rel="noopener noreferrer">公開ページ ↗</a><button id="logout" type="button">ログアウト</button><button id="save" class="primary" type="button" disabled>保存して公開</button></div>
+      <div class="header-actions"><span id="save-status" role="status">ページを選んでください</span><a id="public-link" href="/" target="_blank" rel="noopener noreferrer">公開ページ ↗</a><button id="analytics-open" type="button" aria-haspopup="dialog" aria-controls="analytics-dialog">閲覧数</button><button id="logout" type="button">ログアウト</button><button id="save" class="primary" type="button" disabled>保存して公開</button></div>
     </header>
     <div class="editor-layout">
       <aside class="editor-sidebar">
@@ -83,6 +84,36 @@
       </main>
     </div>
   </div>
+  <dialog id="analytics-dialog" class="analytics-dialog" aria-labelledby="analytics-title" aria-describedby="analytics-description">
+    <div class="analytics-shell">
+      <header class="analytics-heading">
+        <div><p class="analytics-eyebrow">IDFC · メンバー専用</p><h2 id="analytics-title">閲覧数の動向</h2><p id="analytics-description">掲載ごとに、どれくらい読まれているかを確認できます。</p></div>
+        <button id="analytics-close" class="analytics-close" type="button" autofocus>編集を続ける <span aria-hidden="true">×</span></button>
+      </header>
+      <div class="analytics-controls">
+        <div class="analytics-page-control"><label for="analytics-page">掲載を選ぶ <span>日本語・English 合計</span></label><select id="analytics-page"><option value="">全ページ</option></select></div>
+        <fieldset class="analytics-period"><legend>表示期間</legend><div><button type="button" data-analytics-days="30" aria-pressed="true">過去30日</button><button type="button" data-analytics-days="all" aria-pressed="false">今まで全部</button></div></fieldset>
+      </div>
+      <p id="analytics-status" class="analytics-status" role="status" aria-live="polite">閲覧数を読み込み中…</p>
+      <div id="analytics-error" class="analytics-error" role="alert" hidden><p id="analytics-error-text"></p><button id="analytics-retry" type="button">もう一度読み込む</button></div>
+      <div id="analytics-results" hidden>
+        <div class="analytics-metrics">
+          <section class="analytics-metric"><h3 id="analytics-total-label">この期間の閲覧数</h3><p><strong id="analytics-total">0</strong><span>PV</span></p><span id="analytics-date-range"></span></section>
+          <section id="analytics-all-time-card" class="analytics-metric"><h3>計測開始からの閲覧数</h3><p><strong id="analytics-all-time">0</strong><span>PV</span></p><span id="analytics-start-date">計測はこれから始まります</span></section>
+        </div>
+        <section class="analytics-chart-card" aria-labelledby="analytics-chart-title">
+          <div class="analytics-chart-heading"><h3 id="analytics-chart-title">日ごとの閲覧数</h3><p id="analytics-day-readout" aria-live="polite"></p></div>
+          <p id="analytics-empty" class="analytics-empty" hidden></p>
+          <div id="analytics-chart" class="analytics-chart"></div>
+          <div id="analytics-day-control" class="analytics-day-control"><label for="analytics-day">日付を選んで閲覧数を確認</label><input id="analytics-day" type="range" min="0" max="29" value="29" step="1" aria-describedby="analytics-day-readout"></div>
+          <p class="analytics-chart-note">日本時間の日付で集計。今日の数値は途中経過です。計測開始前は「未計測」と表示します。</p>
+          <details class="analytics-daily-details"><summary>日別の数値を見る</summary><div class="analytics-table-scroll"><table><caption class="sr-only">選択した掲載の日別の閲覧数（日本時間）</caption><thead><tr><th scope="col">日付</th><th scope="col">閲覧数</th></tr></thead><tbody id="analytics-daily-rows"></tbody></table></div></details>
+        </section>
+        <section class="analytics-list" aria-labelledby="analytics-list-title"><div class="analytics-list-heading"><h3 id="analytics-list-title">掲載ごとの閲覧数</h3><span id="analytics-list-period">この期間の合計</span></div><p class="analytics-list-hint">掲載名を押すと、そのページの線グラフに切り替わります。</p><div id="analytics-page-rows"></div></section>
+      </div>
+      <footer class="analytics-footer"><p>PVはページが開かれた回数です。同じ人による再閲覧も含むため、人数とは異なります。日本語とEnglishは同じ掲載として合算します。</p><p>計測を有効にした後の閲覧が対象です。以前の閲覧履歴は復元されません。</p></footer>
+    </div>
+  </dialog>
   <p id="startup-error" class="startup-error" role="alert" hidden></p>
 </body>
 </html>

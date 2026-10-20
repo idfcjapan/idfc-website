@@ -11,7 +11,7 @@ const previousOrigin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const editorURL = `${previousOrigin}/edit/`;
 const base = publicURL.pathname;
 const designVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/css/design.css'))).digest('hex').slice(0, 12);
-const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/content-sync.js'))).digest('hex').slice(0, 12);
+const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/content-sync.js'))).update(await readFile(path.join(source, 'assets/js/analytics.js'))).digest('hex').slice(0, 12);
 
 export function rewriteURL(value) {
   if (value === '/edit/' || value === '/edit' || value === '/en/edit/' || value === editorURL) return editorURL;

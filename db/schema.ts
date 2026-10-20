@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core';
 
 export const pageEdits = sqliteTable('page_edits', {
   path: text('path').primaryKey(),
@@ -16,4 +16,14 @@ export const loginLimits = sqliteTable('login_limits', {
   key: text('key').primaryKey(),
   attempts: integer('attempts').notNull(),
   resetAt: integer('reset_at').notNull(),
+});
+// Daily page-view totals only: no visitor, IP, cookie or user-agent records.
+export const pageViewsDaily = sqliteTable('page_views_daily', {
+  day: text('day').notNull(),
+  path: text('path').notNull(),
+  views: integer('views').notNull().default(0),
+}, table => [primaryKey({ columns: [table.day, table.path] })]);
+export const analyticsMetadata = sqliteTable('analytics_metadata', {
+  key: text('key').primaryKey(),
+  value: integer('value').notNull(),
 });

@@ -2,6 +2,11 @@
   'use strict';
   document.documentElement.classList.add('js');
   const scriptURL = document.currentScript?.src;
+  if (scriptURL) {
+    const analyticsURL = new URL('./analytics.js', scriptURL);
+    analyticsURL.search = new URL(scriptURL).search;
+    void import(analyticsURL.href).then(module => module.recordPageView()).catch(() => {});
+  }
   if (location.origin === 'https://idfcjapan.github.io' && scriptURL) {
     try {
       const moduleURL = new URL('./content-sync.js', scriptURL);
