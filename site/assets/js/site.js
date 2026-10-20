@@ -82,6 +82,88 @@
   // The year menu scrolls with the page; only the main header is fixed.
   const yearMenu = document.querySelector('.year-section-nav');
 
+  // Enhance the saved publication only after CMS synchronization. Keeping the
+  // original section/card elements preserves editor scopes and existing links.
+  const profileDisclosures = [];
+  const addProfileDisclosure = (container, member = false) => {
+    const heading = container.querySelector(member ? ':scope > h4, :scope > h3' : ':scope > h3');
+    if (!heading || container.querySelector(':scope > .profile-disclosure')) return;
+    const disclosure = document.createElement('details');
+    disclosure.className = 'profile-disclosure';
+    const summary = document.createElement('summary');
+    const body = document.createElement('div');
+    body.className = 'profile-disclosure-body';
+    const role = member ? container.querySelector(':scope > .member-role') : null;
+    summary.append(heading);
+    if (role) {
+      const label = document.createElement('span');
+      for (const attribute of role.attributes) label.setAttribute(attribute.name, attribute.value);
+      label.replaceChildren(...role.childNodes);
+      summary.append(label);
+      role.remove();
+    }
+    body.append(...container.childNodes);
+    disclosure.append(summary, body);
+    container.append(disclosure);
+    container.classList.add('has-profile-disclosure');
+    profileDisclosures.push(disclosure);
+  };
+  document.querySelectorAll('#committee-2027 > .update-section').forEach(section => addProfileDisclosure(section));
+  document.querySelectorAll('#japan-members-2027 .member-card, #myanmar-members-2027 .member-card')
+    .forEach(card => addProfileDisclosure(card, true));
+
+  if (profileDisclosures.length) {
+    const revealProfileTarget = hash => {
+      let target;
+      try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return null; }
+      if (!target) return null;
+      const own = target.querySelector(':scope > .profile-disclosure');
+      if (own) own.open = true;
+      let ancestor = target.closest('.profile-disclosure');
+      while (ancestor) {
+        ancestor.open = true;
+        ancestor = ancestor.parentElement?.closest('.profile-disclosure');
+      }
+      return target;
+    };
+    const followProfileHash = () => {
+      const target = revealProfileTarget(window.location.hash);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'auto' }));
+    };
+    // Open before the browser performs its normal anchor navigation. This also
+    // handles clicking the current hash again after manually closing its card.
+    document.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button > 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a[href]');
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+      let destination;
+      try { destination = new URL(link.href, window.location.href); } catch { return; }
+      if (destination.origin === location.origin && destination.pathname === location.pathname &&
+          destination.search === location.search && destination.hash) revealProfileTarget(destination.hash);
+    }, true);
+    window.addEventListener('hashchange', followProfileHash);
+    followProfileHash();
+
+    // Native details must be open for reliable printing across browsers. Restore
+    // the reader's choices once the print dialog closes.
+    let printState;
+    const prepareProfilesForPrint = () => {
+      if (printState) return;
+      printState = profileDisclosures.map(disclosure => disclosure.open);
+      profileDisclosures.forEach(disclosure => { disclosure.open = true; });
+    };
+    const restoreProfilesAfterPrint = () => {
+      if (!printState) return;
+      profileDisclosures.forEach((disclosure, index) => { disclosure.open = printState[index]; });
+      printState = null;
+    };
+    window.addEventListener('beforeprint', prepareProfilesForPrint);
+    window.addEventListener('afterprint', restoreProfilesAfterPrint);
+    window.matchMedia('print').addEventListener('change', event => {
+      if (event.matches) prepareProfilesForPrint(); else restoreProfilesAfterPrint();
+    });
+  }
+
   // Anchor order follows the article, so long sections and individual members
   // remain selected until the reader reaches the next heading.
   const contents = document.querySelector('.article-aside');
@@ -105,6 +187,8 @@
       const activation = (header?.getBoundingClientRect().height || 0) + 24;
       let current = tocEntries[0];
       for (const entry of tocEntries) {
+        const closed = entry.target.closest('.profile-disclosure:not([open])');
+        if (closed && !closed.querySelector(':scope > summary')?.contains(entry.target)) continue;
         if (entry.target.getBoundingClientRect().top > activation + 1) break;
         current = entry;
       }
@@ -152,6 +236,7 @@
     window.addEventListener('resize', queueContents);
     window.addEventListener('hashchange', queueContents);
     window.addEventListener('pageshow', queueContents);
+    document.addEventListener('toggle', queueContents, true);
     window.addEventListener('load', () => {
       let target;
       try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch { /* Keep the browser's normal URL handling. */ }
