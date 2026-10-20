@@ -9,5 +9,49 @@
     "source_pdf_image_object": 517,
     "sha256": "3bfb3882695fc2222030b3219d3efbf10345f45eb6ce913abb8ed353d30c4571",
     "modified": false
+  },
+  "global-japanese-tea-association": {
+    "name": "国際日本茶協会",
+    "image": "/assets/idfc2027/global-japanese-tea-association.svg",
+    "width": 203,
+    "height": 88,
+    "source_filename": "S__71082030.jpg",
+    "source_sha256": "50fb6a9aa35f3385fac3df10572e2e40f7fd3cae38a29113100b33477c93a09d",
+    "display_viewbox": [160, 156, 203, 88],
+    "sha256": "305a8be6a015fb9ccaf1087b1a0ef0b70c47f7c5be6940ee0b20bea65b1eb9ff",
+    "modified": false
+  },
+  "japanese-tea-student-association": {
+    "name": "学生日本茶協会",
+    "image": "/assets/idfc2027/japanese-tea-student-association.svg",
+    "width": 96,
+    "height": 96,
+    "source_filename": "S__71082030.jpg",
+    "source_sha256": "50fb6a9aa35f3385fac3df10572e2e40f7fd3cae38a29113100b33477c93a09d",
+    "display_viewbox": [371, 153, 96, 96],
+    "sha256": "43afe9b7487dab990e0d44c91e91f30844b1eb17024e73bd6600d5d746aa7921",
+    "modified": false
+  },
+  "nogezaka-glocal": {
+    "name": "野毛坂グローカル",
+    "image": "/assets/idfc2027/nogezaka-glocal.svg",
+    "width": 382,
+    "height": 88,
+    "source_filename": "S__71082030.jpg",
+    "source_sha256": "50fb6a9aa35f3385fac3df10572e2e40f7fd3cae38a29113100b33477c93a09d",
+    "display_viewbox": [160, 295, 382, 88],
+    "sha256": "eaee2b4d6bdc0a9a68948d85f350fdbf113ab1e6e165a3c040141700930a9d5d",
+    "modified": false
+  },
+  "japan-myanmar-friendship-association": {
+    "name": "日本ミャンマー友好協会",
+    "image": "/assets/idfc2027/japan-myanmar-friendship-association.svg",
+    "width": 388,
+    "height": 88,
+    "source_filename": "S__71082030.jpg",
+    "source_sha256": "50fb6a9aa35f3385fac3df10572e2e40f7fd3cae38a29113100b33477c93a09d",
+    "display_viewbox": [550, 295, 388, 88],
+    "sha256": "5c06734d19b0e4ca354a9f74f0c0625d6d44c123593e0ec08c546c49531d6ec3",
+    "modified": false
   }
 }

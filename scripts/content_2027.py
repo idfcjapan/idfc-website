@@ -213,7 +213,7 @@ def myanmar_members():
 
 
 def supporter_groups():
-    groups=[('助成','supporter-grants',[('公益財団法人 三菱UFJ国際財団','mufg-foundation'),('公益財団法人 双日国際交流財団','sojitz')]),('協賛','supporter-sponsors',[('kokotel','kokotel'),('Little One','little-one')]),('後援','supporter-endorsements',[('野毛坂グローカル','nogezaka')])]
+    groups=[('助成','supporter-grants',[('公益財団法人 三菱UFJ国際財団','mufg-foundation'),('公益財団法人 双日国際交流財団','sojitz')]),('協賛','supporter-sponsors',[('国際日本茶協会','global-japanese-tea-association'),('学生日本茶協会','japanese-tea-student-association')]),('後援','supporter-endorsements',[('野毛坂グローカル','nogezaka-glocal'),('日本ミャンマー友好協会','japan-myanmar-friendship-association')])]
     body='<div class="supporter-groups">'
     for title,group_class,entries in groups:
         body+=f'<section class="supporter-group {group_class}"><h3>{e(title)}</h3><div class="supporter-cards">'
