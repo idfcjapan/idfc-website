@@ -52,7 +52,7 @@
     window.addEventListener('blur', leave);
     document.addEventListener('scroll', leave, { passive: true });
     document.addEventListener('pointerdown', leave);
-    const actions = [...document.querySelectorAll('.button, .contact-button')];
+    const actions = [...document.querySelectorAll('.button:not(.contact-button)')];
     const actionHandlers = actions.map(button => {
       const x = gsap.quickTo(button, 'x', { duration: 0.25, ease: 'power3.out' });
       const y = gsap.quickTo(button, 'y', { duration: 0.25, ease: 'power3.out' });

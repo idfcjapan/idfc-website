@@ -5,8 +5,9 @@ body{font-family:var(--sans)}
 .site-header{background:rgba(247,243,234,.96);backdrop-filter:blur(16px)}
 .brand strong{font-family:Arial,Helvetica,sans-serif;font-weight:600;letter-spacing:-.065em}
 .footer-brand>span{font-family:"Space Grotesk",var(--sans);font-weight:600;letter-spacing:-.065em}
-.button,.contact-button{transition:background .25s,color .25s,border-radius .25s;will-change:auto}
-@media(hover:hover) and (pointer:fine){.button:hover,.contact-button:hover{border-radius:24px}}
+.button{transition:background .25s,color .25s,border-radius .25s;will-change:auto}
+.contact-button{transition:none}
+@media(hover:hover) and (pointer:fine){.button:not(.contact-button):hover{border-radius:24px}}
 .hero{position:relative;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:52px;min-height:calc(100svh - var(--header-height,150px));padding-block:54px 72px;align-items:center}
 .hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid var(--line);border-radius:50%;left:37%;top:20%;z-index:-1;pointer-events:none}
 .hero-copy{min-width:0}
