@@ -438,3 +438,6 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 .site-header .header-links>a[aria-current=page],.site-header .header-links>a:active{border-color:var(--ink);background:var(--ink);color:white;text-decoration:none}
 @media(hover:hover) and (pointer:fine){.site-header .header-links>a:not([aria-current=page]):hover{background:#dce5dc;color:var(--ink)}}
 .site-header .header-links>a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.site-header .header-links>.contact-button{border-color:var(--ink);background:transparent;color:var(--ink)}
+.site-header .header-links>.contact-button[aria-current=page],.site-header .header-links>.contact-button:active{background:var(--cream);color:var(--ink)}
+@media(hover:hover) and (pointer:fine){.site-header .header-links>.contact-button:not([aria-current=page]):hover{background:var(--ink);color:white}}
