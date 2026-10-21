@@ -307,7 +307,6 @@ body.photo-open{overflow:hidden}
  .language-switch a{min-width:76px}
  .primary-nav .header-links{justify-content:flex-start;gap:12px;flex-wrap:wrap;padding:20px 48px 0}
  .primary-nav .header-links>a{padding:10px 16px;min-height:44px;white-space:normal;border:1px solid var(--line);border-radius:6px;background:var(--cream)}
- .primary-nav .header-links>.contact-button{border-color:var(--ink);background:var(--ink);color:var(--paper)}
  .primary-nav .header-links>a:focus-visible{outline-offset:3px}
 }
 @media(max-width:600px){
@@ -433,3 +432,9 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 }
 
 @media(max-width:460px){.supporter-sponsors .supporter-cards,.supporter-endorsements .supporter-cards{grid-template-columns:1fr}}
+
+/* Support buttons use the same selected-page colors as the language switch. */
+.site-header .header-links>a{justify-content:center;padding:8px 12px;border:1px solid var(--line);border-radius:4px;background:var(--cream);color:var(--ink);font-weight:600;text-decoration:none;transition:none;transform:none}
+.site-header .header-links>a[aria-current=page],.site-header .header-links>a:active{border-color:var(--ink);background:var(--ink);color:white;text-decoration:none}
+@media(hover:hover) and (pointer:fine){.site-header .header-links>a:not([aria-current=page]):hover{background:#dce5dc;color:var(--ink)}}
+.site-header .header-links>a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
