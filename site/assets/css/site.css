@@ -186,8 +186,8 @@ html[lang=en] .news-layout .j-header h2{font-size:32px}
 .sponsor-original .j-text{overflow-wrap:anywhere}
 .sponsor-label h2{line-height:1.55;overflow-wrap:anywhere}
 .sponsor-label .button{max-width:100%;white-space:normal;line-height:1.6}
-.home-social .social-icon-link{display:inline-flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
-.home-social .j-hgrid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.home-social .social-icon-link{display:inline-flex;flex-direction:column;align-items:flex-start;gap:10px;color:var(--ink);text-decoration:none}
+.home-social .j-hgrid{grid-template-columns:repeat(6,minmax(0,1fr))}
 @media(max-width:900px){.home-social .j-hgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){.home-social .j-hgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .home-social .social-icon-link img{width:64px;height:64px;margin:0;padding:16px;border:1px solid var(--line);border-radius:50%;background:#fff;object-fit:contain;transition:background .2s,border-color .2s,transform .2s}
