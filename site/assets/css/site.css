@@ -305,3 +305,8 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .past-recruitment-body .j-header h2{font-size:22px;line-height:1.6;overflow-wrap:anywhere}
 .archive-label{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:24px}
 @media(max-width:600px){.past-recruitment,.founding-archive{margin-top:40px;padding-top:24px}.past-recruitment>h2{font-size:22px}.past-recruitment summary{padding:16px}.past-recruitment-body{padding:20px 16px}}
+
+/* Japan-side official introduction portraits. Keep the source post images intact. */
+.member-card .member-photo--instagram{position:relative;width:min(100%,164px);aspect-ratio:432/526;overflow:hidden;margin-inline:auto}
+.member-card .member-photo--instagram img{position:absolute;width:250%;max-width:none;height:auto;max-height:none;left:-119%;top:-67.3%;object-fit:initial;object-position:initial}
+@media(max-width:600px){.member-card .member-photo--instagram{width:min(100%,246px)}}

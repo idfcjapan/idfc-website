@@ -1,0 +1,500 @@
+{
+  "updatedDate": "2026-10-21",
+  "introduction": {
+    "ja": "公式SNSのIDFC2027実行委員紹介と2027パンフレットをもとに、プロフィールを掲載しています。",
+    "en": "Profiles are based on official IDFC2027 social media introductions and the 2027 brochure."
+  },
+  "members": [
+    {
+      "id": "kazuki",
+      "portrait": {
+        "src": "/assets/idfc2027/kazuki.webp",
+        "width": 1066,
+        "height": 753
+      },
+      "mbti": null,
+      "source": {
+        "type": "brochure",
+        "url": "/idfc2027/%E8%B3%87%E6%96%99/%E6%96%B0%E6%AD%93%E3%83%91%E3%83%B3%E3%83%95%E3%83%AC%E3%83%83%E3%83%88/#page-12",
+        "page": 12
+      },
+      "ja": {
+        "name": "かずき",
+        "university": "慶應義塾大学",
+        "role": "代表",
+        "quirk": "プロ野球の応援歌を歌うのが得意。",
+        "reason": "初めて訪れたミャンマーへの思いから、学生の立場で日緬の友好に貢献したいと参加。"
+      },
+      "en": {
+        "name": "Kazuki",
+        "university": "Keio University",
+        "role": "President",
+        "quirk": "Enjoys singing professional baseball cheering songs.",
+        "reason": "Joined to contribute to friendship between Japan and Myanmar after a memorable first visit to Myanmar."
+      }
+    },
+    {
+      "id": "ryota",
+      "portrait": {
+        "src": "/assets/idfc2027/ryota.webp",
+        "width": 1400,
+        "height": 1003
+      },
+      "mbti": "ENFJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DaHrk1Hynd-/"
+      },
+      "ja": {
+        "name": "れいとうみかん",
+        "university": "東京大学",
+        "role": "会計",
+        "quirk": "理系でも、高校時代の数学の模試で0点を取った経験あり。",
+        "reason": "タイ留学中に出会ったミャンマーの友人たちを通じて、同国と関わる活動に関心を持った。"
+      },
+      "en": {
+        "name": "Reitomikan",
+        "university": "The University of Tokyo",
+        "role": "Accounting",
+        "quirk": "Once scored zero on a high-school mathematics practice exam, despite being a science student.",
+        "reason": "Friendships with Myanmar students during an exchange in Thailand inspired an interest in working with Myanmar."
+      }
+    },
+    {
+      "id": "hanna",
+      "portrait": {
+        "src": "/assets/idfc2027/hanna.webp",
+        "width": 942,
+        "height": 620
+      },
+      "mbti": "ENTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/p/DZzUkqhDVf_/"
+      },
+      "ja": {
+        "name": "はんな",
+        "university": "UC Berkeley",
+        "role": "副代表 / 広報&リサーチ",
+        "quirk": "最近、住まいが浸水する出来事を経験。",
+        "reason": "学校でミャンマーの人々と関わり、社会課題を知ったことから、文化を越えた協働と相互理解を目指して参加。"
+      },
+      "en": {
+        "name": "Hanna",
+        "university": "University of California, Berkeley",
+        "role": "Vice-President / Public Relations & Research",
+        "quirk": "Recently dealt with a flooded home.",
+        "reason": "Meeting Myanmar communities at school inspired a wish to turn cross-cultural understanding into shared action."
+      }
+    },
+    {
+      "id": "yuka",
+      "portrait": {
+        "src": "/assets/idfc2027/yuka.webp",
+        "width": 954,
+        "height": 756
+      },
+      "mbti": "ENFJ",
+      "source": {
+        "type": "facebook",
+        "url": "https://www.facebook.com/idfc.myanmar.japan/posts/1013442144728525/"
+      },
+      "ja": {
+        "name": "ゆうか",
+        "university": "大阪大学",
+        "role": "副代表 / 日本渉外 / ミャンマー渉外",
+        "quirk": "声の大きさには自信あり。",
+        "reason": "アラビア語の学びや中東での難民支援経験から、ミャンマーの課題にも関心を持ち、学生同士の対話を求めて参加。"
+      },
+      "en": {
+        "name": "Yuka",
+        "university": "Osaka University",
+        "role": "Vice-President / Japan External Relations / Myanmar External Relations",
+        "quirk": "Has a particularly powerful voice.",
+        "reason": "Arabic studies and refugee-support work in the Middle East led to an interest in Myanmar and dialogue between students."
+      }
+    },
+    {
+      "id": "waka",
+      "portrait": {
+        "src": "/assets/idfc2027/waka.webp",
+        "width": 911,
+        "height": 733
+      },
+      "mbti": "ISTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Da42BniCOQD/"
+      },
+      "ja": {
+        "name": "わか",
+        "university": "龍谷大学",
+        "role": "広報&リサーチ",
+        "quirk": "階段をリズムに乗って降りるのが得意。",
+        "reason": "高校で育んだ国際交流への関心を大学でも続けたく、SNSで知ったIDFCの多様な学生との交流に魅力を感じた。"
+      },
+      "en": {
+        "name": "Waka",
+        "university": "Ryukoku University",
+        "role": "Public Relations & Research",
+        "quirk": "Enjoys going down stairs to a rhythm.",
+        "reason": "Wanted to continue international exchanges after high school and was drawn to IDFC after discovering its diverse student community online."
+      }
+    },
+    {
+      "id": "hla",
+      "portrait": {
+        "src": "/assets/idfc2027/hla.webp",
+        "width": 956,
+        "height": 724
+      },
+      "mbti": "INTJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Da2RSbPjGe7/"
+      },
+      "ja": {
+        "name": "HLA（ラ）",
+        "university": "筑波大学",
+        "role": "広報&リサーチ",
+        "quirk": "強いプレッシャーには平気でも、小さな出来事に大きく反応することも。",
+        "reason": "友人の紹介でIDFCを知り、ミャンマーを真剣に考える学生たちに刺激を受け、両国への貢献を目指して参加。"
+      },
+      "en": {
+        "name": "HLA (La)",
+        "university": "University of Tsukuba",
+        "role": "Public Relations & Research",
+        "quirk": "Handles major pressure well, but small things can still cause a big reaction.",
+        "reason": "A friend introduced IDFC, and meeting students committed to Myanmar inspired a wish to contribute to both countries."
+      }
+    },
+    {
+      "id": "chaw-kalyar",
+      "ja": {
+        "name": "チョー・カリヤー（ချောကလျာ）",
+        "university": "大阪大学",
+        "role": "広報&リサーチ",
+        "quirk": "薄い壁越しに、隣からミスチルの歌が聞こえてくることも。",
+        "reason": "将来は国連でミャンマーの開発・支援に携わりたいと考え、先輩の紹介で参加。交流を通じて文化・歴史・言語を学びたいと思っている。"
+      },
+      "en": {
+        "name": "Chaw Kalyar",
+        "university": "Osaka University",
+        "role": "Public Relations & Research",
+        "quirk": "Sometimes hears a neighbor singing Mr. Children songs through the walls.",
+        "reason": "Hopes to work on development and support for Myanmar through the United Nations. Joined through a senior student to learn about Myanmar’s culture, history and language through exchange."
+      },
+      "mbti": "INTJ",
+      "source": {
+        "type": "facebook",
+        "url": "https://www.facebook.com/idfc.myanmar.japan/posts/pfbid0RhVX1DejRrFKTdstquPjro7s9uXs4gzkBzLyBa16TJhmvEYPnnYaqnTBs7Emd3a5l"
+      },
+      "portrait": {
+        "src": "/assets/idfc2027/team2027/chaw-kalyar-facebook.jpg",
+        "width": 512,
+        "height": 640,
+        "presentation": "instagram-portrait"
+      }
+    },
+    {
+      "id": "sai",
+      "portrait": {
+        "src": "/assets/idfc2027/sai.webp",
+        "width": 952,
+        "height": 724
+      },
+      "mbti": "INFP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Da-CLdSDKd8/"
+      },
+      "ja": {
+        "name": "SAI",
+        "university": "日本大学",
+        "role": "広報&リサーチ",
+        "quirk": "日常で3つの言語を使い分ける。",
+        "reason": "同じ背景を持つ日本在住の仲間とつながり、日本の学生との交流から視野と社会課題への理解を広げたいと参加。"
+      },
+      "en": {
+        "name": "SAI",
+        "university": "Nihon University",
+        "role": "Public Relations & Research",
+        "quirk": "Uses three languages in everyday life.",
+        "reason": "Joined to connect with people from similar backgrounds in Japan and broaden perspectives through exchanges with Japanese students."
+      }
+    },
+    {
+      "id": "yua",
+      "portrait": {
+        "src": "/assets/idfc2027/team2027/kazuya-instagram.jpg",
+        "width": 1080,
+        "height": 1350,
+        "presentation": "instagram-portrait"
+      },
+      "mbti": "INTJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Da7a15JDQhz/"
+      },
+      "ja": {
+        "name": "和也",
+        "university": "富山大学",
+        "role": "広報&リサーチ",
+        "quirk": "好きな漫画やアニメの影響を受けやすい。",
+        "reason": "海外へ踏み出す機会を探す中で、現地の学生との交流を通じて異文化を学べる点に惹かれた。"
+      },
+      "en": {
+        "name": "Kazuya",
+        "university": "University of Toyama",
+        "role": "Public Relations & Research",
+        "quirk": "Often takes inspiration from favorite manga and anime.",
+        "reason": "Was looking for an opportunity to go abroad and learn about other cultures through exchanges with local students."
+      }
+    },
+    {
+      "id": "kana",
+      "portrait": {
+        "src": "/assets/idfc2027/team2027/kana-instagram.jpg",
+        "width": 1080,
+        "height": 1350,
+        "presentation": "instagram-portrait"
+      },
+      "mbti": "INTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DakPpm3DSdr/"
+      },
+      "ja": {
+        "name": "kana",
+        "university": "尚美学園大学",
+        "role": "広報&リサーチ / 企画",
+        "quirk": "ユニクロのシャツを色違いで集めるのが楽しみ。",
+        "reason": "友人の紹介で参加。食べることが好きで、食文化や民族衣装への理解を深めたいと考えている。"
+      },
+      "en": {
+        "name": "kana",
+        "university": "Shobi University",
+        "role": "Public Relations & Research / Planning",
+        "quirk": "Collects Uniqlo shirts in different colors.",
+        "reason": "Joined through a friend and hopes to learn more about food cultures and traditional clothing."
+      }
+    },
+    {
+      "id": "yu",
+      "portrait": {
+        "src": "/assets/idfc2027/yu.webp",
+        "width": 1011,
+        "height": 748
+      },
+      "mbti": "ENTJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DapZSKLjBe0/"
+      },
+      "ja": {
+        "name": "ゆう",
+        "university": "獨協大学",
+        "role": "企画",
+        "quirk": "さまざまな種類のルービックキューブを解ける。",
+        "reason": "未知の世界に出会うだけでなく、その経験を将来に生かせる学びにつなげたいと参加。"
+      },
+      "en": {
+        "name": "Yu",
+        "university": "Dokkyo University",
+        "role": "Planning",
+        "quirk": "Can solve several kinds of Rubik’s Cube.",
+        "reason": "Joined to discover an unfamiliar world and turn the experience into learning for the future."
+      }
+    },
+    {
+      "id": "koji",
+      "portrait": {
+        "src": "/assets/idfc2027/koji-portrait.webp",
+        "width": 842,
+        "height": 994
+      },
+      "mbti": "INFJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Dar-H9oEoVf/"
+      },
+      "ja": {
+        "name": "こじ",
+        "university": "東海大学",
+        "role": "日本渉外",
+        "quirk": "移動は各駅停車を楽しむ派。",
+        "reason": "高校時代の本会議参加を機に運営へ。国際保健や移民・難民の医療への関心を、ミャンマーに関する学びと結びつけている。"
+      },
+      "en": {
+        "name": "Koji",
+        "university": "Tokai University",
+        "role": "Japan External Relations",
+        "quirk": "Enjoys traveling by local trains.",
+        "reason": "Became an organizer after attending a conference in high school, linking an interest in migrant and refugee health with learning about Myanmar."
+      }
+    },
+    {
+      "id": "honoka",
+      "portrait": {
+        "src": "/assets/idfc2027/honoka.webp",
+        "width": 1400,
+        "height": 927
+      },
+      "mbti": "ESTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Daui31Jj7CU/"
+      },
+      "ja": {
+        "name": "ほのか",
+        "university": "上智大学",
+        "role": "日本渉外",
+        "quirk": "とても硬い泥団子を作れる。",
+        "reason": "大学で東南アジアを学び、異なる背景の同世代との対話から、多様な価値観や新しい知見に触れたいと参加。"
+      },
+      "en": {
+        "name": "Honoka",
+        "university": "Sophia University",
+        "role": "Japan External Relations",
+        "quirk": "Can make exceptionally hard mud balls.",
+        "reason": "Studying Southeast Asia at university inspired a wish to learn from peers with different backgrounds and perspectives."
+      }
+    },
+    {
+      "id": "manari",
+      "portrait": {
+        "src": "/assets/idfc2027/team2027/manari-instagram.jpg",
+        "width": 1080,
+        "height": 1350,
+        "presentation": "instagram-portrait"
+      },
+      "mbti": "ENFP-T",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DaxHqEBgh8D/"
+      },
+      "ja": {
+        "name": "まなり",
+        "university": "東京外国語大学",
+        "role": "日本渉外",
+        "quirk": "笑い方には独特の個性あり。",
+        "reason": "大学で専攻するビルマ語をきっかけに、ミャンマーへの理解を深め、他大学やミャンマーの学生との友情を育みたいと参加。"
+      },
+      "en": {
+        "name": "Manari",
+        "university": "Tokyo University of Foreign Studies",
+        "role": "Japan External Relations",
+        "quirk": "Has a distinctive laugh.",
+        "reason": "A Burmese-language major who joined to learn more about Myanmar and make friends across universities and countries."
+      }
+    },
+    {
+      "id": "rika",
+      "portrait": {
+        "src": "/assets/idfc2027/rika.webp",
+        "width": 1050,
+        "height": 1400
+      },
+      "mbti": "ENTJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Dahq7cBjX1B/"
+      },
+      "ja": {
+        "name": "Rika",
+        "university": "東洋大学",
+        "role": "広報&リサーチ / ミャンマー渉外",
+        "quirk": "朝食は3種類以上を楽しむ。",
+        "reason": "ジャーナリストから紹介され、ミャンマーを広く伝えようとする日本の学生の力になりたいと参加。"
+      },
+      "en": {
+        "name": "Rika",
+        "university": "Toyo University",
+        "role": "Public Relations & Research / Myanmar External Relations",
+        "quirk": "Enjoys at least three different foods for breakfast.",
+        "reason": "Joined after a journalist’s introduction, hoping to support Japanese students sharing knowledge about Myanmar."
+      }
+    },
+    {
+      "id": "khin",
+      "portrait": {
+        "src": "/assets/idfc2027/khin.webp",
+        "width": 934,
+        "height": 688
+      },
+      "mbti": "ENTJ",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DazsdF8AJmj/"
+      },
+      "ja": {
+        "name": "キン",
+        "university": "筑波大学",
+        "role": "ミャンマー渉外",
+        "quirk": "気分や場面に合わせて歯磨き粉を3種類使い分ける。",
+        "reason": "ミャンマーの教育や社会問題への関心から、日本でできる支援や発信を、同じ志の仲間と進めたいと参加。"
+      },
+      "en": {
+        "name": "Khin",
+        "university": "University of Tsukuba",
+        "role": "Myanmar External Relations",
+        "quirk": "Chooses between three toothpastes depending on the mood or occasion.",
+        "reason": "Joined to work with like-minded students on education and social issues in Myanmar through support and outreach from Japan."
+      }
+    },
+    {
+      "id": "ayu",
+      "portrait": {
+        "src": "/assets/idfc2027/ayu.webp",
+        "width": 1400,
+        "height": 930
+      },
+      "mbti": "ISTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/Dam0dxxDFXN/"
+      },
+      "ja": {
+        "name": "あゆい",
+        "university": "名古屋大学",
+        "role": "企画",
+        "quirk": "昼寝をたっぷりしても、夜はしっかり眠れる。",
+        "reason": "学生生活の最後に新しい挑戦をし、多様な背景の学生たちと交流したいと参加。"
+      },
+      "en": {
+        "name": "Ayui",
+        "university": "Nagoya University",
+        "role": "Planning",
+        "quirk": "Can sleep soundly at night even after a long nap.",
+        "reason": "Joined to try something new in the final year of student life and meet students from varied backgrounds."
+      }
+    },
+    {
+      "id": "ayane",
+      "portrait": {
+        "src": "/assets/idfc2027/ayane.webp",
+        "width": 1400,
+        "height": 923
+      },
+      "mbti": "ENTP",
+      "source": {
+        "type": "instagram",
+        "url": "https://www.instagram.com/idfc_japan/p/DacsQ5RGqba/"
+      },
+      "ja": {
+        "name": "あやね",
+        "university": "早稲田大学",
+        "role": "日本渉外 / 企画",
+        "quirk": "雨音に合わせてお風呂で大熱唱。",
+        "reason": "ミャンマーの歴史や社会への関心に加え、大学近くのミャンマー街を通じて同国を身近に感じ、参加。"
+      },
+      "en": {
+        "name": "Ayane",
+        "university": "Waseda University",
+        "role": "Japan External Relations / Planning",
+        "quirk": "Sings enthusiastically in the bath with the rain as accompaniment.",
+        "reason": "An interest in Myanmar’s history and society, and a nearby Myanmar community, made joining feel like a natural step."
+      }
+    }
+  ]
+}
