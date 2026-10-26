@@ -33,8 +33,19 @@ await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(source, output, { recursive: true });
 const all = await files(output);
+// Google ownership proofs must retain their exact downloaded bytes. Recognize
+// only root-level proof filenames and validate before bypassing page processing.
+const verificationFiles = new Set();
+for (const file of all) {
+  const name = path.basename(file);
+  if (path.dirname(file) !== output || !/^google[a-f0-9]+\.html$/.test(name)) continue;
+  const expected = Buffer.from('google-site-verification: ' + name, 'utf8');
+  if (!(await readFile(file)).equals(expected)) throw new Error(`Invalid Google ownership verification file: ${name}`);
+  verificationFiles.add(file);
+}
 let pages = 0;
 for (const file of all) {
+  if (verificationFiles.has(file)) continue;
   if (!/\.(html|css|xml|txt|svg)$/i.test(file)) continue;
   let text = await readFile(file, 'utf8');
   if (file.endsWith('.html')) {
@@ -94,7 +105,7 @@ await writeFile(path.join(output, '.nojekyll'), '');
 // Check every local page, stylesheet, image and document reference after rebasing.
 const missing = new Set();
 let references = 0;
-for (const file of all.filter(file => file.endsWith('.html'))) {
+for (const file of all.filter(file => file.endsWith('.html') && !verificationFiles.has(file))) {
   const html = await readFile(file, 'utf8');
   const pageURL = new URL(path.relative(output, file).split(path.sep).join('/'), publicURL);
   for (const match of html.matchAll(/\b(?:href|src|poster)=(['"])(.*?)\1/gs)) {
