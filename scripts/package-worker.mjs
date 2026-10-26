@@ -1,4 +1,6 @@
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { normalizePublicSEO } from './normalize-public-seo.mjs';
+await normalizePublicSEO('dist/client');
 await mkdir('dist/.openai', {recursive:true});
 await cp('.openai/hosting.json', 'dist/.openai/hosting.json');
 await cp('drizzle', 'dist/drizzle', {recursive:true});
