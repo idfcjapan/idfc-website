@@ -1,14 +1,20 @@
 import editor from './editor.html?raw';
 import pages from './pages.json';
 import { recordPublicView, editorAnalytics } from './analytics.js';
+import { PUBLIC_SITE_URL, publicPageURL } from '../source/public-seo.mjs';
 
 const enc = new TextEncoder();
 const COOKIE = '__Host-idfc-editor';
 const SESSION_SECONDS = 8 * 60 * 60;
 const MAX_HTML = 2 * 1024 * 1024;
 const json = (value, status=200, headers={}) => new Response(JSON.stringify(value), {
-  status, headers:{'content-type':'application/json; charset=utf-8', 'cache-control':'no-store', ...headers},
+  status, headers:{'content-type':'application/json; charset=utf-8', 'cache-control':'no-store', 'x-robots-tag':'noindex', ...headers},
 });
+function preventIndexing(response) {
+  const headers=new Headers(response.headers);
+  headers.set('x-robots-tag','noindex');
+  return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
+}
 const sha = async value => [...new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(value)))].map(x=>x.toString(16).padStart(2,'0')).join('');
 const token = () => [...crypto.getRandomValues(new Uint8Array(32))].map(x=>x.toString(16).padStart(2,'0')).join('');
 const same = (a,b) => {let n=a.length^b.length; for(let i=0;i<Math.max(a.length,b.length);i++)n|=(a.charCodeAt(i)||0)^(b.charCodeAt(i)||0);return n===0;};
@@ -216,7 +222,16 @@ async function publicPage(request,env,path) {
   if(!response.headers.get('content-type')?.includes('text/html')||response.status!==200)return response;
   const keys=['main','header','footer'].map(scope=>keyFor(path,scope));
   const rows=await database(env).prepare('SELECT path, html FROM page_edits WHERE path IN (?, ?, ?)').bind(...keys).all();
-  let rewriter=new HTMLRewriter();
+  // The service remains available for editing and previews; public search
+  // signals point to the existing GitHub Pages publication in both languages.
+  const canonical=publicPageURL(path),basePath=path.startsWith('/en/')?path.slice(3):path;
+  let rewriter=new HTMLRewriter()
+    .on('head link[rel="canonical"]',{element(el){el.setAttribute('href',canonical);}})
+    .on('head meta[property="og:url"]',{element(el){el.setAttribute('content',canonical);}})
+    .on('head link[rel="alternate"][hreflang]',{element(el){
+      const language=el.getAttribute('hreflang');
+      if(['ja','en','x-default'].includes(language))el.setAttribute('href',publicPageURL((language==='en'?'/en':'')+basePath));
+    }});
   for(const [i,selector] of ['main#main','header.site-header','footer.site-footer'].entries()){
     const row=rows.results.find(row=>row.path===keys[i]);
     if(row)rewriter=rewriter.on(selector,{element(el){el.setInnerContent(JSON.parse(row.html)[path.startsWith('/en/')?'en':'ja'],{html:true});}});
@@ -231,11 +246,13 @@ async function publicPage(request,env,path) {
 export default {async fetch(request,env) {
   const url=new URL(request.url);
   try {
-    if(url.pathname==='/api/public/content')return await publicContent(request,env,url);
-    if(url.pathname==='/api/public/views')return await recordPublicView(request,env,pages);
-    if(url.pathname.startsWith('/api/editor/'))return await api(request,env,url);
-    if(url.pathname==='/edit'||url.pathname==='/en/edit/')return Response.redirect(url.origin+'/edit/',302);
-    if(url.pathname==='/edit/')return new Response(editor,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-frame-options':'SAMEORIGIN','x-content-type-options':'nosniff','content-security-policy':"default-src 'self'; img-src 'self' https: data:; style-src 'self'; script-src 'self'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"}});
+    if(url.pathname==='/sitemap.xml')return Response.redirect(PUBLIC_SITE_URL+'sitemap.xml',301);
+    if(url.pathname==='/robots.txt')return new Response(request.method==='HEAD'?null:'User-agent: *\nAllow: /\nSitemap: '+PUBLIC_SITE_URL+'sitemap.xml\n',{headers:{'content-type':'text/plain; charset=utf-8','cache-control':'public, max-age=300'}});
+    if(url.pathname==='/api/public/content')return preventIndexing(await publicContent(request,env,url));
+    if(url.pathname==='/api/public/views')return preventIndexing(await recordPublicView(request,env,pages));
+    if(url.pathname.startsWith('/api/editor/'))return preventIndexing(await api(request,env,url));
+    if(url.pathname==='/edit'||url.pathname==='/en/edit/')return preventIndexing(Response.redirect(url.origin+'/edit/',302));
+    if(url.pathname==='/edit/')return new Response(editor,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-robots-tag':'noindex','x-frame-options':'SAMEORIGIN','x-content-type-options':'nosniff','content-security-policy':"default-src 'self'; img-src 'self' https: data:; style-src 'self'; script-src 'self'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"}});
     if(url.pathname.startsWith('/uploads/images/')){
       if(!['GET','HEAD'].includes(request.method))return new Response(null,{status:405});
       const key=url.pathname.slice('/uploads/images/'.length);

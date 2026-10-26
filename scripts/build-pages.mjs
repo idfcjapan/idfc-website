@@ -1,6 +1,7 @@
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { canonicalPath, publicPageURL } from '../source/public-seo.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const source = path.join(root, 'site');
@@ -32,8 +33,19 @@ await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(source, output, { recursive: true });
 const all = await files(output);
+// Google ownership proofs must retain their exact downloaded bytes. Recognize
+// only root-level proof filenames and validate before bypassing page processing.
+const verificationFiles = new Set();
+for (const file of all) {
+  const name = path.basename(file);
+  if (path.dirname(file) !== output || !/^google[a-f0-9]+\.html$/.test(name)) continue;
+  const expected = Buffer.from('google-site-verification: ' + name, 'utf8');
+  if (!(await readFile(file)).equals(expected)) throw new Error(`Invalid Google ownership verification file: ${name}`);
+  verificationFiles.add(file);
+}
 let pages = 0;
 for (const file of all) {
+  if (verificationFiles.has(file)) continue;
   if (!/\.(html|css|xml|txt|svg)$/i.test(file)) continue;
   let text = await readFile(file, 'utf8');
   if (file.endsWith('.html')) {
@@ -69,6 +81,23 @@ for (const file of all) {
   text = text.replace(/url\((['"]?)(\/(?!\/)[^)'"\s]+)\1\)/g,
     (_, quote, url) => `url(${quote}${rewriteURL(url)}${quote})`);
   if (!file.endsWith('.html')) text = text.replaceAll(previousOrigin + '/', publicURL.href);
+  if (file.endsWith('.html')) {
+    // Compatibility pages share one publication; consolidate only search metadata.
+    const route = '/' + path.relative(output, file).split(path.sep).join('/').replace(/index\.html$/, '');
+    const canonical = publicPageURL(route, publicURL.href);
+    text = text.replace(/<link\b[^>]*rel="canonical"[^>]*>/g, tag => tag.replace(/href="[^"]*"/, `href="${canonical}"`));
+    text = text.replace(/<meta\b[^>]*property="og:url"[^>]*>/g, tag => tag.replace(/content="[^"]*"/, `content="${canonical}"`));
+    text = text.replace(/<link\b[^>]*rel="alternate"[^>]*hreflang="[^"]*"[^>]*>/g, tag => tag.replace(/href="([^"]*)"/, (_, value) => {
+      const target = new URL(value);
+      return `href="${publicPageURL('/' + target.pathname.slice(base.length), publicURL.href)}"`;
+    }));
+  }
+  if (file.endsWith('sitemap.xml')) {
+    text = text.replace(/<url>[\s\S]*?<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g, (entry, value) => {
+      const route = '/' + decodeURIComponent(new URL(value).pathname.slice(base.length));
+      return canonicalPath(route) === route ? entry : '';
+    });
+  }
   await writeFile(file, text);
 }
 await writeFile(path.join(output, '.nojekyll'), '');
@@ -76,7 +105,7 @@ await writeFile(path.join(output, '.nojekyll'), '');
 // Check every local page, stylesheet, image and document reference after rebasing.
 const missing = new Set();
 let references = 0;
-for (const file of all.filter(file => file.endsWith('.html'))) {
+for (const file of all.filter(file => file.endsWith('.html') && !verificationFiles.has(file))) {
   const html = await readFile(file, 'utf8');
   const pageURL = new URL(path.relative(output, file).split(path.sep).join('/'), publicURL);
   for (const match of html.matchAll(/\b(?:href|src|poster)=(['"])(.*?)\1/gs)) {
