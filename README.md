@@ -1,8 +1,8 @@
 # IDFC日本ミャンマー学生会議 — 公開サイトと共同編集
 
-公式サイト・検索上の正規URL: **https://idfc-japan-myanmar.hannaowo.chatgpt.site/**
+公式サイト・検索上の正規URL: **https://idfcjapan.github.io/idfc-website/**
 
-GitHub Pagesの閲覧URL: https://idfcjapan.github.io/idfc-website/ （引き続き利用可能）。両方の公開先のcanonical・日英代替URL・構造化データ・サイトマップは公式サイトに統一します。`scripts/normalize-public-seo.mjs` が公開時に検索用メタデータと空の説明文を整え、本文や保存済み編集には変更を加えません。
+閲覧・共有・検索向けのURLはGitHub Pagesに統一します。既存のSitesサービスは共同編集・保存済み本文・アップロード画像の配信に利用し、canonical・日英代替URL・構造化データ・サイトマップはGitHubの公式URLを案内します。`scripts/normalize-public-seo.mjs` が公開時に検索用メタデータと空の説明文を整え、本文や保存済み編集には変更を加えません。
 
 GitHub Pagesでは `site/` の閲覧ページ・画像・PDFを公開します。`main` への変更はGitHub Actionsが検証・公開します。メンバー編集画面は既存のSitesサービスを使い、保存した日英セットの公開内容をGitHub Pagesが読み込みます。閲覧URLは変わりません。ログイン情報は公開ページへ渡しません。
 

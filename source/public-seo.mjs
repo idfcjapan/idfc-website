@@ -1,9 +1,12 @@
 // Keep the public publication and editor service aligned on one set of URLs.
-export const PUBLIC_SITE_URL = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/';
+export const PUBLIC_SITE_URL = 'https://idfcjapan.github.io/idfc-website/';
 
-// The GitHub copy remains accessible, but the requested Sites address is the
-// preferred publication. Keep route parsing explicit because GitHub has a prefix.
-const publicationBases = [PUBLIC_SITE_URL, 'https://idfcjapan.github.io/idfc-website/'].map(value => new URL(value));
+// GitHub Pages is the official publication. The Sites address remains the editing
+// service; accept both source URL shapes when normalizing published metadata.
+const publicationBases = [
+  'https://idfcjapan.github.io/idfc-website/',
+  'https://idfc-japan-myanmar.hannaowo.chatgpt.site/',
+].map(value => new URL(value));
 
 const yearAliases = new Set([
   '/idfc2027/活動/',

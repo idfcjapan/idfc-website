@@ -16,8 +16,9 @@ async function files(directory) {
   return (await Promise.all((await readdir(directory, { withFileTypes: true })).map(entry => entry.isDirectory() ? files(join(directory, entry.name)) : join(directory, entry.name)))).flat();
 }
 
-equal(publicationRoute('https://idfcjapan.github.io/idfc-website/en/about-idfc/'), '/en/about-idfc/', 'Legacy GitHub prefix is stripped exactly once');
-equal(publicationRoute(PUBLIC_SITE_URL + 'about-idfc/'), '/about-idfc/', 'Sites URL is accepted');
+equal(publicationRoute('https://idfcjapan.github.io/idfc-website/en/about-idfc/'), '/en/about-idfc/', 'GitHub publication prefix is stripped exactly once');
+equal(publicationRoute(PUBLIC_SITE_URL + 'about-idfc/'), '/about-idfc/', 'Official GitHub URL is accepted');
+equal(publicationRoute('https://idfc-japan-myanmar.hannaowo.chatgpt.site/about-idfc/'), '/about-idfc/', 'Legacy Sites URL is accepted for normalization');
 equal(publicPageURL('/en/idfc2027/%E6%B4%BB%E5%8B%95/'), PUBLIC_SITE_URL + 'en/idfc2027/', 'Japanese encoded alias maps to English hub');
 assert.throws(() => publicationRoute('https://example.com/about-idfc/')); checks++;
 assert.throws(() => publicationRoute('https://idfcjapan.github.io/unrelated/')); checks++;
@@ -42,7 +43,7 @@ for (const file of (await files('site')).filter(file => file.endsWith('.html')))
   equal(body(normalized), body(original), 'Content, CMS hooks and navigation remain unchanged: ' + route);
   equal(normalizePublicPage(normalized, route), normalized, 'Metadata normalization is idempotent: ' + route);
   check(Boolean(description(normalized)), 'Every published page has a description: ' + route);
-  check(head(normalized).includes('rel="canonical" href="' + publicPageURL(route) + '"'), 'Canonical points to Sites: ' + route);
+  check(head(normalized).includes('rel="canonical" href="' + publicPageURL(route) + '"'), 'Canonical points to GitHub Pages: ' + route);
   if (!description(original)) filled++;
   const organization = normalized.match(/<script\b[^>]*id="idfc-organization"[^>]*>([\s\S]*?)<\/script>/)?.[1];
   if (organization) {
@@ -60,7 +61,7 @@ try {
   const proof = Buffer.from('google-site-verification: googleabcdef.html');
   await writeFile(join(directory, 'googleabcdef.html'), proof);
   const mixed = '<?xml version="1.0"?><urlset>' + [
-    'https://idfcjapan.github.io/idfc-website/', PUBLIC_SITE_URL,
+    'https://idfc-japan-myanmar.hannaowo.chatgpt.site/', PUBLIC_SITE_URL,
     'https://idfcjapan.github.io/idfc-website/idfc2027/',
     'https://idfcjapan.github.io/idfc-website/idfc2027/%E6%B4%BB%E5%8B%95/',
     'https://idfcjapan.github.io/idfc-website/en/',
@@ -71,8 +72,8 @@ try {
   equal(await readFile(join(directory, 'googleabcdef.html')), proof, 'Ownership proof bytes remain untouched');
   const sitemap = await readFile(join(directory, 'sitemap.xml'), 'utf8');
   equal(normalizePublicSitemap(sitemap), { text: sitemap, count: 3 }, 'Published sitemap normalization is idempotent');
-  check(!sitemap.includes('github.io'), 'Sitemap contains only preferred Sites URLs');
-  equal(await readFile(join(directory, 'robots.txt'), 'utf8'), 'User-agent: *\nAllow: /\nSitemap: ' + PUBLIC_SITE_URL + 'sitemap.xml\n', 'Robots advertises the Sites sitemap');
+  check(!sitemap.includes('chatgpt.site') && [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].every(match => match[1].startsWith(PUBLIC_SITE_URL)), 'Sitemap contains only official GitHub URLs');
+  equal(await readFile(join(directory, 'robots.txt'), 'utf8'), 'User-agent: *\nAllow: /\nSitemap: ' + PUBLIC_SITE_URL + 'sitemap.xml\n', 'Robots advertises the official GitHub sitemap');
 } finally {
   if (dirname(directory) !== resolve(tmpdir()) || !basename(directory).startsWith('idfc-public-seo-')) throw new Error('Unexpected test directory');
   await rm(directory, { recursive: true, force: true });
