@@ -32,8 +32,8 @@ function metadata(html) {
 }
 
 try {
-  equal(publicPageURL('/'), 'https://idfcjapan.github.io/idfc-website/', 'Public home URL is preserved');
-  equal(publicPageURL('/en/idfc2027/%E6%B4%BB%E5%8B%95/'), 'https://idfcjapan.github.io/idfc-website/en/idfc2027/', 'Encoded English compatibility URL has the English hub canonical');
+  equal(publicPageURL('/'), 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/', 'Public home URL is preserved');
+  equal(publicPageURL('/en/idfc2027/%E6%B4%BB%E5%8B%95/'), 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/en/idfc2027/', 'Encoded English compatibility URL has the English hub canonical');
   equal(canonicalPath('/idfc2027/資料/団体概要/'), '/idfc2027/資料/団体概要/', 'Distinct documents are not folded into the hub');
   equal(publicPageURL('/about-idfc/', 'https://example.test/preview/'), 'https://example.test/preview/about-idfc/', 'Pages build can use an explicit publication base');
 
@@ -42,10 +42,13 @@ try {
     for (const sql of (await readFile('drizzle/' + file, 'utf8')).split('--> statement-breakpoint')) if (sql.trim()) await db.prepare(sql.trim()).run();
   }
 
+  const sponsorPath = encodeURIComponent('新規スポンサー様募集') + '/';
   const examples = [
     ['/', '', ''], ['/en/', '', 'en/'],
     ['/about-idfc/', 'about-idfc/', 'about-idfc/'],
     ['/en/about-idfc/', 'about-idfc/', 'en/about-idfc/'],
+    ['/新規スポンサー様募集/', sponsorPath, sponsorPath],
+    ['/en/新規スポンサー様募集/', sponsorPath, 'en/' + sponsorPath],
     ['/idfc2027/', 'idfc2027/', 'idfc2027/'],
     ['/en/idfc2027/', 'idfc2027/', 'en/idfc2027/'],
     ...['活動', '実行委員', '資料'].flatMap(alias => [
@@ -58,13 +61,23 @@ try {
     equal(response.status, 200, 'Viewer still serves ' + route);
     equal(response.headers.get('x-robots-tag'), null, 'Public viewer is not marked noindex: ' + route);
     const html = await response.text();
-    const preferred = 'https://idfcjapan.github.io/idfc-website/' + preferredPath;
+    const descriptionTag = [...head(html).matchAll(/<meta\b[^>]*>/gi)].find(tag => attribute(tag[0], 'name') === 'description');
+    check(Boolean(descriptionTag && attribute(descriptionTag[0], 'content')), 'Public page has a nonempty localized search description: ' + route);
+    if (route === '/' || route === '/en/') {
+      const organization = JSON.parse(html.match(/<script\b[^>]*id="idfc-organization"[^>]*>([\s\S]*?)<\/script>/)[1]);
+      equal([organization.url, organization['@id'], organization.logo], [
+        'https://idfc-japan-myanmar.hannaowo.chatgpt.site/',
+        'https://idfc-japan-myanmar.hannaowo.chatgpt.site/#organization',
+        'https://idfc-japan-myanmar.hannaowo.chatgpt.site/assets/images/idfc-logo.svg',
+      ], 'Organization schema uses the preferred publication');
+    }
+    const preferred = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/' + preferredPath;
     equal(metadata(html), {
       canonical: [preferred], ogURL: [preferred],
       languages: {
-        ja: 'https://idfcjapan.github.io/idfc-website/' + japanesePath,
-        en: 'https://idfcjapan.github.io/idfc-website/en/' + japanesePath,
-        'x-default': 'https://idfcjapan.github.io/idfc-website/' + japanesePath,
+        ja: 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/' + japanesePath,
+        en: 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/en/' + japanesePath,
+        'x-default': 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/' + japanesePath,
       },
     }, 'Only public publication URLs are signaled in head: ' + route);
     const source = await readFile(join('dist/client', route, 'index.html'), 'utf8');
@@ -80,7 +93,7 @@ try {
   for (const [route, language] of [['/', 'ja'], ['/en/', 'en']]) {
     const html = await (await request(route)).text();
     equal(main(html), saved[language], 'Saved CMS content and editor links remain unchanged: ' + language);
-    check(metadata(html).canonical[0].startsWith('https://idfcjapan.github.io/idfc-website/'), 'Saved content does not overwrite canonical metadata');
+    check(metadata(html).canonical[0].startsWith('https://idfc-japan-myanmar.hannaowo.chatgpt.site/'), 'Saved content does not overwrite canonical metadata');
   }
 
   for (const route of ['/edit/', '/edit', '/en/edit/', '/api/editor/session', '/api/editor/preview?path=%2F', '/api/public/content?path=%2F']) {
@@ -95,9 +108,17 @@ try {
   const bundle = await (await request('/api/public/content?path=%2F')).json();
   equal(bundle.content.main.html, saved.ja, 'Public content API still returns the saved fragment');
   const sitemap = await request('/sitemap.xml', { redirect: 'manual' });
-  equal(sitemap.status, 301, 'Editor-service sitemap permanently points to the public sitemap');
-  equal(sitemap.headers.get('location'), 'https://idfcjapan.github.io/idfc-website/sitemap.xml', 'Sitemap redirect preserves the existing public URL');
-  equal(await (await request('/robots.txt')).text(), 'User-agent: *\nAllow: /\nSitemap: https://idfcjapan.github.io/idfc-website/sitemap.xml\n', 'Robots discovery advertises only the public sitemap while allowing canonical signals to be crawled');
+  equal(sitemap.status, 200, 'Sites serves its own sitemap without a redirect loop');
+  equal(sitemap.headers.get('location'), null, 'Public sitemap does not redirect');
+  const sitemapText = await sitemap.text();
+  const locations = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  check(locations.length > 0 && locations.every(url => url.startsWith('https://idfc-japan-myanmar.hannaowo.chatgpt.site/')), 'Every sitemap entry nominates Sites');
+  equal(new Set(locations).size, locations.length, 'Sitemap has no duplicate canonical locations');
+  check(!locations.some(url => /\/idfc2027\/(?:%E6%B4%BB%E5%8B%95|%E5%AE%9F%E8%A1%8C%E5%A7%94%E5%93%A1|%E8%B3%87%E6%96%99)\/$/.test(url)), 'Compatibility-only aliases stay out of the sitemap');
+  const sitemapHead = await request('/sitemap.xml', { method: 'HEAD' });
+  equal(sitemapHead.status, 200, 'Sitemap HEAD succeeds');
+  equal(await sitemapHead.text(), '', 'Sitemap HEAD has no body');
+  equal(await (await request('/robots.txt')).text(), 'User-agent: *\nAllow: /\nSitemap: https://idfc-japan-myanmar.hannaowo.chatgpt.site/sitemap.xml\n', 'Robots discovery advertises only the public sitemap while allowing canonical signals to be crawled');
   const headResponse = await request('/en/', { method: 'HEAD' });
   equal(headResponse.status, 200, 'Viewer HEAD still succeeds');
   equal(await headResponse.text(), '', 'Viewer HEAD still has no body');

@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promi
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { canonicalPath, publicPageURL } from '../source/public-seo.mjs';
+import { normalizePublicSEO } from './normalize-public-seo.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const source = path.join(root, 'site');
@@ -100,6 +101,9 @@ for (const file of all) {
   }
   await writeFile(file, text);
 }
+// Keep the GitHub mirror reachable at its existing base path while directing
+// search engines to the official Sites publication chosen by the owner.
+const seo = await normalizePublicSEO(output);
 await writeFile(path.join(output, '.nojekyll'), '');
 
 // Check every local page, stylesheet, image and document reference after rebasing.
@@ -119,7 +123,6 @@ for (const file of all.filter(file => file.endsWith('.html') && !verificationFil
     catch { missing.add(url.pathname); }
   }
   if (!html.includes('rel="canonical"')) throw new Error(`Missing canonical URL: ${file}`);
-  if (/hannaowo\.chatgpt\.site/.test(html.replaceAll(editorURL, ''))) throw new Error(`Old public hostname remains: ${file}`);
 }
 if (missing.size) throw new Error(`Missing local targets (${missing.size}):\n${[...missing].join('\n')}`);
-console.log(JSON.stringify({ public_url: publicURL.href, pages, checked_references: references }));
+console.log(JSON.stringify({ public_url: publicURL.href, pages, checked_references: references, seo }));
