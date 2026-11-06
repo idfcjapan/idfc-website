@@ -15,9 +15,8 @@
   user to log in when necessary; never silently publish a static-only change that
   would remain hidden by an older CMS override. Preserve the latest saved content.
 - The GitHub public URL is https://idfcjapan.github.io/idfc-website/. Preserve it.
-  The owner selected https://idfc-japan-myanmar.hannaowo.chatgpt.site/ as the
-  official search canonical. Keep both publications' SEO signals aligned with
-  that Sites URL while preserving GitHub Pages navigation and assets.
+  Keep viewer, sharing and search URLs aligned with this GitHub publication,
+  including canonical metadata, language alternatives, schema and sitemaps.
   The existing Sites service hosts the authenticated editor, saved fragments and
   uploaded images. Keep the existing project ID and storage bindings.
 - Static HTML in `site/` includes current edits. Do not run the legacy Python
