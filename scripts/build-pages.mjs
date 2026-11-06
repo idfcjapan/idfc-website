@@ -101,8 +101,8 @@ for (const file of all) {
   }
   await writeFile(file, text);
 }
-// Keep the GitHub mirror reachable at its existing base path while directing
-// search engines to the official Sites publication chosen by the owner.
+// Keep navigation, sharing and search metadata aligned with the existing
+// GitHub Pages publication selected by the owner.
 const seo = await normalizePublicSEO(output);
 await writeFile(path.join(output, '.nojekyll'), '');
 
