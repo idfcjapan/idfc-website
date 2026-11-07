@@ -12,7 +12,10 @@ if (!publicURL.pathname.endsWith('/')) throw new Error('PAGES_URL must end in a 
 const previousOrigin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const editorURL = `${previousOrigin}/edit/`;
 const base = publicURL.pathname;
-const designVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/css/design.css'))).digest('hex').slice(0, 12);
+const stylesVersion = createHash('sha256')
+  .update(await readFile(path.join(source, 'assets/css/site.css')))
+  .update(await readFile(path.join(source, 'assets/css/design.css')))
+  .digest('hex').slice(0, 12);
 const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/content-sync.js'))).update(await readFile(path.join(source, 'assets/js/analytics.js'))).digest('hex').slice(0, 12);
 
 export function rewriteURL(value) {
@@ -70,8 +73,8 @@ for (const file of all) {
       if (value.includes('data:')) return `srcset=${quote}${value}${quote}`;
       return `srcset=${quote}${value.split(',').map(item => item.replace(/^(\s*)(\S+)/, (_, space, url) => space + rewriteURL(url))).join(',')}${quote}`;
     });
-    text = text.replace(/href=(['"])([^'"]*\/assets\/css\/design\.css)(?:\?[^'"]*)?\1/g,
-      (_, quote, url) => `href=${quote}${url}?v=${designVersion}${quote}`);
+    text = text.replace(/href=(['"])([^'"]*\/assets\/css\/(?:site|design)\.css)(?:\?[^'"]*)?\1/g,
+      (_, quote, url) => `href=${quote}${url}?v=${stylesVersion}${quote}`);
     text = text.replace(/src=(['"])([^'"]*\/assets\/js\/site\.js)(?:\?[^'"]*)?\1/g,
       (_, quote, url) => `src=${quote}${url}?v=${scriptVersion}${quote}`);
   }
