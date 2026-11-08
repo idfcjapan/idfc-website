@@ -549,7 +549,7 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     box-sizing: border-box;
     width: auto;
     max-width: none;
-    margin: 0 12px 0 36px;
+    margin: 0 9px 0 36px;
   }
 
   .site-header .brand-row.wrap {
@@ -588,20 +588,20 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     height: .95em;
   }
 
-  /* Sponsor, contact and language links share the design's support-link text. */
+  /* Sponsor link and black contact button; the language link keeps the globe + EN style. */
   .site-header .header-tools {
-    gap: 40px;
+    gap: 36px;
   }
 
   .site-header .header-tools .header-links {
-    gap: 40px;
+    gap: 53px;
   }
 
-  .site-header .header-tools .header-links > a,
-  .site-header .header-tools .header-links > a.contact-button {
-    padding: 8px 0;
+  .site-header .header-tools .header-links > a {
+    min-height: 0;
+    padding: 0;
     border: 0;
-    border-radius: 4px;
+    border-radius: 0;
     background: transparent;
     color: var(--header-ink);
     font-size: 19px;
@@ -610,35 +610,37 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   }
 
   .site-header .header-tools .header-links > a:hover,
-  .site-header .header-tools .header-links > a.contact-button:hover,
-  .site-header .header-tools .header-links > a:active {
+  .site-header .header-tools .header-links > a:active,
+  .site-header .header-tools .header-links > a[aria-current="page"] {
     background: transparent;
     color: var(--ink);
   }
 
   .site-header .header-tools .header-links > a[aria-current="page"] {
-    background: transparent;
-    color: var(--ink);
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 8px;
   }
 
-  .site-header .language-switch a {
-    min-width: 0;
-    padding-inline: 0;
-    color: var(--header-ink);
-  }
-
-  .site-header .language-switch a:hover {
-    background: transparent;
-    color: var(--ink);
-  }
-
-  .site-header .language-switch a::after {
+  .site-header .header-tools .header-links > a.contact-button,
+  .site-header .header-tools .header-links > a.contact-button:is(:hover, :active, [aria-current="page"]) {
+    box-sizing: border-box;
+    min-height: 58px;
+    padding: 0 28.5px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--ink);
+    color: white;
     font-size: 19px;
-    font-weight: 500;
-    letter-spacing: .01em;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-header .header-tools .header-links > a.contact-button:hover {
+      background: #303641;
+    }
   }
 
   /* Main navigation row. */
