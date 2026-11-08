@@ -14,7 +14,7 @@ const routes = ['idfc2027', 'idfc2027/活動', 'idfc2027/実行委員', 'idfc202
 const sectionPattern = /<section\b[^>]*id="japan-team-2027"[^>]*>[\s\S]*?<\/section>/g;
 const contentsPattern = /(<a\b[^>]*href="#japan-team-2027"[^>]*>[\s\S]*?<\/a><ol class="toc-members">)[\s\S]*?(<\/ol>)/g;
 
-if (roster.members.length !== 18 || new Set(roster.members.map(member => member.id)).size !== 18) throw new Error('Expected 18 distinct Japan-side members.');
+if (roster.members.length !== 17 || new Set(roster.members.map(member => member.id)).size !== 17) throw new Error('Expected 17 distinct Japan-side members.');
 if (new Set(roster.members.map(member => member.ja.university)).size !== 16) throw new Error('Expected 16 universities in the current roster.');
 for (const member of roster.members) {
   if (!/^[a-z][a-z-]*$/.test(member.id)) throw new Error('Invalid member anchor.');

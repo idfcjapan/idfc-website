@@ -169,34 +169,6 @@
       }
     },
     {
-      "id": "chaw-kalyar",
-      "ja": {
-        "name": "チョー・カリヤー（ချောကလျာ）",
-        "university": "大阪大学",
-        "role": "広報&リサーチ",
-        "quirk": "薄い壁越しに、隣からミスチルの歌が聞こえてくることも。",
-        "reason": "将来は国連でミャンマーの開発・支援に携わりたいと考え、先輩の紹介で参加。交流を通じて文化・歴史・言語を学びたいと思っている。"
-      },
-      "en": {
-        "name": "Chaw Kalyar",
-        "university": "Osaka University",
-        "role": "Public Relations & Research",
-        "quirk": "Sometimes hears a neighbor singing Mr. Children songs through the walls.",
-        "reason": "Hopes to work on development and support for Myanmar through the United Nations. Joined through a senior student to learn about Myanmar’s culture, history and language through exchange."
-      },
-      "mbti": "INTJ",
-      "source": {
-        "type": "facebook",
-        "url": "https://www.facebook.com/idfc.myanmar.japan/posts/pfbid0RhVX1DejRrFKTdstquPjro7s9uXs4gzkBzLyBa16TJhmvEYPnnYaqnTBs7Emd3a5l"
-      },
-      "portrait": {
-        "src": "/assets/idfc2027/team2027/chaw-kalyar-facebook.jpg",
-        "width": 512,
-        "height": 640,
-        "presentation": "instagram-portrait"
-      }
-    },
-    {
       "id": "sai",
       "portrait": {
         "src": "/assets/idfc2027/sai.webp",
