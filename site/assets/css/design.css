@@ -1091,9 +1091,9 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   }
 }
 
-/* Interview pages: one paragraph gap everywhere, matching across all three people. */
-article[data-source-path^="/ミャンマーからの声/m"] {
-  --interview-gap: 19.2px;
+/* Keep interview prose close and give each new question room to start. */
+article.legacy-content[data-source-path^="/ミャンマーからの声/m"] {
+  line-height: 1.85;
 }
 
 article[data-source-path^="/ミャンマーからの声/m"] > [id^="cc-matrix"] {
@@ -1112,7 +1112,12 @@ article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-
 article[data-source-path^="/ミャンマーからの声/m"] .j-text > p:last-child,
 article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte p:last-child,
 article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte > div {
-  margin: 0 0 var(--interview-gap);
+  margin: 0 0 0.75em;
+}
+
+article.legacy-content[data-source-path^="/ミャンマーからの声/m"] p.interview-q,
+article[data-source-path="/ミャンマーからの声/ms-nakayama-sayaka/"] .j-text > p:first-child {
+  margin-block: 1.5em 0.5em;
 }
 
 article[data-source-path^="/ミャンマーからの声/m"] p.interview-q {
@@ -1122,7 +1127,7 @@ article[data-source-path^="/ミャンマーからの声/m"] p.interview-q {
 
 article[data-source-path^="/ミャンマーからの声/m"] .j-textWithImage > figure {
   clear: right;
-  margin-bottom: var(--interview-gap);
+  margin-bottom: 1.25em;
 }
 
 article[data-source-path^="/ミャンマーからの声/m"] .j-imageSubtitle,
