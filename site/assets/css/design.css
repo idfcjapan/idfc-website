@@ -490,7 +490,8 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   outline-offset: 3px;
 }
 
-@media (min-width: 1200px) {
+/* The language switch shows a globe and EN/JP at every width. */
+@media all {
   .site-header .language-switch {
     padding: 0;
     border: 0;
@@ -532,7 +533,62 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     content: "JP" / "";
   }
 
-  /* Support links are plain text in the same style as the language switch. */
+}
+
+/* Desktop header: sizes and spacing match the supplied 1798px design. */
+@media (min-width: 1200px) {
+  .site-header {
+    --header-ink: #2d313f;
+    --nav-font: clamp(15px, calc(15px + (100vw - 1200px) * 4 / 598), 19px);
+    --nav-pad: clamp(12px, calc(12px + (100vw - 1200px) * 10 / 598), 22px);
+    --nav-chevron-space: clamp(4px, calc(4px + (100vw - 1200px) * 15 / 598), 19px);
+  }
+
+  .site-header .brand-row.wrap,
+  .site-header .primary-nav .wrap {
+    box-sizing: border-box;
+    width: auto;
+    max-width: none;
+    margin: 0 12px 0 36px;
+  }
+
+  .site-header .brand-row.wrap {
+    min-height: 99px;
+    padding: 0 0 10px 7px;
+  }
+
+  .site-header .brand {
+    gap: 27px;
+  }
+
+  .site-header .brand img {
+    width: 55px;
+    height: 41px;
+  }
+
+  .site-header .brand strong {
+    position: relative;
+    top: 1px;
+    font-size: 33px;
+    letter-spacing: -.055em;
+  }
+
+  .site-header .brand > span {
+    gap: 19px;
+  }
+
+  .site-header .brand > span > span {
+    padding-left: 29px;
+    font-size: clamp(14px, 1.5vw, 20px);
+    letter-spacing: .045em;
+  }
+
+  .site-header .brand > span > span::before {
+    top: calc(.18em + 3px);
+    height: .95em;
+  }
+
+  /* Sponsor, contact and language links share the design's support-link text. */
   .site-header .header-tools {
     gap: 40px;
   }
@@ -543,14 +599,14 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 
   .site-header .header-tools .header-links > a,
   .site-header .header-tools .header-links > a.contact-button {
-    padding: 8px 6px;
+    padding: 8px 0;
     border: 0;
     border-radius: 4px;
     background: transparent;
-    color: #656b66;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: .035em;
+    color: var(--header-ink);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: .01em;
   }
 
   .site-header .header-tools .header-links > a:hover,
@@ -566,6 +622,74 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 8px;
+  }
+
+  .site-header .language-switch a {
+    min-width: 0;
+    padding-inline: 0;
+    color: var(--header-ink);
+  }
+
+  .site-header .language-switch a:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .site-header .language-switch a::after {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+
+  /* Main navigation row. */
+  .site-header .primary-nav .nav-level-0 {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 15px 0;
+  }
+
+  .site-header .nav-level-0 > li {
+    flex: 0 0 auto;
+    gap: 0;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .site-header .nav-level-0 > li > a {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 57px;
+    padding: 0 var(--nav-pad);
+    color: var(--header-ink);
+    font-size: var(--nav-font);
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: .01em;
+    white-space: nowrap;
+  }
+
+  .site-header .nav-level-0 > li > .dropdown-toggle {
+    width: 22px;
+    min-height: 57px;
+    margin: 0 calc(var(--nav-chevron-space) - 2px) 0 2px;
+    padding: 7px 0 0;
+    border-left: 0;
+    color: #6f7179;
+    font-size: 16px;
+  }
+
+  .site-header .nav-level-0 > li.is-current {
+    border-color: var(--line);
+    background: var(--cream);
+  }
+
+  .site-header .nav-level-0 > li.is-current > a,
+  .site-header .nav-level-0 > li.is-current > .dropdown-toggle {
+    color: var(--ink);
+    text-decoration: none;
   }
 }
 
@@ -627,27 +751,24 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 
   .site-header .language-switch {
     gap: 0;
-    padding: clamp(2px, .6vw, 5px);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--cream);
   }
 
   .site-header .language-switch a {
     width: auto;
-    min-width: 0;
-    min-height: clamp(36px, 6.25vw, 50px);
-    padding: 5px clamp(8px, 2vw, 16px);
-    border: 1px solid var(--line);
-    border-radius: inherit;
-    color: var(--muted);
-    font-size: clamp(12px, 2.25vw, 18px);
-    font-weight: 600;
+    min-width: 44px;
+    min-height: 44px;
+    gap: clamp(6px, 1.2vw, 10px);
+    padding: 5px clamp(4px, 1vw, 8px);
+    border: 0;
   }
 
-  .site-header .language-switch a:hover {
-    background: var(--surface);
-    color: var(--ink);
+  .site-header .language-switch a::before {
+    width: clamp(17px, 2.6vw, 20px);
+    height: clamp(17px, 2.6vw, 20px);
+  }
+
+  .site-header .language-switch a::after {
+    font-size: clamp(15px, 2.4vw, 18px);
   }
 
   .site-header .mobile-toggle {
@@ -723,6 +844,89 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     min-height: var(--compact-menu-row);
     color: var(--muted);
     font-size: 18px;
+  }
+}
+
+/* Compact header and menu: sizes and spacing match the supplied 799px design. */
+@media (max-width: 1199px) {
+  .site-header {
+    --compact-header-inset: clamp(16px, 3.25vw, 38px);
+    --compact-header-height: clamp(74px, 11.5vw, 92px);
+    --compact-menu-row: clamp(56px, 9.87vw, 80px);
+    --compact-menu-toggle: clamp(44px, 7.63vw, 64px);
+  }
+
+  .site-header .brand-row.wrap {
+    min-height: var(--compact-header-height);
+    padding-top: calc(8px + .4vw);
+  }
+
+  .site-header .brand-row .brand > span {
+    gap: clamp(4px, 1.5vw, 12px);
+  }
+
+  .site-header .brand-row .brand {
+    gap: clamp(7px, 2.19vw, 18px);
+  }
+
+  .site-header .brand img {
+    position: relative;
+    top: -.29vw;
+    width: clamp(36px, 5.12vw, 46px);
+  }
+
+  .site-header .brand strong {
+    letter-spacing: -.055em;
+  }
+
+  .site-header .brand-row .brand > span > span {
+    padding-left: clamp(9px, 2vw, 16px);
+    font-size: clamp(10px, 1.9vw, 16px);
+  }
+
+  .site-header .brand > span > span::before {
+    top: calc(.18em + 3.3px);
+    height: .9em;
+  }
+
+  /* The language link and menu button sit slightly above the brand's centre. */
+  .site-header .header-tools,
+  .site-header .mobile-toggle {
+    align-self: start;
+    margin-top: calc((var(--compact-header-height) - var(--compact-menu-toggle)) / 2 - 13.5px - .4vw);
+  }
+
+  .site-header .header-tools {
+    height: var(--compact-menu-toggle);
+  }
+
+  .site-header .primary-nav .header-links {
+    grid-template-columns: minmax(0, 1.305fr) minmax(0, 1fr);
+    padding: clamp(16px, 3vw, 24px) calc(var(--compact-header-inset) - 3px) 0 var(--compact-header-inset);
+  }
+
+  .site-header .primary-nav .header-links > a {
+    min-height: clamp(44px, 7.13vw, 58px);
+    font-size: clamp(13px, 2.39vw, 20px);
+    letter-spacing: .01em;
+  }
+
+  .site-header .primary-nav .header-links > a:not(.contact-button) {
+    padding-left: 20px;
+    color: #2d313f;
+  }
+
+  .site-header .primary-nav .nav-level-0 {
+    padding: clamp(12px, 2.63vw, 21px) calc(var(--compact-header-inset) - 3px) clamp(12px, 2.63vw, 21px) calc(var(--compact-header-inset) + 1px);
+  }
+
+  .site-header .nav-level-0 > li > a {
+    color: var(--ink);
+    font-size: clamp(15px, 2.75vw, 23px);
+  }
+
+  .site-header .nav-level-0 > .is-current > a {
+    padding-left: clamp(15px, 3.13vw, 25px);
   }
 }
 
