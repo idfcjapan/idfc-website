@@ -589,6 +589,32 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     height: .95em;
   }
 
+  /* English pages: the full name sits on one line to the right of IDFC. */
+  html[lang="en"] .site-header .brand > span {
+    flex-direction: row;
+    align-items: center;
+    gap: calc(19 * var(--hu));
+  }
+
+  html[lang="en"] .site-header .brand > span > span {
+    display: block;
+    max-width: none;
+    padding-left: calc(29 * var(--hu));
+    font-size: calc(18 * var(--hu));
+    line-height: 1.45;
+    letter-spacing: .01em;
+    white-space: nowrap;
+  }
+
+  /* English pages: menu items spread across the full row, with no gap at the right end. */
+  html[lang="en"] .site-header .primary-nav .nav-level-0 {
+    justify-content: space-between;
+  }
+
+  html[lang="en"] .site-header .nav-level-0 > li:last-child > .dropdown-toggle {
+    margin-right: 0;
+  }
+
   /* Sponsor link and black contact button; the language link keeps the globe + EN style. */
   .site-header .header-tools {
     gap: calc(36 * var(--hu));
