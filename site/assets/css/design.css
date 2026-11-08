@@ -1092,11 +1092,11 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 }
 
 /* Interview pages: even paragraph spacing, with room before each question. */
-article[data-source-path^="/ミャンマーからの声/mr-"] .j-text p {
+article[data-source-path^="/ミャンマーからの声/mr-"] :is(.j-text, .cc-m-textwithimage-inline-rte) p {
   margin-bottom: .9em;
 }
 
-article[data-source-path^="/ミャンマーからの声/mr-"] .j-text p.interview-q {
+article[data-source-path^="/ミャンマーからの声/mr-"] p.interview-q {
   margin-top: 2.4em;
   font-weight: 700;
   color: var(--ink);
