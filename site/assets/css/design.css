@@ -535,13 +535,14 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
 
 }
 
-/* Desktop header: sizes and spacing match the supplied 1798px design. */
+/* Desktop header: sizes and spacing scale with the window so it looks like the supplied 1798px design. */
 @media (min-width: 1200px) {
   .site-header {
     --header-ink: #2d313f;
-    --nav-font: clamp(15px, calc(15px + (100vw - 1200px) * 4 / 598), 19px);
-    --nav-pad: clamp(12px, calc(12px + (100vw - 1200px) * 10 / 598), 22px);
-    --nav-chevron-space: clamp(4px, calc(4px + (100vw - 1200px) * 15 / 598), 19px);
+    --hu: min(calc(100vw / 1798), 1px);
+    --nav-font: max(13px, calc(19 * var(--hu)));
+    --nav-pad: calc(22 * var(--hu));
+    --nav-chevron-space: calc(19 * var(--hu));
   }
 
   .site-header .brand-row.wrap,
@@ -549,52 +550,52 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     box-sizing: border-box;
     width: auto;
     max-width: none;
-    margin: 0 9px 0 36px;
+    margin: 0 calc(9 * var(--hu)) 0 calc(36 * var(--hu));
   }
 
   .site-header .brand-row.wrap {
-    min-height: 99px;
-    padding: 0 0 10px 7px;
+    min-height: calc(99 * var(--hu));
+    padding: 0 0 calc(10 * var(--hu)) calc(7 * var(--hu));
   }
 
   .site-header .brand {
-    gap: 27px;
+    gap: calc(27 * var(--hu));
   }
 
   .site-header .brand img {
-    width: 55px;
-    height: 41px;
+    width: calc(55 * var(--hu));
+    height: calc(41 * var(--hu));
   }
 
   .site-header .brand strong {
     position: relative;
-    top: 1px;
-    font-size: 33px;
+    top: calc(1 * var(--hu));
+    font-size: calc(33 * var(--hu));
     letter-spacing: -.055em;
   }
 
   .site-header .brand > span {
-    gap: 19px;
+    gap: calc(19 * var(--hu));
   }
 
   .site-header .brand > span > span {
-    padding-left: 29px;
-    font-size: clamp(14px, 1.5vw, 20px);
+    padding-left: calc(29 * var(--hu));
+    font-size: calc(20 * var(--hu));
     letter-spacing: .045em;
   }
 
   .site-header .brand > span > span::before {
-    top: calc(.18em + 3px);
+    top: calc(.18em + calc(3 * var(--hu)));
     height: .95em;
   }
 
   /* Sponsor link and black contact button; the language link keeps the globe + EN style. */
   .site-header .header-tools {
-    gap: 36px;
+    gap: calc(36 * var(--hu));
   }
 
   .site-header .header-tools .header-links {
-    gap: 53px;
+    gap: calc(53 * var(--hu));
   }
 
   .site-header .header-tools .header-links > a {
@@ -604,7 +605,7 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     border-radius: 0;
     background: transparent;
     color: var(--header-ink);
-    font-size: 19px;
+    font-size: max(13px, calc(19 * var(--hu)));
     font-weight: 500;
     letter-spacing: .01em;
   }
@@ -619,19 +620,19 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   .site-header .header-tools .header-links > a[aria-current="page"] {
     text-decoration: underline;
     text-decoration-thickness: 2px;
-    text-underline-offset: 8px;
+    text-underline-offset: calc(8 * var(--hu));
   }
 
   .site-header .header-tools .header-links > a.contact-button,
   .site-header .header-tools .header-links > a.contact-button:is(:hover, :active, [aria-current="page"]) {
     box-sizing: border-box;
-    min-height: 58px;
-    padding: 0 28.5px;
+    min-height: calc(58 * var(--hu));
+    padding: 0 calc(28.5 * var(--hu));
     border: 0;
-    border-radius: 999px;
+    border-radius: calc(999 * var(--hu));
     background: var(--ink);
     color: white;
-    font-size: 19px;
+    font-size: max(13px, calc(19 * var(--hu)));
     font-weight: 700;
     letter-spacing: 0;
     text-decoration: none;
@@ -647,15 +648,15 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   .site-header .primary-nav .nav-level-0 {
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 5px;
-    padding: 15px 0;
+    gap: calc(5 * var(--hu));
+    padding: calc(15 * var(--hu)) 0;
   }
 
   .site-header .nav-level-0 > li {
     flex: 0 0 auto;
     gap: 0;
     border: 1px solid transparent;
-    border-radius: 999px;
+    border-radius: calc(999 * var(--hu));
     background: transparent;
   }
 
@@ -663,7 +664,7 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     display: inline-flex;
     align-items: center;
     box-sizing: border-box;
-    min-height: 57px;
+    min-height: calc(57 * var(--hu));
     padding: 0 var(--nav-pad);
     color: var(--header-ink);
     font-size: var(--nav-font);
@@ -674,13 +675,13 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   }
 
   .site-header .nav-level-0 > li > .dropdown-toggle {
-    width: 22px;
-    min-height: 57px;
-    margin: 0 calc(var(--nav-chevron-space) - 2px) 0 2px;
-    padding: 7px 0 0;
+    width: calc(22 * var(--hu));
+    min-height: calc(57 * var(--hu));
+    margin: 0 calc(var(--nav-chevron-space) - calc(2 * var(--hu))) 0 calc(2 * var(--hu));
+    padding: calc(7 * var(--hu)) 0 0;
     border-left: 0;
     color: #6f7179;
-    font-size: 16px;
+    font-size: calc(16 * var(--hu));
   }
 
   .site-header .nav-level-0 > li.is-current {
@@ -692,6 +693,22 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   .site-header .nav-level-0 > li.is-current > .dropdown-toggle {
     color: var(--ink);
     text-decoration: none;
+  }
+
+  .site-header .language-switch a {
+    min-width: calc(58 * var(--hu));
+    min-height: calc(44 * var(--hu));
+    gap: calc(10 * var(--hu));
+    padding-inline: calc(6 * var(--hu));
+  }
+
+  .site-header .language-switch a::before {
+    width: calc(20 * var(--hu));
+    height: calc(20 * var(--hu));
+  }
+
+  .site-header .language-switch a::after {
+    font-size: max(13px, calc(18 * var(--hu)));
   }
 }
 
