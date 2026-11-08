@@ -611,6 +611,11 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     margin-right: 0;
   }
 
+  /* When the last item is the current page, keep room inside its pill so ⌄ does not touch the edge. */
+  .site-header .nav-level-0 > li.is-current:last-child > .dropdown-toggle {
+    margin-right: calc(var(--nav-chevron-space) - calc(2 * var(--hu)));
+  }
+
   /* Sponsor link and black contact button; the language link keeps the globe + EN style. */
   .site-header .header-tools {
     gap: calc(36 * var(--hu));
