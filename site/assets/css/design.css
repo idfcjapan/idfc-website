@@ -1091,15 +1091,43 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   }
 }
 
-/* Interview pages: even paragraph spacing, with room before each question. */
-article[data-source-path^="/ミャンマーからの声/mr-"] :is(.j-text, .cc-m-textwithimage-inline-rte) p {
-  margin-bottom: .9em;
+/* Interview pages: one paragraph gap everywhere, matching across all three people. */
+article[data-source-path^="/ミャンマーからの声/m"] {
+  --interview-gap: 19.2px;
 }
 
-article[data-source-path^="/ミャンマーからの声/mr-"] p.interview-q {
-  margin-top: 2.4em;
+article[data-source-path^="/ミャンマーからの声/m"] > [id^="cc-matrix"] {
+  display: flow-root;
+}
+
+article[data-source-path^="/ミャンマーからの声/m"] .j-text,
+article[data-source-path^="/ミャンマーからの声/m"] .j-textWithImage {
+  display: block;
+  margin: 0 !important;
+  padding: 0;
+}
+
+article[data-source-path^="/ミャンマーからの声/m"] .j-text > p,
+article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte p,
+article[data-source-path^="/ミャンマーからの声/m"] .j-text > p:last-child,
+article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte p:last-child,
+article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte > div {
+  margin: 0 0 var(--interview-gap);
+}
+
+article[data-source-path^="/ミャンマーからの声/m"] p.interview-q {
   font-weight: 700;
   color: var(--ink);
+}
+
+article[data-source-path^="/ミャンマーからの声/m"] .j-textWithImage > figure {
+  clear: right;
+  margin-bottom: var(--interview-gap);
+}
+
+article[data-source-path^="/ミャンマーからの声/m"] .j-imageSubtitle,
+article[data-source-path^="/ミャンマーからの声/m"] .j-callToAction {
+  clear: both;
 }
 
 /* Voices from Myanmar list: every person uses the same layout and spacing. */
