@@ -1091,7 +1091,7 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   }
 }
 
-/* Keep interview prose close and give each new question room to start. */
+/* Distinguish paragraph breaks from wrapped lines in the interviews. */
 article.legacy-content[data-source-path^="/ミャンマーからの声/m"] {
   line-height: 1.85;
 }
@@ -1112,12 +1112,12 @@ article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-
 article[data-source-path^="/ミャンマーからの声/m"] .j-text > p:last-child,
 article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte p:last-child,
 article[data-source-path^="/ミャンマーからの声/m"] .cc-m-textwithimage-inline-rte > div {
-  margin: 0 0 0.75em;
+  margin: 0 0 1.625em;
 }
 
 article.legacy-content[data-source-path^="/ミャンマーからの声/m"] p.interview-q,
 article[data-source-path="/ミャンマーからの声/ms-nakayama-sayaka/"] .j-text > p:first-child {
-  margin-block: 1.5em 0.5em;
+  margin-block: 2em 1.5em;
 }
 
 article[data-source-path^="/ミャンマーからの声/m"] p.interview-q {
