@@ -1090,3 +1090,14 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Interview pages: even paragraph spacing, with room before each question. */
+article[data-source-path^="/ミャンマーからの声/mr-"] .j-text p {
+  margin-bottom: .9em;
+}
+
+article[data-source-path^="/ミャンマーからの声/mr-"] .j-text p.interview-q {
+  margin-top: 2.4em;
+  font-weight: 700;
+  color: var(--ink);
+}
