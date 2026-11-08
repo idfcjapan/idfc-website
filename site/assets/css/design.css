@@ -1101,3 +1101,77 @@ article[data-source-path^="/ミャンマーからの声/mr-"] p.interview-q {
   font-weight: 700;
   color: var(--ink);
 }
+
+/* Voices from Myanmar list: every person uses the same layout and spacing. */
+.voice-person {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 451px);
+  grid-template-rows: auto 1fr;
+  column-gap: 32px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+.voice-person:last-child {
+  margin-bottom: 0;
+}
+
+.voice-person .j-textWithImage {
+  display: contents;
+}
+
+.legacy-content .voice-person .j-textWithImage > figure {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  float: none;
+  width: 100%;
+  margin: 0;
+}
+
+.legacy-content .voice-person .j-textWithImage > figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: 50% 15%;
+}
+
+.voice-person .j-textWithImage > div {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.voice-person .cc-m-textwithimage-inline-rte p {
+  margin: 0 0 12px;
+}
+
+.voice-person .cc-m-textwithimage-inline-rte p:last-child {
+  margin-bottom: 0;
+}
+
+.voice-person .j-callToAction {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .voice-person {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    row-gap: 20px;
+  }
+
+  .legacy-content .voice-person .j-textWithImage > figure,
+  .voice-person .j-textWithImage > div,
+  .voice-person .j-callToAction {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .voice-person .j-callToAction {
+    margin-top: 0;
+  }
+}
