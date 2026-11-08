@@ -606,12 +606,8 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
     white-space: nowrap;
   }
 
-  /* English pages: menu items spread across the full row, with no gap at the right end. */
-  html[lang="en"] .site-header .primary-nav .nav-level-0 {
-    justify-content: space-between;
-  }
-
-  html[lang="en"] .site-header .nav-level-0 > li:last-child > .dropdown-toggle {
+  /* Menu items spread across the full row, with no gap at the right end. */
+  .site-header .nav-level-0 > li:last-child > .dropdown-toggle {
     margin-right: 0;
   }
 
@@ -673,7 +669,7 @@ html[lang=en] .advisor-message section>p{line-height:1.85}
   /* Main navigation row. */
   .site-header .primary-nav .nav-level-0 {
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: calc(5 * var(--hu));
     padding: calc(15 * var(--hu)) 0;
   }
