@@ -1,5 +1,6 @@
 // Aggregate page views only: no cookies, visitor identifiers or personal data.
 const service = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
+const viewEndpoint = 'https://idfc-view-collector.hannaowo.chatgpt.site/api/public/views';
 const publicOrigin = 'https://idfcjapan.github.io';
 const publicBase = '/idfc-website';
 
@@ -22,7 +23,8 @@ export function recordPageView() {
     return;
   }
   window.__idfcViewRecorded = true;
-  void fetch(service + '/api/public/views', {
+  const endpoint = location.origin === service ? service + '/api/public/views' : viewEndpoint;
+  void fetch(endpoint, {
     method:'POST', mode:'cors', credentials:'omit', cache:'no-store', keepalive:true,
     headers:{'content-type':'application/json'}, body:JSON.stringify({path}),
   }).catch(() => { /* A failed counter must never interrupt reading the site. */ });

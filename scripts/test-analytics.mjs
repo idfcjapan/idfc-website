@@ -65,12 +65,13 @@ async function testTracker() {
   const normal = tracker(); normal.record(); normal.record();
   equal(normal.calls.length, 1, 'Public tracker sends at most once per page load');
   const [url, options] = normal.calls[0];
-  equal(url, 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/api/public/views', 'Tracker uses existing editing service');
+  equal(url, 'https://idfc-view-collector.hannaowo.chatgpt.site/api/public/views', 'Tracker uses the public view collector');
   equal(JSON.parse(options.body), { path: '/about-idfc/' }, 'Tracker strips GitHub publication prefix');
   equal({ method: options.method, mode: options.mode, credentials: options.credentials, cache: options.cache, keepalive: options.keepalive },
     { method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true }, 'Tracker never sends credentials or cached counters');
   equal(Object.keys(JSON.parse(options.body)), ['path'], 'Tracker sends no visitor identity or page query');
   const service = tracker({ origin: 'https://idfc-japan-myanmar.hannaowo.chatgpt.site', path: '/en/about-idfc/' }); service.record();
+  equal(service.calls[0][0], 'https://idfc-japan-myanmar.hannaowo.chatgpt.site/api/public/views', 'Service-hosted pages keep their same-origin counter');
   equal(JSON.parse(service.calls[0][1].body), { path: '/en/about-idfc/' }, 'Service-hosted public pages are counted');
   for (const variant of [
     { origin: 'http://localhost:5173' }, { origin: 'https://unrelated.test' },
