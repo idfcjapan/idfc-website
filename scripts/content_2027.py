@@ -25,7 +25,7 @@ for department in MYANMAR_DEPARTMENTS:
 BASE='/idfc2027/'
 HUB_ROUTES={BASE:'overview-2027',BASE+'活動/':'activities-2027',BASE+'実行委員/':'committee-2027',BASE+'資料/':'materials-2027'}
 HUB_SECTIONS=[('overview-2027','IDFC2027'),('activities-2027','年間活動'),('committee-2027','運営幹部'),('japan-members-2027','日本側実行委員'),('myanmar-members-2027','ミャンマー側実行委員'),('materials-2027','資料'),('partners-2027','協賛・サポーター')]
-THEME='Empowering Migrant Youths Through Resilience: Discovering Essential Skills In The Dynamic World'
+THEME='Empowering Migrant Youths Through Resilience: Navigating Barriers and Expanding Opportunities'
 INTRO='IDFC 2027 brings together bright young minds from Myanmar and Japan to learn, collaborate and co-create solutions for education challenges across borders and gaps.'
 VISION='日緬の若者が国際協働を通じて互いに学び合い、両国を繋ぐ架け橋となる'
 MISSION='主体的に学び、相互理解を深める場を提供することで、ミャンマーに関心を持つ人を増やし、社会課題に向き合い行動する人材を育む'

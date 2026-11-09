@@ -40,7 +40,7 @@ for source in docs:
 
 # Planning terms must remain readable in HTML, not just in downloads.
 plan=restore_document(html.fromstring((DIST/'idfc2027/index.html').read_text())).xpath('//*[@id="conference-2027"]')[0].text_content()
-expected=['2027年3月20日–26日','Bangkok','Mae Sot','Empowering Migrant Youths Through Resilience: Discovering Essential Skills In The Dynamic World','Including organizing committee members and support staffs from both countries.']
+expected=['2027年3月20日–26日','Bangkok','Mae Sot','Empowering Migrant Youths Through Resilience: Navigating Barriers and Expanding Opportunities','Including organizing committee members and support staffs from both countries.']
 for phrase in expected:
     if phrase not in plan:errors.append({'conference_plan_missing':phrase})
 plan_counts=html.parse(str(DIST/'idfc2027/index.html')).xpath('//*[@data-participant-plan="plan-2027"]')
