@@ -38,11 +38,11 @@
         "height": 332
       },
       {
-        "id": "pyae-phyo-kyaw",
-        "name": "Pyae Phyo Kyaw",
+        "id": "khu-reh",
+        "name": "Khu Reh",
         "role": "Vice President",
-        "photo": "myanmar-pyae-phyo-kyaw",
-        "image": "/assets/idfc2027/myanmar-pyae-phyo-kyaw.webp",
+        "photo": "myanmar-khu-reh",
+        "image": "/assets/idfc2027/myanmar-khu-reh.webp",
         "bbox": [
           665,
           812,
@@ -63,11 +63,11 @@
     "source_sha256": "fbcab97a51aee6d290c7598c8f5e002e48ca8d7a90d64aae480594cc610722b4",
     "members": [
       {
-        "id": "myat-su-wai",
-        "name": "Myat Su Wai",
+        "id": "elle",
+        "name": "Elle",
         "role": "Academic Head",
-        "photo": "myanmar-myat-su-wai",
-        "image": "/assets/idfc2027/myanmar-myat-su-wai.webp",
+        "photo": "myanmar-elle",
+        "image": "/assets/idfc2027/myanmar-elle.webp",
         "bbox": [
           360,
           298,
@@ -78,11 +78,11 @@
         "height": 337
       },
       {
-        "id": "may",
-        "name": "May",
+        "id": "phibi",
+        "name": "Phibi",
         "role": "Academic Member",
-        "photo": "myanmar-may",
-        "image": "/assets/idfc2027/myanmar-may.webp",
+        "photo": "myanmar-phibi",
+        "image": "/assets/idfc2027/myanmar-phibi.webp",
         "bbox": [
           90,
           805,
@@ -118,11 +118,11 @@
     "source_sha256": "4d6f7760e9f144252255b8dd4114f279752b8f4324f2e2965a0e26b07f3b65ed",
     "members": [
       {
-        "id": "phone-min-khant",
-        "name": "Phone Min Khant",
+        "id": "phone",
+        "name": "Phone",
         "role": "Operation Head",
-        "photo": "myanmar-phone-min-khant",
-        "image": "/assets/idfc2027/myanmar-phone-min-khant.webp",
+        "photo": "myanmar-phone",
+        "image": "/assets/idfc2027/myanmar-phone.webp",
         "bbox": [
           107,
           627,
@@ -158,11 +158,11 @@
     "source_sha256": "67f61e6770b1258b9b6830e599804bb2f155f406d382b1db4f49b4e31efac743",
     "members": [
       {
-        "id": "nay-thu-ta",
-        "name": "Nay Thu Ta",
+        "id": "nay",
+        "name": "Nay",
         "role": "External Affairs Head",
-        "photo": "myanmar-nay-thu-ta",
-        "image": "/assets/idfc2027/myanmar-nay-thu-ta.webp",
+        "photo": "myanmar-nay",
+        "image": "/assets/idfc2027/myanmar-nay.webp",
         "bbox": [
           108,
           627,
@@ -198,11 +198,11 @@
     "source_sha256": "3129f6325306ec5c6aa5c35ceab8d737f9e448babdcbaf7500d2402678fa2726",
     "members": [
       {
-        "id": "saw-chit-tun",
-        "name": "Saw Chit Tun",
+        "id": "kai",
+        "name": "Kai",
         "role": "PR Head",
-        "photo": "myanmar-saw-chit-tun",
-        "image": "/assets/idfc2027/myanmar-saw-chit-tun.webp",
+        "photo": "myanmar-kai",
+        "image": "/assets/idfc2027/myanmar-kai.webp",
         "bbox": [
           112,
           284,
@@ -228,11 +228,11 @@
         "height": 308
       },
       {
-        "id": "kaung-khant-zaw",
-        "name": "Kaung Khant Zaw",
+        "id": "ko-uak",
+        "name": "Ko Uak",
         "role": "PR Member",
-        "photo": "myanmar-kaung-khant-zaw",
-        "image": "/assets/idfc2027/myanmar-kaung-khant-zaw.webp",
+        "photo": "myanmar-ko-uak",
+        "image": "/assets/idfc2027/myanmar-ko-uak.webp",
         "bbox": [
           112,
           892,
@@ -243,11 +243,11 @@
         "height": 294
       },
       {
-        "id": "hsaw-reh",
-        "name": "Hsaw Reh",
+        "id": "jeffry",
+        "name": "Jeffry",
         "role": "PR Member",
-        "photo": "myanmar-hsaw-reh",
-        "image": "/assets/idfc2027/myanmar-hsaw-reh.webp",
+        "photo": "myanmar-jeffry",
+        "image": "/assets/idfc2027/myanmar-jeffry.webp",
         "bbox": [
           675,
           895,

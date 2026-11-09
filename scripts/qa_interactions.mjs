@@ -271,7 +271,7 @@ for(const fixture of payload.fixtures.filter(f=>['/idfc2027/','/idfc2027/活動/
   check(entries[0].link.getAttribute('aria-current')==='location','reading starts with the overview in the contents');
   check(menu.querySelectorAll('a').length===7,'Japan and Myanmar committees are separate chapters in the year menu');
   for(const link of menu.querySelectorAll('a'))check(link.getAttribute('href').startsWith('#')&&new URL(link.href).pathname===win.location.pathname,'each year choice stays on the current document');
-  for(const id of ['school','greeting-kazuki','japan-members-2027','member-koji','myanmar-members-2027','member-aleo','myanmar-academic-2027','member-hsaw-reh','documents-2027','supporters-2027']){
+  for(const id of ['school','greeting-kazuki','japan-members-2027','member-koji','myanmar-members-2027','member-aleo','myanmar-academic-2027','member-jeffry','documents-2027','supporters-2027']){
     const index=entries.findIndex(({target})=>target.getAttribute('id')===id);
     check(index>=0,'the contents includes every major section and Koji');
     const activation=(width<1200?74:210)+24;
