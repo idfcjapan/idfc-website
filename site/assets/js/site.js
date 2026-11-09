@@ -249,13 +249,18 @@
 
   // Content stays visible when motion is reduced or observers are unavailable.
   if (!reducedMotion.matches && typeof window.IntersectionObserver === 'function') {
+    // Content already on screen when the script starts stays still, and the rest
+    // starts moving just before it scrolls into view, so nothing visibly jumps.
+    const measured = new WeakSet();
     const reveal = new window.IntersectionObserver(entries => {
       entries.forEach(entry => {
+        const firstReading = !measured.has(entry.target);
+        measured.add(entry.target);
         if (!entry.isIntersecting) return;
-        if (!entry.target.contains(document.activeElement)) entry.target.classList.add('is-revealed');
+        if (!firstReading && !entry.target.contains(document.activeElement)) entry.target.classList.add('is-revealed');
         reveal.unobserve(entry.target);
       });
-    }, { threshold: 0.08 });
+    }, { rootMargin: '0px 0px 12% 0px' });
     document.querySelectorAll('.hero-copy, .hero-photo, .home-2027, .news-item, .feature-link, .update-section, .document-card, .pie-chart, .member-card, .executive-grid > article, .event-photo, .history-timeline li').forEach(el => reveal.observe(el));
   }
 

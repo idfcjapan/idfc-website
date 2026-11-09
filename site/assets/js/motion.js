@@ -7,31 +7,17 @@
   const language = document.documentElement.lang === 'en';
 
   media.add('(prefers-reduced-motion: no-preference)', () => {
-    const title = document.querySelector('.hero h1 > span');
-    if (title) {
-      const accessibleTitle = document.createElement('span');
-      accessibleTitle.className = 'motion-sr';
-      accessibleTitle.textContent = 'IDFC';
-      const letters = [...'IDFC'].map(char => {
-        const span = document.createElement('span');
-        span.className = 'kinetic-letter';
-        span.setAttribute('aria-hidden', 'true');
-        span.textContent = char;
-        return span;
-      });
-      title.replaceChildren(accessibleTitle, ...letters);
-      gsap.from(letters, { yPercent: 24, rotation: 4, opacity: 0, stagger: 0.07, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity' });
-    }
-    const headings = gsap.utils.toArray('.section-heading h2, .page-masthead h1, .home-social h2');
+    // Content already on screen stays still; only content below the fold moves in.
+    const belowFold = element => element.getBoundingClientRect().top > window.innerHeight;
+    const headings = gsap.utils.toArray('.section-heading h2, .page-masthead h1, .home-social h2').filter(belowFold);
     headings.forEach(heading => gsap.from(heading, { y: 22, duration: 0.7, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: heading, start: 'top 92%', once: true } }));
-    const cards = gsap.utils.toArray('.voice-grid>.feature-link, .home-photo-preview>.event-photo');
+    const cards = gsap.utils.toArray('.voice-grid>.feature-link, .home-photo-preview>.event-photo').filter(belowFold);
     cards.forEach((card, index) => {
       card.classList.add('motion-managed');
       gsap.from(card, { y: 28, duration: 0.7, delay: (index % 3) * 0.07, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: card, start: 'top 95%', once: true } });
     });
     return () => {
       cards.forEach(card => card.classList.remove('motion-managed'));
-      if (title) { title.textContent = 'IDFC'; title.removeAttribute('aria-label'); }
     };
   });
 

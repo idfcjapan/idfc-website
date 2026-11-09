@@ -208,9 +208,9 @@ html{scroll-behavior:auto}
  @media(hover:hover) and (pointer:fine){.button:hover>span[aria-hidden=true]{transform:translate(3px,-2px)}}
 }
 @keyframes conference-drift{from{transform:scale(1) translateY(0)}to{transform:scale(1.035) translateY(-6px)}}
-@keyframes content-arrive{from{opacity:.25;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes pie-arrive{from{opacity:.25;transform:rotate(-14deg) scale(.8)}to{opacity:1;transform:rotate(0) scale(1)}}
-@keyframes legend-arrive{from{opacity:.2;transform:translateX(9px)}to{opacity:1;transform:none}}
+@keyframes content-arrive{from{transform:translateY(18px)}to{transform:none}}
+@keyframes pie-arrive{from{transform:rotate(-14deg) scale(.8)}to{transform:rotate(0) scale(1)}}
+@keyframes legend-arrive{from{transform:translateX(9px)}to{transform:none}}
 @keyframes photo-open{from{opacity:.25;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
 @keyframes backdrop-open{from{opacity:0}to{opacity:1}}
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
