@@ -59,8 +59,7 @@ function run({ width = 1440, height = 900, reduce = false, fine = true, en = fal
   return { document, window, title, stage, dialog, nav, photo, button, tilt, observers, instances, contexts, timelines, ticker, moves };
 }
 const desktop = run();
-check(desktop.title.children.filter(n => n.className === 'kinetic-letter').length === 4, 'Four IDFC letters animate');
-check(desktop.title.children[0].textContent === 'IDFC' && !desktop.title.children[0].attrs['aria-hidden'], 'Headline keeps accessible text outside decorative letters');
+check(desktop.title.children.every(n => n.className !== 'kinetic-letter'), 'Headline stays still on load');
 check(desktop.instances.length === 0 && desktop.ticker.size === 0, 'Desktop uses native scrolling without a smoothing loop');
 check(desktop.timelines.length === 0, 'Desktop does not pin or scrub the story');
 check(desktop.observers.length === 0, 'Motion does not intercept overlay scrolling');
