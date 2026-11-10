@@ -1,15 +1,13 @@
 // Aggregate page views only: no cookies, visitor identifiers or personal data.
-const service = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
-const viewEndpoint = 'https://idfc-view-collector.hannaowo.chatgpt.site/api/public/views';
+const viewEndpoint = 'https://idfc-analytics.idfc-japan.workers.dev/api/public/views';
 const publicOrigin = 'https://idfcjapan.github.io';
 const publicBase = '/idfc-website';
 
 export function recordPageView() {
   if (window.top !== window.self || navigator.webdriver || window.__idfcViewRecorded) return;
   if (/bot|crawler|spider|headless|lighthouse|preview|facebookexternalhit|slurp/i.test(navigator.userAgent)) return;
-  let path = location.pathname;
-  if (location.origin === publicOrigin && path.startsWith(publicBase + '/')) path = path.slice(publicBase.length);
-  else if (location.origin !== service) return;
+  if (location.origin !== publicOrigin || !location.pathname.startsWith(publicBase + '/')) return;
+  const path = location.pathname.slice(publicBase.length);
   if (/^\/(?:en\/)?(?:edit|api|assets|uploads)(?:\/|$)/.test(path)) return;
   if (document.prerendering || document.visibilityState === 'hidden') {
     const visible = () => {
@@ -23,8 +21,7 @@ export function recordPageView() {
     return;
   }
   window.__idfcViewRecorded = true;
-  const endpoint = location.origin === service ? service + '/api/public/views' : viewEndpoint;
-  void fetch(endpoint, {
+  void fetch(viewEndpoint, {
     method:'POST', mode:'cors', credentials:'omit', cache:'no-store', keepalive:true,
     headers:{'content-type':'application/json'}, body:JSON.stringify({path}),
   }).catch(() => { /* A failed counter must never interrupt reading the site. */ });
