@@ -1208,3 +1208,62 @@ article[data-source-path^="/ミャンマーからの声/m"] .j-callToAction {
     margin-top: 0;
   }
 }
+
+/* Reunion photos: one large photo, small thumbnails below that switch it. */
+.legacy-content .gallery-switcher.is-ready > ul {
+  display: block;
+}
+
+.legacy-content .gallery-switcher.is-ready > ul > li:not(.is-active) {
+  display: none;
+}
+
+.legacy-content .gallery-switcher.is-ready > ul img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.gallery-switcher .cc-m-gallery-slider-bar {
+  margin: 0;
+}
+
+.gallery-switcher .cc-m-gallery-slider-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.gallery-switcher .cc-m-gallery-slider-thumbnails a {
+  display: block;
+  border-radius: 4px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  opacity: .6;
+  transition: opacity .15s;
+}
+
+.gallery-switcher .cc-m-gallery-slider-thumbnails a:hover,
+.gallery-switcher .cc-m-gallery-slider-thumbnails a[aria-current="true"] {
+  opacity: 1;
+}
+
+.gallery-switcher .cc-m-gallery-slider-thumbnails a[aria-current="true"] {
+  outline-color: var(--ink);
+}
+
+.legacy-content .gallery-switcher .cc-m-gallery-slider-thumbnails img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+html:not(.js) .gallery-switcher .cc-m-gallery-slider-bar {
+  display: none;
+}

@@ -432,6 +432,29 @@
     viewer.querySelector('.document-controls').hidden = false;
     go(fromHash() ?? 0, 'auto', false);
   });
+  // One large photo with small thumbnails underneath; a thumbnail swaps the large photo.
+  document.querySelectorAll('.gallery-switcher').forEach(gallery => {
+    const slides = [...gallery.querySelectorAll(':scope > ul > li')];
+    const thumbs = [...gallery.querySelectorAll('.cc-m-gallery-slider-thumbnails a')];
+    if (slides.length < 2 || thumbs.length !== slides.length) return;
+    const show = index => {
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      thumbs.forEach((thumb, i) => {
+        if (i === index) thumb.setAttribute('aria-current', 'true');
+        else thumb.removeAttribute('aria-current');
+      });
+    };
+    thumbs.forEach((thumb, i) => {
+      thumb.removeAttribute('data-lightbox');
+      thumb.setAttribute('aria-label', english ? `Show photo ${i + 1}` : `写真${i + 1}を表示`);
+      thumb.addEventListener('click', e => {
+        e.preventDefault();
+        show(i);
+      });
+    });
+    gallery.classList.add('is-ready');
+    show(0);
+  });
   const dialog = document.querySelector('.photo-dialog');
   if (dialog && typeof dialog.showModal === 'function') {
     const photo = dialog.querySelector('img');
