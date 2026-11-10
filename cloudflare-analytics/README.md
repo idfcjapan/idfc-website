@@ -17,3 +17,17 @@ Deploy (from the repository root, after `npx wrangler login`):
     npx wrangler d1 migrations apply idfc-analytics --remote -c cloudflare-analytics/wrangler.jsonc
     npx wrangler d1 execute idfc-analytics --remote -c cloudflare-analytics/wrangler.jsonc --file cloudflare-analytics/past-views.sql
     npx wrangler deploy -c cloudflare-analytics/wrangler.jsonc
+
+## Member page-view dashboard
+
+https://idfc-analytics.idfc-japan.workers.dev/ shows the editor's「閲覧数の動向」view
+(`public/`), reading old and new counts together (`combined_page_views_daily`).
+The browser asks for a password; the user name can be anything. The Worker checks
+it against the secret `DASHBOARD_PASSWORD`. The secret is set by a member, never
+committed:
+
+    npx wrangler secret put DASHBOARD_PASSWORD -c cloudflare-analytics/wrangler.jsonc
+
+`public/analytics.js` is a copy of `site/assets/editor/analytics.js`, and
+`public/dashboard.css` holds the analytics rules from `site/assets/editor/editor.css`.
+Copy them again if the editor's view changes.

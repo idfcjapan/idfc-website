@@ -113,7 +113,9 @@ export async function recordPublicView(request, env, pages, now = Date.now()) {
 
 // The caller must authenticate before invoking this handler. It never sets CORS
 // headers, so private analytics cannot be read from the public GitHub site.
-export async function editorAnalytics(request, env, pages, now = Date.now()) {
+export async function editorAnalytics(request, env, pages, now = Date.now(), { table = 'page_views_daily' } = {}) {
+  // The Cloudflare dashboard reads old and new counts together; nothing else may be named here.
+  if (!['page_views_daily', 'combined_page_views_daily'].includes(table)) throw new Error('Unknown analytics table.');
   const url = new URL(request.url);
   const rawDays = url.searchParams.get('days') || '30';
   if (!['30', 'all'].includes(rawDays)) return json({ error: '表示期間は「過去30日」か「今まで全部」を選んでください。' }, 400);
@@ -125,9 +127,9 @@ export async function editorAnalytics(request, env, pages, now = Date.now()) {
   const today = dayAt(now);
   const result = await env.DB.batch([
     days === 'all'
-      ? env.DB.prepare('SELECT day, path, views FROM page_views_daily WHERE day <= ? ORDER BY day, path').bind(today)
-      : env.DB.prepare('SELECT day, path, views FROM page_views_daily WHERE day >= ? AND day <= ? ORDER BY day, path').bind(dayAt(now - 29 * DAY_MS), today),
-    env.DB.prepare('SELECT path, SUM(views) AS views FROM page_views_daily GROUP BY path'),
+      ? env.DB.prepare(`SELECT day, path, views FROM ${table} WHERE day <= ? ORDER BY day, path`).bind(today)
+      : env.DB.prepare(`SELECT day, path, views FROM ${table} WHERE day >= ? AND day <= ? ORDER BY day, path`).bind(dayAt(now - 29 * DAY_MS), today),
+    env.DB.prepare(`SELECT path, SUM(views) AS views FROM ${table} GROUP BY path`),
     env.DB.prepare('SELECT value FROM analytics_metadata WHERE key = ?').bind(START_KEY),
   ]);
   const collectionStartedAt = result[2].results?.[0]?.value ?? null;
