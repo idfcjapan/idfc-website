@@ -7,7 +7,7 @@
   "preview_urls": false,
   // Logs off: request details (which could include IP addresses) are not kept.
   "observability": { "enabled": false },
-  // Member-only dashboard files; the Worker checks the password before serving them.
+  // Dashboard files, served by the Worker with no-store and noindex headers.
   "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
   "d1_databases": [
     {
