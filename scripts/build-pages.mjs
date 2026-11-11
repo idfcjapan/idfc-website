@@ -10,8 +10,10 @@ const output = path.join(root, '_site');
 const publicURL = new URL(process.env.PAGES_URL || 'https://idfcjapan.github.io/idfc-website/');
 if (!publicURL.pathname.endsWith('/')) throw new Error('PAGES_URL must end in a slash.');
 const previousOrigin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
-const editorURL = `${previousOrigin}/edit/`;
 const base = publicURL.pathname;
+// The 編集 link opens the GitHub-based editor published with the site (site/edit/).
+const oldEditorURL = `${previousOrigin}/edit/`;
+const editorURL = `${base}edit/`;
 const stylesVersion = createHash('sha256')
   .update(await readFile(path.join(source, 'assets/css/site.css')))
   .update(await readFile(path.join(source, 'assets/css/design.css')))
@@ -19,7 +21,7 @@ const stylesVersion = createHash('sha256')
 const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/content-sync.js'))).update(await readFile(path.join(source, 'assets/js/analytics.js'))).digest('hex').slice(0, 12);
 
 export function rewriteURL(value) {
-  if (value === '/edit/' || value === '/edit' || value === '/en/edit/' || value === editorURL) return editorURL;
+  if (value === '/edit/' || value === '/edit' || value === '/en/edit/' || value === oldEditorURL) return editorURL;
   if (value.startsWith(previousOrigin + '/')) return publicURL.href + value.slice(previousOrigin.length + 1);
   if (value.startsWith('/') && !value.startsWith('//')) return base + value.slice(1);
   return value;
@@ -82,9 +84,7 @@ for (const file of all) {
       (_, quote, url) => `src=${quote}${url}?v=${scriptVersion}${quote}`);
   }
   // Translation metadata also contains the old canonical URLs.
-  text = text.replaceAll(editorURL, '__IDFC_EDITOR_URL__')
-    .replaceAll(previousOrigin + '/', publicURL.href)
-    .replaceAll('__IDFC_EDITOR_URL__', editorURL);
+  text = text.replaceAll(previousOrigin + '/', publicURL.href);
   text = text.replace(/url\((['"]?)(\/(?!\/)[^)'"\s]+)\1\)/g,
     (_, quote, url) => `url(${quote}${rewriteURL(url)}${quote})`);
   if (!file.endsWith('.html')) text = text.replaceAll(previousOrigin + '/', publicURL.href);

@@ -7,13 +7,8 @@
     analyticsURL.search = new URL(scriptURL).search;
     void import(analyticsURL.href).then(module => module.recordPageView()).catch(() => {});
   }
-  if (location.origin === 'https://idfcjapan.github.io' && scriptURL) {
-    try {
-      const moduleURL = new URL('./content-sync.js', scriptURL);
-      moduleURL.search = new URL(scriptURL).search;
-      await (await import(moduleURL.href)).syncPublishedContent();
-    } catch { /* The static publication stays usable without the editor. */ }
-  }
+  // Edits are saved straight into the static pages on GitHub, so pages no longer
+  // load saved content from the former ChatGPT editing service at runtime.
   const english = document.documentElement.getAttribute('lang') === 'en';
   const text = english ? {
     menuOpen: 'Open menu', menuClose: 'Close menu', imageFailed: 'The image could not be loaded.',
