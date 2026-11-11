@@ -248,3 +248,7 @@ details>summary{cursor:pointer;font-size:12px;font-weight:600;line-height:1.7;mi
  .analytics-axis{fill:CanvasText}
  .analytics-period button[aria-pressed=true],.analytics-page-row[aria-pressed=true]{outline:2px solid Highlight;outline-offset:-3px}
 }
+.remember{display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:12px;color:#5d7480;line-height:1.7}.remember input{width:auto;margin-top:4px}
+.token-help{margin-top:18px}.token-help .direct-steps{font-size:12px}.token-help .direct-steps a{text-decoration:underline}
+.account-name{margin-left:12px;font-size:12px;color:#67808b}
+.branch-note{margin:0;padding:8px 16px;background:#fff6dc;color:#6b4e00;font-size:12px;border-bottom:1px solid #f0dfa8}

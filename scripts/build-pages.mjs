@@ -47,12 +47,15 @@ for (const file of all) {
   if (!(await readFile(file)).equals(expected)) throw new Error(`Invalid Google ownership verification file: ${name}`);
   verificationFiles.add(file);
 }
+// The member editor (site/edit/) is a tool page, not part of the publication:
+// it has no site menu or search metadata, and must not be indexed.
+const isEditor = file => path.relative(output, file).split(path.sep)[0] === 'edit';
 let pages = 0;
 for (const file of all) {
   if (verificationFiles.has(file)) continue;
   if (!/\.(html|css|xml|txt|svg)$/i.test(file)) continue;
   let text = await readFile(file, 'utf8');
-  if (file.endsWith('.html')) {
+  if (file.endsWith('.html') && !isEditor(file)) {
     pages++;
     // Select the scripted layout before the first stylesheet can paint. The
     // deferred bundle may wait for saved bilingual content before wiring menus.
@@ -85,7 +88,10 @@ for (const file of all) {
   text = text.replace(/url\((['"]?)(\/(?!\/)[^)'"\s]+)\1\)/g,
     (_, quote, url) => `url(${quote}${rewriteURL(url)}${quote})`);
   if (!file.endsWith('.html')) text = text.replaceAll(previousOrigin + '/', publicURL.href);
-  if (file.endsWith('.html')) {
+  if (file.endsWith('.html') && isEditor(file)) {
+    text = text.replace(/\b(href|src)=(['"])(.*?)\2/gs, (_, attribute, quote, value) => `${attribute}=${quote}${rewriteURL(value)}${quote}`);
+  }
+  if (file.endsWith('.html') && !isEditor(file)) {
     // Compatibility pages share one publication; consolidate only search metadata.
     const route = '/' + path.relative(output, file).split(path.sep).join('/').replace(/index\.html$/, '');
     const canonical = publicPageURL(route, publicURL.href);
@@ -125,7 +131,7 @@ for (const file of all.filter(file => file.endsWith('.html') && !verificationFil
     try { if ((await stat(local)).isDirectory()) local = path.join(local, 'index.html'); await stat(local); }
     catch { missing.add(url.pathname); }
   }
-  if (!html.includes('rel="canonical"')) throw new Error(`Missing canonical URL: ${file}`);
+  if (!isEditor(file) && !html.includes('rel="canonical"')) throw new Error(`Missing canonical URL: ${file}`);
 }
 if (missing.size) throw new Error(`Missing local targets (${missing.size}):\n${[...missing].join('\n')}`);
 console.log(JSON.stringify({ public_url: publicURL.href, pages, checked_references: references, seo }));

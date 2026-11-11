@@ -2,20 +2,21 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const LIMIT = 2 * 1024 * 1024;
-  const state = {csrf:'', pages:[], path:'/', scope:'main', revision:0, drafts:{ja:'',en:''},
+  const GH = window.IDFCGitHub;
+  const state = {loaded:null, user:'', pages:[], path:'/', scope:'main', revision:0, drafts:{ja:'',en:''},
     dirty:false, busy:false, ready:false, authenticated:false, initialized:false,
     contentVersion:0, loading:false, restore:null, seen:new Set(), selected:null,
     aiExport:null, lastExport:null, aiPreview:false, toolsLifecycle:null, savedLabel:''};
   const pending = new Map(); let sequence = 0;
-  const analytics = window.IDFCAnalytics?.create({request:api,isAuthenticated:()=>state.authenticated});
   const language = () => state.path.startsWith('/en/') ? 'en' : 'ja';
   const basePath = p => p.startsWith('/en/') ? p.slice(3) : p;
   const status = value => { $('save-status').textContent = value; };
   const message = value => { $('editor-message').textContent = value; $('editor-message').hidden = !value; };
   const aiStatus = value => { $('ai-status').textContent = value; };
   const post = value => $('preview').contentWindow.postMessage({channel:'idfc-editor',...value}, location.origin);
+  const title = () => state.pages.find(p=>p.path===state.path)?.title.replace(/\s*[-|]\s*IDFC.*$/,'') || basePath(state.path);
+  const attr = (html,convert) => convert('<img src="'+html.replaceAll('&','&amp;').replaceAll('"','&quot;')+'">').match(/src="([^"]*)"/)[1].replaceAll('&amp;','&');
   const metadata = () => ({version:2,path:basePath(state.path),scope:state.scope,revision:state.revision,language:'both'});
-  const query = () => '?path='+encodeURIComponent(state.path)+'&scope='+state.scope;
   const reviewed = () => state.seen.has('ja') && state.seen.has('en') && $('pair-reviewed').checked;
   function update() {
     const unavailable = state.busy || !state.ready;
@@ -49,20 +50,13 @@
   }
   function stopTools() { state.toolsLifecycle?.abort(); state.toolsLifecycle=null; $('browser-ai-hint').hidden=true; }
   function loginView(note='') {
-    analytics?.close({clear:true});
     state.authenticated=false; stopTools(); $('editor-view').hidden=true; $('login-view').hidden=false;
     $('login-error').textContent=note; $('password').focus();
   }
-  async function api(route,options={}) {
-    const response=await fetch('/api/editor/'+route,{credentials:'same-origin',...options,headers:{
-      ...(typeof options.body==='string'?{'content-type':'application/json'}:{}),
-      ...(options.method && options.method!=='GET'?{'x-csrf-token':state.csrf}:{}),...options.headers}});
-    const data=await response.json();
-    if(!response.ok) {
-      if(response.status===401 && route!=='login') loginView('ログインの有効期限が切れました。再ログインしてください。');
-      throw new Error(data.error || '処理に失敗しました。');
-    }
-    return data;
+  // GitHub errors that mean the sign-in is no longer valid return to the login screen.
+  function failed(error) {
+    if(error?.status===401&&state.authenticated&&!state.dirty)loginView(error.message);
+    return error;
   }
   function frameRequest(type,values={}) {
     return new Promise((resolve,reject)=>{
@@ -71,8 +65,9 @@
       pending.set(id,{resolve,reject,timer,type}); post({type,...values,requestId:id});
     });
   }
-  const serialize=()=>frameRequest('serialize');
-  const replace=html=>frameRequest('replace',{html});
+  // Drafts keep the repository's links (/about-idfc/); the preview shows them under the published address.
+  const serialize=()=>frameRequest('serialize').then(GH.toSource);
+  const replace=html=>frameRequest('replace',{html:GH.toDisplay(html)});
   async function pair() { state.drafts[language()]=await serialize(); return {...state.drafts}; }
   function consent() { return !state.dirty || confirm('未保存の日英の変更を破棄して、ページを切り替えますか？'); }
   function options() {
@@ -87,23 +82,24 @@
   function frame() {
     state.ready=false; state.loading=true; state.restore=state.drafts[language()];
     state.selected=null; $('image-tools').hidden=true; $('link-tools').hidden=true;
-    $('frame-loading').hidden=false; $('public-link').href='https://idfcjapan.github.io/idfc-website'+state.path;
-    $('preview').src='/api/editor/preview'+query();
+    $('frame-loading').hidden=false; $('public-link').href=GH.PUBLIC_SITE+state.path;
+    $('preview').src=GH.BASE+encodeURI(state.path)+'?idfc-editor='+Date.now();
   }
   async function load() {
     busy(true); state.ready=false; message(''); status('日英の内容を読み込み中…');
     try {
-      const data=await api('page'+query());
-      if(typeof data.html?.ja!=='string' || typeof data.html?.en!=='string') throw new Error('日英セットの編集画面を再読み込みしてください。');
-      state.drafts=data.html; state.revision=data.revision; state.dirty=false; state.contentVersion=0;
+      const data=await GH.load(state.path,state.scope);
+      state.loaded=data; state.drafts={...data.html}; state.revision=data.revision; state.dirty=false; state.contentVersion=0;
       state.seen=new Set(); $('pair-reviewed').checked=false; invalidate(); state.lastExport=null;
       $('scope-hint').textContent=state.scope==='main'?'このページの日本語と英語をまとめて保存します。':'日本語・英語の全ページ共通部分をまとめて保存します。';
-      state.savedLabel=data.updatedAt?'最終保存：'+new Date(data.updatedAt).toLocaleString('ja-JP'):'公開中の日英の内容';
+      state.savedLabel='保存済みの日英の内容';
       frame();
-    } catch(error) { message(error.message); busy(false); $('frame-loading').hidden=true; }
+    } catch(error) { message(failed(error).message); busy(false); $('frame-loading').hidden=true; }
   }
   async function start(data) {
-    state.csrf=data.csrf; state.pages=data.pages; state.authenticated=true;
+    state.user=data.user; state.pages=data.pages; state.authenticated=true;
+    $('account-name').textContent=data.user;
+    $('branch-note').hidden=data.branch==='main'; $('branch-note').textContent='テスト用：保存先は「'+data.branch+'」です。公開サイトは変わりません。';
     $('login-view').hidden=true; $('editor-view').hidden=false; $('startup-error').hidden=true;
     registerTools();
     if(!state.initialized) {
@@ -117,8 +113,7 @@
   async function preview(html,target) {
     requireReady(); expected(target); busy(true); message('');
     try {
-      const data=await api('draft'+query(),{method:'POST',body:JSON.stringify({html})});
-      state.drafts=data.html; dirty(); state.aiPreview=true; $('ai-preview-label').hidden=false;
+      state.drafts=GH.sanitizePair(html); dirty(); state.aiPreview=true; $('ai-preview-label').hidden=false;
       await replace(state.drafts[language()]);
       aiStatus('日英の編集案を読み込みました。両言語のプレビューを確認してから、まとめて保存・公開してください。');
       return {...metadata(),contentVersion:state.contentVersion,previewed:true,published:false,languages:['ja','en']};
@@ -131,13 +126,15 @@
     let published=false;
     try {
       const html=await pair();
-      const data=await api('page'+query(),{method:'PUT',body:JSON.stringify({html,revision:state.revision,reviewed:{ja:true,en:true}})});
-      published=true; state.drafts=data.html; state.revision=data.revision; state.dirty=false; state.contentVersion++;
+      const data=await GH.save(state.loaded,html,{title:title()});
+      published=true;
+      if(!data.unchanged){state.loaded={...state.loaded,sha:data.sha,original:data.original,html:data.html,revision:data.revision};state.drafts={...data.html};state.revision=data.revision;}
+      state.dirty=false; state.contentVersion++;
       state.aiPreview=false; $('ai-preview-label').hidden=true; invalidate();
-      state.savedLabel='日本語と英語を保存しました・公開サイトは再読み込みで反映'; status(state.savedLabel);
+      state.savedLabel=data.unchanged?'変更はありませんでした':GH.BRANCH==='main'?'日本語と英語を保存しました・公開サイトには数分で反映されます':'テスト用ブランチに保存しました（公開サイトは変わりません）'; status(state.savedLabel);
       await replace(state.drafts[language()]);
     } catch(error) {
-      message(published?'日英は保存済みです。プレビューを読み直してください。':error.message);
+      message(published?'日英は保存済みです。プレビューを読み直してください。':failed(error).message);
       status(published?state.savedLabel:'保存できませんでした・日英の編集内容は残っています');
     } finally { busy(false); }
   }
@@ -170,7 +167,7 @@
   function registerTools() {
     const registry=document.modelContext; if(typeof registry?.registerTool!=='function'||state.toolsLifecycle)return;
     const lifecycle=new AbortController();state.toolsLifecycle=lifecycle;
-    const targetProperties={expectedPath:{type:'string'},expectedScope:{type:'string',enum:['main','header','footer']},expectedRevision:{type:'integer',minimum:0},expectedContentVersion:{type:'integer',minimum:0}};
+    const targetProperties={expectedPath:{type:'string'},expectedScope:{type:'string',enum:['main','header','footer']},expectedRevision:{type:'string'},expectedContentVersion:{type:'integer',minimum:0}};
     const tools=[{
       name:'idfc_read_editing_page',description:'Read BOTH Japanese and English HTML fragments for the selected IDFC page/scope, including unsaved changes. Always edit both languages as a pair. No credentials are returned.',
       inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},
@@ -185,9 +182,15 @@
     }];
     Promise.all(tools.map(tool=>Promise.resolve(registry.registerTool(tool,{signal:lifecycle.signal})))).then(()=>{if(!lifecycle.signal.aborted&&state.authenticated)$('browser-ai-hint').hidden=false;}).catch(()=>{lifecycle.abort();state.toolsLifecycle=null;});
   }
+  // AI assistants that can run scripts in this page (for example in a built-in
+  // browser) can use the same two steps as the WebMCP tools. Nothing is published.
+  window.IDFCEditor={
+    async read(){requireReady();busy(true);try{return {...metadata(),contentVersion:state.contentVersion,html:await pair(),unsavedChanges:state.dirty};}finally{busy(false);}},
+    preview(htmlJa,htmlEn,target={}){return preview({ja:htmlJa,en:htmlEn},{path:target.expectedPath,scope:target.expectedScope,revision:target.expectedRevision,contentVersion:target.expectedContentVersion});},
+  };
   $('show-password').addEventListener('click',()=>{const show=$('password').type==='password';$('password').type=show?'text':'password';$('show-password').textContent=show?'非表示':'表示';});
   // 閲覧数 opens the member page on Cloudflare, where page views are now counted.
-  $('login-form').addEventListener('submit',async e=>{e.preventDefault();$('login-button').disabled=true;try{await api('login',{method:'POST',body:JSON.stringify({password:$('password').value})});$('password').value='';await start(await api('session'));}catch(error){$('login-error').textContent=error.message;}finally{$('login-button').disabled=false;}});
+  $('login-form').addEventListener('submit',async e=>{e.preventDefault();$('login-button').disabled=true;$('login-error').textContent='確認中…';try{const data=await GH.login($('password').value,$('remember').checked);$('password').value='';$('login-error').textContent='';await start(data);}catch(error){$('login-error').textContent=error.message;}finally{$('login-button').disabled=false;}});
   $('page-select').addEventListener('change',()=>{if(!consent()){$('page-select').value=state.path;return;}state.path=$('page-select').value;load();});
   $('scope').addEventListener('change',()=>{if(!consent()){$('scope').value=state.scope;return;}state.scope=$('scope').value;load();});
   $('language').addEventListener('change',async()=>{
@@ -198,14 +201,14 @@
   $('pair-reviewed').addEventListener('change',update);
   $('reload').addEventListener('click',()=>{if(consent())load();});
   $('save').addEventListener('click',()=>save().catch(error=>message(error.message)));
-  $('logout').addEventListener('click',async()=>{if(!consent())return;busy(true);try{await api('logout',{method:'POST'});state.dirty=false;state.ready=false;state.initialized=false;$('preview').src='about:blank';loginView();}catch(error){message(error.message);}finally{busy(false);}});
+  $('logout').addEventListener('click',()=>{if(!consent())return;GH.logout();state.dirty=false;state.ready=false;state.initialized=false;$('preview').src='about:blank';loginView();busy(false);});
   $('ai-request').addEventListener('input',()=>{if(state.aiExport){state.aiExport.prompt=prompt(state.aiExport.meta);$('ai-prompt').value=state.aiExport.prompt;}update();});
   for(const button of document.querySelectorAll('[data-ai-example]'))button.addEventListener('click',()=>{$('ai-request').value=button.dataset.aiExample;$('ai-request').dispatchEvent(new Event('input'));});
   $('ai-export').addEventListener('click',async()=>{try{
     requireReady();if(!$('ai-request').value.trim())throw new Error('変えたいことを入力してください。');busy(true);
     const html=await pair(),meta={...metadata(),exportId:crypto.randomUUID()};
     download(fileHTML(html,meta),'idfc-bilingual-'+state.scope+'.html');state.aiExport={meta,prompt:prompt(meta)};state.lastExport={id:meta.exportId,contentVersion:state.contentVersion};
-    $('ai-prompt').value=state.aiExport.prompt;$('ai-prompt-details').hidden=false;aiStatus('日英セットのファイルを保存しました。両方を編集する依頼文と一緒にChatGPTへ送ってください。');
+    $('ai-prompt').value=state.aiExport.prompt;$('ai-prompt-details').hidden=false;aiStatus('日英セットのファイルを保存しました。両方を編集する依頼文と一緒にAIへ送ってください。');
   }catch(error){message(error.message);}finally{busy(false);}});
   $('ai-copy').addEventListener('click',async()=>{if(!state.aiExport)return;try{await navigator.clipboard.writeText(state.aiExport.prompt);aiStatus('日英セットの依頼文をコピーしました。');}catch{$('ai-prompt-details').hidden=false;$('ai-prompt-details').open=true;$('ai-prompt').focus();$('ai-prompt').select();}});
   $('ai-import').addEventListener('change',async()=>{const file=$('ai-import').files[0];if(!file)return;try{
@@ -215,22 +218,23 @@
   for(const button of document.querySelectorAll('[data-command]')){button.addEventListener('mousedown',e=>e.preventDefault());button.addEventListener('click',()=>{if(!state.busy&&state.ready)post({type:'command',command:button.dataset.command,value:button.dataset.value});});}
   $('text-color').addEventListener('input',()=>{if(!state.busy&&state.ready)post({type:'command',command:'foreColor',value:$('text-color').value});});
   const safeURL=value=>{value=value.trim();if(!/^(https?:\/\/|\/[^/]|#|mailto:|tel:)/i.test(value))throw new Error('https:// または / から始まるリンクを指定してください。');return value;};
-  $('apply-link').addEventListener('click',()=>{try{requireReady();post({type:'link',url:safeURL($('link-url').value)});}catch(error){message(error.message);}});
+  $('apply-link').addEventListener('click',()=>{try{requireReady();post({type:'link',url:attr(safeURL($('link-url').value),GH.toDisplay)});}catch(error){message(error.message);}});
   $('apply-alt').addEventListener('click',()=>{if(!state.busy&&state.ready)post({type:'alt',value:$('image-alt').value});});
   function changePhoto(url) {
     if(!/^https?:\/\//i.test(url)&&!/^\/[^/]/.test(url))throw new Error('画像のURLを指定してください。');
     if(!state.selected?.src)throw new Error('差し替える写真を選んでください。');
     const other=language()==='ja'?'en':'ja',doc=new DOMParser().parseFromString(state.drafts[other],'text/html');
-    const matches=[...doc.querySelectorAll('img')].filter(img=>img.getAttribute('src')===state.selected.src);
-    if(!matches.length)throw new Error('もう一方の言語に対応する写真が見つかりません。ChatGPTに日英セットでの差し替えを依頼してください。');
+    const selectedSource=attr(state.selected.src,GH.toSource);
+    const matches=[...doc.querySelectorAll('img')].filter(img=>img.getAttribute('src')===selectedSource);
+    if(!matches.length)throw new Error('もう一方の言語に対応する写真が見つかりません。AIに日英セットでの差し替えを依頼してください。');
     for(const img of matches){img.setAttribute('src',url);for(const attr of ['srcset','sizes','data-src','width','height'])img.removeAttribute(attr);const a=img.closest('a[data-lightbox]');if(a)a.setAttribute('href',url);}
-    state.drafts[other]=doc.body.innerHTML;post({type:'image',url});$('image-url').value=url;
+    state.drafts[other]=doc.body.innerHTML;post({type:'image',url:attr(url,GH.toDisplay)});$('image-url').value=url;
   }
   $('apply-image-url').addEventListener('click',()=>{try{requireReady();changePhoto(safeURL($('image-url').value));}catch(error){message(error.message);}});
   $('image-file').addEventListener('change',async()=>{const file=$('image-file').files[0];if(!file)return;try{
     requireReady();if(file.size>8*1024*1024)throw new Error('画像は8 MBまでです。');busy(true);
-    const data=await api('upload',{method:'POST',body:file,headers:{'content-type':file.type}});changePhoto(data.url);status('日英両方の写真を差し替えました・未公開');
-  }catch(error){message(error.message);}finally{$('image-file').value='';busy(false);}});
+    const data=await GH.upload(file);changePhoto(data.url);status('日英両方の写真を差し替えました・未公開（保存すると公開されます）');
+  }catch(error){message(failed(error).message);}finally{$('image-file').value='';busy(false);}});
   $('mobile-preview').addEventListener('click',()=>{const on=document.querySelector('.frame-area').classList.toggle('mobile');$('mobile-preview').textContent=on?'PC表示':'スマホ表示';$('mobile-preview').setAttribute('aria-pressed',String(on));});
   $('download-draft').addEventListener('click',async()=>{try{requireReady();busy(true);download(fileHTML(await pair(),{...metadata(),exportId:crypto.randomUUID()}),'idfc-bilingual-draft.html');}catch(error){message(error.message);}finally{busy(false);}});
   window.addEventListener('message',async event=>{
@@ -248,11 +252,19 @@
     }
     if(data.type==='selected'){
       state.selected=data;$('selection-label').textContent=data.text||'選択中';$('image-tools').hidden=data.kind!=='image';$('link-tools').hidden=!data.hasLink;
-      $('image-alt').value=data.alt||'';$('image-url').value=data.src||'';$('link-url').value=data.href||'';
+      $('image-alt').value=data.alt||'';$('image-url').value=data.src?attr(data.src,GH.toSource):'';$('link-url').value=data.href?attr(data.href,GH.toSource):'';
     }
   });
-  $('preview').addEventListener('load',()=>{if(!state.loading)return;const src=$('preview').src;setTimeout(()=>{if(state.loading&&$('preview').src===src){message('プレビューを読み込めませんでした。「最新の保存内容を読み直す」をお試しください。');$('frame-loading').hidden=true;busy(false);}},10000);});
+  // The preview is the published page itself; the editing helpers are added once it has loaded.
+  function prepareFrame(){
+    let doc;try{doc=$('preview').contentDocument;}catch{doc=null;}
+    if(!doc?.body||doc.body.dataset.editorScope)return;
+    doc.body.dataset.editorScope=state.scope;
+    const css=doc.createElement('link');css.rel='stylesheet';css.href=GH.BASE+'/assets/editor/preview.css';doc.head.append(css);
+    const script=doc.createElement('script');script.src=GH.BASE+'/assets/editor/preview.js?v=20261110-github1';doc.body.append(script);
+  }
+  $('preview').addEventListener('load',()=>{if(!state.loading)return;prepareFrame();const src=$('preview').src;setTimeout(()=>{if(state.loading&&$('preview').src===src){message('プレビューを読み込めませんでした。「最新の保存内容を読み直す」をお試しください。');$('frame-loading').hidden=true;busy(false);}},10000);});
   window.addEventListener('beforeunload',e=>{if(state.dirty){e.preventDefault();e.returnValue='';}});
   window.addEventListener('pagehide',stopTools);window.addEventListener('pageshow',()=>{if(state.authenticated)registerTools();});
-  api('session').then(start).catch(error=>loginView(error.message==='ログインしてください。'?'':error.message));
+  if(GH.hasToken())GH.session().then(start).catch(error=>loginView(error.message==='ログインしてください。'?'':error.message));else loginView();
 })();
