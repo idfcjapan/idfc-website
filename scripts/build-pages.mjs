@@ -18,7 +18,7 @@ const stylesVersion = createHash('sha256')
   .update(await readFile(path.join(source, 'assets/css/site.css')))
   .update(await readFile(path.join(source, 'assets/css/design.css')))
   .digest('hex').slice(0, 12);
-const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/content-sync.js'))).update(await readFile(path.join(source, 'assets/js/analytics.js'))).digest('hex').slice(0, 12);
+const scriptVersion = createHash('sha256').update(await readFile(path.join(source, 'assets/js/site.js'))).update(await readFile(path.join(source, 'assets/js/analytics.js'))).digest('hex').slice(0, 12);
 
 export function rewriteURL(value) {
   if (value === '/edit/' || value === '/edit' || value === '/en/edit/' || value === oldEditorURL) return editorURL;
@@ -62,7 +62,7 @@ for (const file of all) {
   if (file.endsWith('.html') && !isEditor(file)) {
     pages++;
     // Select the scripted layout before the first stylesheet can paint. The
-    // deferred bundle may wait for saved bilingual content before wiring menus.
+    // deferred bundle wires menus after the static page has loaded.
     text = text.replace(/<head>/i, '<head><script>document.documentElement.classList.add("js")</script>');
     // Include the third advisor's individual message page in the shared menu.
     const advisorMenu = /(<ul\b[^>]*id="nav-4"[^>]*>)([\s\S]*?)(<\/ul>)/;

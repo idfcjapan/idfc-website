@@ -20,6 +20,9 @@
 - AI help in the editor: WebMCP tools `idfc_read_editing_page` / `idfc_preview_ai_edit`,
   the same steps as `window.IDFCEditor.read()` / `.preview()`, and the AI file
   export/import. All of them only preview; the member presses 保存して公開.
+- Keep the AI editor. The unused legacy public-content sync script and legacy
+  editor analytics panel have been removed; do not reintroduce them. The default
+  `npm run build` builds GitHub Pages, not the retired Sites service.
 - Page views are counted by the Cloudflare Worker in `cloudflare-analytics/`
   (dashboard https://idfc-analytics.idfc-japan.workers.dev/). Leave it as it is.
 - The GitHub public URL is https://idfcjapan.github.io/ (the repository is

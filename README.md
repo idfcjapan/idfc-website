@@ -30,6 +30,14 @@ GitHub Pagesでは `site/` の閲覧ページ・画像・PDFを公開します�
 
 原文を保存した36ページに、提供された2027資料に基づく8ページを追加しています。静的コンテンツは `site/`、公開用ビルドは `dist/client/` と `dist/server/index.js` です。公開ページはサーバーで保存内容を反映したHTMLを返します。
 
+## 使用終了した機能の整理
+
+旧ChatGPT Sitesの保存内容を読み込む `site/assets/js/content-sync.js` と、旧編集画面専用の `site/assets/editor/analytics.js` は未使用のため削除しました。現在のAI編集（ChatGPT・Claudeなど）、GitHubへの日英セット保存、写真の差し替え、Cloudflareの閲覧数集計は引き続き利用できます。
+
+現在の公開用ビルドは `npm run build` または `node scripts/build-pages.mjs` です。どちらもGitHub Pages用の `_site/` を作成します。旧Sitesサービスを公開するビルドは通常のコマンドから外しました。`worker/`・`db/`・`drizzle/`・`.openai/hosting.json` は過去の記録であり、現行サイトでは使いません。旧URLを現在の公開URLへ変換する互換処理は残しています。
+
+## 初回制作・旧サービスの記録（以下は現行の操作手順ではありません）
+
 ## 構成
 
 - `site/` — 90ページの日英HTMLとアセット、sitemap.xml
