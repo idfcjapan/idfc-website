@@ -2,7 +2,7 @@
 // third-party translation API is used by visitors.
 const service = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const pagesOrigin = 'https://idfcjapan.github.io';
-const pagesBase = '/idfc-website';
+const pagesBase = '';
 
 export function publicURL(value, origin = pagesOrigin, base = pagesBase, sourceOrigin = service) {
   if (!value || value.startsWith('#') || /^(?:mailto:|tel:|data:)/i.test(value)) return value;

@@ -1,6 +1,8 @@
 # IDFC日本ミャンマー学生会議 — 公開サイトと共同編集
 
-公式サイト・検索上の正規URL: **https://idfcjapan.github.io/idfc-website/**
+公式サイト・検索上の正規URL: **https://idfcjapan.github.io/**
+
+2026年11月にリポジトリ名を `idfc-website` から `idfcjapan.github.io` に変え、サイトをドメインの一番上に移しました（Googleの検索結果にサイト名とロゴが出るようにするため）。旧アドレス `https://idfcjapan.github.io/idfc-website/...` は `site/404.html` が同じページに転送します。
 
 閲覧・共有・検索向けのURLはGitHub Pagesに統一します。canonical・日英代替URL・構造化データ・サイトマップはGitHubの公式URLを案内します。`scripts/normalize-public-seo.mjs` が公開時に検索用メタデータと空の説明文を整え、本文や保存済み編集には変更を加えません。
 
@@ -12,9 +14,9 @@ GitHub Pagesでは `site/` の閲覧ページ・画像・PDFを公開します�
 
 ## GitHubだけで動く新しい編集画面（`/edit/`）
 
-新しい編集画面は https://idfcjapan.github.io/idfc-website/edit/ です（`site/edit/index.html`）。見た目と使い方は従来の編集画面と同じで、サーバー・Cloudflare・有料サービスは使いません。
+新しい編集画面は https://idfcjapan.github.io/edit/ です（`site/edit/index.html`）。見た目と使い方は従来の編集画面と同じで、サーバー・Cloudflare・有料サービスは使いません。
 
-- ログイン：各メンバーが自分のGitHubアカウントで作る「fine-grained personal access token」（`idfc-website` だけ・Contents: Read and write）を貼り付けます。作り方は画面の「合言葉（トークン）の作り方」に日本語で載せています。トークンはそのブラウザーの `sessionStorage`（「このパソコンに記憶する」を選んだ場合は `localStorage`）だけに保存し、リポジトリには書きません。メンバーはリポジトリの共同編集者（Write）である必要があります。
+- ログイン：各メンバーが自分のGitHubアカウントで作る「fine-grained personal access token」（`idfcjapan.github.io` だけ・Contents: Read and write。リポジトリ名の変更前に作ったトークンもそのまま使えます）を貼り付けます。作り方は画面の「合言葉（トークン）の作り方」に日本語で載せています。トークンはそのブラウザーの `sessionStorage`（「このパソコンに記憶する」を選んだ場合は `localStorage`）だけに保存し、リポジトリには書きません。メンバーはリポジトリの共同編集者（Write）である必要があります。
 - 読み込み：GitHubの `main` の最新コミットから `site/<ページ>/index.html` と `site/en/<ページ>/index.html` を読み、本文・ヘッダー・フッターの部分だけを取り出します。プレビューは公開中のページに編集用の部品を重ねて表示します。
 - 保存：日英2ファイル（ヘッダー・フッターは全ページ分）と新しい写真を、GitHub APIで1つのコミットにまとめて `main` に記録します。読み込み後にほかの人が同じ部分を保存していた場合や、`main` が早送りできない場合は保存を拒否し、編集内容は画面に残ります。保存前のHTMLは旧サービスの `sanitize()` と同じ規則で整えます（`site/assets/editor/github.js`）。その後GitHub Actionsが数分で公開します。
 - 写真：`site/uploads/images/<ランダムな名前>` に保存します。

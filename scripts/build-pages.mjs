@@ -7,7 +7,7 @@ import { normalizePublicSEO } from './normalize-public-seo.mjs';
 const root = path.resolve(import.meta.dirname, '..');
 const source = path.join(root, 'site');
 const output = path.join(root, '_site');
-const publicURL = new URL(process.env.PAGES_URL || 'https://idfcjapan.github.io/idfc-website/');
+const publicURL = new URL(process.env.PAGES_URL || 'https://idfcjapan.github.io/');
 if (!publicURL.pathname.endsWith('/')) throw new Error('PAGES_URL must end in a slash.');
 const previousOrigin = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
 const base = publicURL.pathname;
@@ -51,7 +51,9 @@ for (const file of all) {
 }
 // The member editor (site/edit/) is a tool page, not part of the publication:
 // it has no site menu or search metadata, and must not be indexed.
-const isEditor = file => path.relative(output, file).split(path.sep)[0] === 'edit';
+// The not-found page (404.html, which also forwards old /idfc-website/ links) is
+// treated the same way.
+const isEditor = file => path.relative(output, file).split(path.sep)[0] === 'edit' || path.relative(output, file) === '404.html';
 let pages = 0;
 for (const file of all) {
   if (verificationFiles.has(file)) continue;

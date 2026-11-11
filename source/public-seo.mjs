@@ -1,10 +1,11 @@
 // Keep the public publication and editor service aligned on one set of URLs.
-export const PUBLIC_SITE_URL = 'https://idfcjapan.github.io/idfc-website/';
+export const PUBLIC_SITE_URL = 'https://idfcjapan.github.io/';
 
 // GitHub Pages is the official publication. The Sites address remains the editing
 // service; accept both source URL shapes when normalizing published metadata.
 const publicationBases = [
   'https://idfcjapan.github.io/idfc-website/',
+  'https://idfcjapan.github.io/',
   'https://idfc-japan-myanmar.hannaowo.chatgpt.site/',
 ].map(value => new URL(value));
 

@@ -1,7 +1,7 @@
 // Local stand-in for the GitHub API and raw file host, used only to test the
 // member editor (site/edit/) without touching the real repository.
 // Usage: node scripts/build-pages.mjs && node scripts/editor-mock-github.mjs . 8765
-// then open http://localhost:8765/idfc-website/edit/?branch=editor-test, run
+// then open http://localhost:8765/edit/?branch=editor-test, run
 // localStorage.setItem("idfc-editor-test-config", JSON.stringify({api:location.origin+"/gh", raw:location.origin+"/raw"}))
 // in the page, reload, and sign in with the token "test-token-local".
 import http from 'node:http';
@@ -53,8 +53,8 @@ http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost');
   const p = decodeURIComponent(url.pathname);
   try {
-    if (p.startsWith('/idfc-website/')) {
-      let file = path.join(siteDir, p.slice('/idfc-website/'.length));
+    if (!/^\/(?:raw|mock|gh)\//.test(p)) {
+      let file = path.join(siteDir, p.slice(1));
       if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
       if (!fs.existsSync(file)) { res.writeHead(404); return res.end('not found'); }
       res.writeHead(200, {'content-type':types[path.extname(file)] || 'application/octet-stream', 'cache-control':'no-store'});

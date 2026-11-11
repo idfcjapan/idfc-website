@@ -21,7 +21,7 @@ equal(publicationRoute(PUBLIC_SITE_URL + 'about-idfc/'), '/about-idfc/', 'Offici
 equal(publicationRoute('https://idfc-japan-myanmar.hannaowo.chatgpt.site/about-idfc/'), '/about-idfc/', 'Legacy Sites URL is accepted for normalization');
 equal(publicPageURL('/en/idfc2027/%E6%B4%BB%E5%8B%95/'), PUBLIC_SITE_URL + 'en/idfc2027/', 'Japanese encoded alias maps to English hub');
 assert.throws(() => publicationRoute('https://example.com/about-idfc/')); checks++;
-assert.throws(() => publicationRoute('https://idfcjapan.github.io/unrelated/')); checks++;
+equal(publicationRoute('https://idfcjapan.github.io/en/about-idfc/'), '/en/about-idfc/', 'Root GitHub URL is accepted');
 equal(pageDescription('/', { existing: 'Keep this existing description.' }), 'Keep this existing description.', 'Nonblank descriptions remain unchanged');
 for (const route of ['/about-idfc/', '/新規スポンサー様募集/', '/お問合せ/']) {
   const ja = pageDescription(route, { og: 'Old fees 95,000 yen; February; 30 students' });
@@ -37,7 +37,8 @@ check(Array.from(pageDescription('/archive/', { og: '交流😀'.repeat(100) }))
 let pages = 0, filled = 0;
 for (const file of (await files('site')).filter(file => file.endsWith('.html'))) {
   const route = '/' + file.replaceAll('\\', '/').replace(/^site\//, '').replace(/index\.html$/, '');
-  if (/^\/google[a-f0-9]+\.html$/.test(route)) continue;
+  // The editor and not-found pages are tools, not published pages (as in build-pages.mjs).
+  if (/^\/google[a-f0-9]+\.html$/.test(route) || route.startsWith('/edit/') || route === '/404.html') continue;
   const original = await readFile(file, 'utf8');
   const normalized = normalizePublicPage(original, route);
   equal(body(normalized), body(original), 'Content, CMS hooks and navigation remain unchanged: ' + route);

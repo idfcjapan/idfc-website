@@ -1,6 +1,6 @@
 # IDFC page-view counter (Cloudflare)
 
-Public pages on https://idfcjapan.github.io/idfc-website/ send `{path}` to this
+Public pages on https://idfcjapan.github.io/ send `{path}` to this
 Worker (`site/assets/js/analytics.js`). It adds 1 to that page's total for the day
 in the D1 database `idfc-analytics`. Nothing else is stored: no cookies, IP
 addresses or visitor identifiers (see `/j/privacy/`). It runs on Cloudflare's free

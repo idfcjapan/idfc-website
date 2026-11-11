@@ -6,12 +6,12 @@
   const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   let testConfig = null;
   if (local) { try { testConfig = JSON.parse(localStorage.getItem('idfc-editor-test-config') || 'null'); } catch {} }
-  const CONFIG = {owner:'idfcjapan', repo:'idfc-website', api:'https://api.github.com', raw:'https://raw.githubusercontent.com', ...(testConfig || {})};
+  const CONFIG = {owner:'idfcjapan', repo:'idfcjapan.github.io', api:'https://api.github.com', raw:'https://raw.githubusercontent.com', ...(testConfig || {})};
   const requested = new URLSearchParams(location.search).get('branch');
   const BRANCH = requested && /^[A-Za-z0-9._-][A-Za-z0-9._\/-]{0,99}$/.test(requested) && !requested.includes('..') ? requested : 'main';
   const BASE = location.pathname.replace(/\/edit\/(?:index\.html)?$/, '');
   const OLD_SERVICE = 'https://idfc-japan-myanmar.hannaowo.chatgpt.site';
-  const PUBLIC_SITE = 'https://idfcjapan.github.io/idfc-website';
+  const PUBLIC_SITE = 'https://idfcjapan.github.io';
   const TOKEN_KEY = 'idfc-editor-github-token';
   const MAX_HTML = 2 * 1024 * 1024;
   const SELECTOR = {main:'main#main', header:'header.site-header', footer:'footer.site-footer'};
@@ -43,7 +43,7 @@
     if (response.ok) return data;
     if (response.status === 401) throw new EditorError('ログインの有効期限が切れたか、合言葉（トークン）が正しくありません。もう一度ログインしてください。', 401);
     if (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0') throw new EditorError('GitHubの利用回数の上限に達しました。1時間ほど待ってからお試しください。', 429);
-    if (response.status === 403 || response.status === 404) throw new EditorError('このトークンでは保存できません。作成時に「idfc-website」と「Contents：Read and write」を選んだか確認してください。団体の管理者の承認待ちの場合もあります。', 403);
+    if (response.status === 403 || response.status === 404) throw new EditorError('このトークンでは保存できません。作成時に「idfcjapan.github.io」と「Contents：Read and write」を選んだか確認してください。団体の管理者の承認待ちの場合もあります。', 403);
     throw new EditorError(data.message ? 'GitHubでエラーが発生しました：' + data.message : 'GitHubでエラーが発生しました。少し待ってから再度お試しください。', response.status);
   }
   const repo = route => '/repos/' + CONFIG.owner + '/' + CONFIG.repo + route;
@@ -139,7 +139,7 @@
   }
 
   // Saved pages use site-root links such as /about-idfc/. The published copy
-  // lives under /idfc-website/, so links are shifted for the preview only.
+  // may live under a sub-path (BASE), so links are shifted for the preview only.
   const URL_ATTRIBUTES = ['href','src','poster','data-src','data-original','data-url'];
   function mapURLs(html, convert) {
     const template = document.createElement('template');
@@ -209,7 +209,7 @@
     token = token || storage.read();
     if (!token) throw new EditorError('ログインしてください。', 401);
     const [account, repository] = await Promise.all([gh('/user'), gh(repo(''))]);
-    if (!repository.permissions?.push) throw new EditorError('このGitHubアカウントには、IDFCサイトを保存する権限がありません。IDFCの担当者に「idfc-website」への招待（Write権限）を頼んでください。', 403);
+    if (!repository.permissions?.push) throw new EditorError('このGitHubアカウントには、IDFCサイトを保存する権限がありません。IDFCの担当者に「idfcjapan.github.io」への招待（Write権限）を頼んでください。', 403);
     user = account.login;
     const sha = await head();
     const pages = JSON.parse(await raw(sha, 'worker/pages.json') || '[]');

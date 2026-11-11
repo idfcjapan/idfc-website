@@ -22,7 +22,7 @@ export async function normalizePublicSEO(directory) {
       verificationFiles++;
       continue;
     }
-    if (path.relative(root, file).split(path.sep)[0] === 'edit') continue;
+    if (path.relative(root, file).split(path.sep)[0] === 'edit' || path.relative(root, file) === '404.html') continue;
     const route = '/' + path.relative(root, file).split(path.sep).join('/').replace(/index\.html$/, '');
     const original = await readFile(file, 'utf8');
     const normalized = normalizePublicPage(original, route);

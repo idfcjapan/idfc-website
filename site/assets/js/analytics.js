@@ -1,7 +1,7 @@
 // Aggregate page views only: no cookies, visitor identifiers or personal data.
 const viewEndpoint = 'https://idfc-analytics.idfc-japan.workers.dev/api/public/views';
 const publicOrigin = 'https://idfcjapan.github.io';
-const publicBase = '/idfc-website';
+const publicBase = '';
 
 export function recordPageView() {
   if (window.top !== window.self || navigator.webdriver || window.__idfcViewRecorded) return;
