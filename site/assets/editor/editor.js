@@ -108,9 +108,8 @@
     registerTools();
     if(!state.initialized) {
       state.initialized=true; options(); state.path=$('page-select').value || '/';
-      analytics?.open({pages:state.pages,path:state.path});
       await load();
-    } else { busy(false); analytics?.open({pages:state.pages,path:state.path}); }
+    } else { busy(false); }
   }
   function expected(input) {
     if(input.path!==basePath(state.path) || input.scope!==state.scope || input.revision!==state.revision || input.contentVersion!==state.contentVersion) throw new Error('ページまたは編集内容が変わりました。日英の最新内容を取得し直してください。');
@@ -187,7 +186,7 @@
     Promise.all(tools.map(tool=>Promise.resolve(registry.registerTool(tool,{signal:lifecycle.signal})))).then(()=>{if(!lifecycle.signal.aborted&&state.authenticated)$('browser-ai-hint').hidden=false;}).catch(()=>{lifecycle.abort();state.toolsLifecycle=null;});
   }
   $('show-password').addEventListener('click',()=>{const show=$('password').type==='password';$('password').type=show?'text':'password';$('show-password').textContent=show?'非表示':'表示';});
-  $('analytics-open').addEventListener('click',()=>{if(state.authenticated)analytics?.open({pages:state.pages,path:state.path});});
+  // 閲覧数 opens the member page on Cloudflare, where page views are now counted.
   $('login-form').addEventListener('submit',async e=>{e.preventDefault();$('login-button').disabled=true;try{await api('login',{method:'POST',body:JSON.stringify({password:$('password').value})});$('password').value='';await start(await api('session'));}catch(error){$('login-error').textContent=error.message;}finally{$('login-button').disabled=false;}});
   $('page-select').addEventListener('change',()=>{if(!consent()){$('page-select').value=state.path;return;}state.path=$('page-select').value;load();});
   $('scope').addEventListener('change',()=>{if(!consent()){$('scope').value=state.scope;return;}state.scope=$('scope').value;load();});
